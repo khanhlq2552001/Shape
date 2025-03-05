@@ -508,7 +508,6 @@ MonoBehaviour:
       idGrid: 0
   _dataShape: {fileID: 11400000, guid: 3556f8970a926ee41a75efe82c6aa190, type: 2}
   _spacing: 1.05
-  _listItemGrid: []
 --- !u!1 &1759580382
 GameObject:
   m_ObjectHideFlags: 0

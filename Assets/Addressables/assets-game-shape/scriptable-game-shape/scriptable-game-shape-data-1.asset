@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: scriptable-game-shape-data-1
   m_EditorClassIdentifier: 
   shapes:
-  - {fileID: 6275642047127334236, guid: 31eddb82f3bee064d88d8f5ee8502cc9, type: 3}
-  - {fileID: 4728265801870601744, guid: 537c3f86c1da54842b27525ee101964a, type: 3}
+  - {fileID: 3996426128874166779, guid: 0f0f1ed18970cbc46947b1c29f89d45c, type: 3}
+  - {fileID: 6713387133045274278, guid: da8a93573f867af439d503c03792a4b8, type: 3}

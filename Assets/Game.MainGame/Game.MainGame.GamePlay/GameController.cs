@@ -18,7 +18,7 @@ namespace Game.MainGame
         [SerializeField] private float _stopDistance;
 
         private StateController _stateController = StateController.NoDrag;
-        private Shape _objShape;
+        private ObjShape _objShape;
         private Vector2 _touchPosition;
 
         public StateController StateController
@@ -47,7 +47,7 @@ namespace Game.MainGame
 
                     if (hit.collider != null)
                     {
-                        Shape obj = hit.collider.gameObject.GetComponent<Shape>();
+                        ObjShape obj = hit.collider.gameObject.GetComponent<ObjShape>();
 
                         if (obj != null && obj.CanMove)
                         {
@@ -103,7 +103,7 @@ namespace Game.MainGame
 
             for (int i=0; i< listItemGrid.Count; i++)
             {
-                float distance = Vector2.Distance((Vector2)listItemGrid[i].transform.position, (Vector2)_objShape.objShape.tranCentre.position);
+                float distance = Vector2.Distance((Vector2)listItemGrid[i].transform.position, (Vector2)_objShape.tranCentre.position);
 
                 if (distance < distanceMin)
                 {
@@ -112,13 +112,13 @@ namespace Game.MainGame
                 }
             }
 
-            Vector2 offset = _objShape.objShape.tranCentre.localPosition;
+            Vector2 offset = _objShape.tranCentre.localPosition;
             Vector2 posTarget = (Vector2)objCentre.transform.position - offset;
 
             StartCoroutine(MoveToTargetCoroutine(_objShape, posTarget, 10f));
         }
 
-        IEnumerator MoveToTargetCoroutine(Shape shape,Vector2 destination, float speed)
+        IEnumerator MoveToTargetCoroutine(ObjShape shape,Vector2 destination, float speed)
         {
             shape.CanMove = false;
             Rigidbody2D rb = shape.rb;

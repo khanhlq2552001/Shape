@@ -182,13 +182,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 31eddb82f3bee064d88d8f5ee8502cc9
-    m_Address: prefabs-game-shape-1
+  - m_GUID: 0f0f1ed18970cbc46947b1c29f89d45c
+    m_Address: prefabs-ui-shape_Square_12
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 537c3f86c1da54842b27525ee101964a
-    m_Address: prefabs-game-shape-2
+  - m_GUID: da8a93573f867af439d503c03792a4b8
+    m_Address: prefabs-game-shape_LShape_22_2
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
