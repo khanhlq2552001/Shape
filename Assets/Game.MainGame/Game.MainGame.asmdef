@@ -1,0 +1,16 @@
+{
+    "name": "Game.MainGame",
+    "rootNamespace": "Game.MainGame",
+    "references": [
+        "LeanPool"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
