@@ -181,6 +181,7 @@ namespace Game.MainGame
 
                     if (value)
                     {
+                        LevelManager.Instance.controller.StateController = StateController.NoDrag;
                         shape.CanMove = false;
                         shape.EffectWin(_listInfoWall[i].type, _listInfoWall[i].wall);
                     }

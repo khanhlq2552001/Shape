@@ -8,6 +8,9 @@ namespace Game.MainGame
 {
     public class ObjShape : MonoBehaviour
     {
+        [SerializeField] private SpriteRenderer _spr;
+        [SerializeField] private List<SpriteRenderer> _sprShadows;
+
         private bool _canMove = true;
         private int _idGate;
         private int _id;
@@ -51,6 +54,20 @@ namespace Game.MainGame
             get => _id;
 
             set => _id = value;
+        }
+
+        public void SetColor(string strHex)
+        {
+            Color color;
+            ColorUtility.TryParseHtmlString("#"+ strHex, out color);
+            _spr.color = color;
+
+            Color darkerColor = new Color(color.r *0.4f, color.g * 0.35f, color.b * 0.35f, color.a);
+
+            for(int i=0; i< _sprShadows.Count; i++)
+            {
+                _sprShadows[i].color = darkerColor;
+            }
         }
 
         public bool CheckResult(TypeWall type)

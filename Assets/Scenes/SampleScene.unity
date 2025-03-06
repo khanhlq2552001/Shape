@@ -501,6 +501,9 @@ MonoBehaviour:
     width: 3
     height: 3
     ids: 000000000100000002000000030000000400000005000000060000000700000008000000
+    colorCodes:
+    - FF2323
+    - FFD321
     idCentreShapes:
     - idShapes: 1
       idGrid: 8

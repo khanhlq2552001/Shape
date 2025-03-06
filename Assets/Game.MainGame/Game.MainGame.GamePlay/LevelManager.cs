@@ -108,6 +108,7 @@ namespace Game.MainGame
                 shape.ResetAttribute();
                 shape.IDGate = _data.idCentreShapes[i].idGate;
                 shape.ID = i;
+                shape.SetColor(_data.colorCodes[_data.idCentreShapes[i].idGate]);
                 Vector2 offset = shape.tranCentre.localPosition;
                 int x = _data.idCentreShapes[i].idGrid % _data.width;
                 int y = _data.idCentreShapes[i].idGrid / _data.width;
@@ -153,6 +154,7 @@ namespace Game.MainGame
         public int width;
         public int height;
         public List<int> ids;
+        public List<string> colorCodes;
         public List<ShapeCreate> idCentreShapes;
         public List<DataWall> datasWall;
         public List<DataWallCorner> datasWallCorner;
