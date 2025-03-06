@@ -8,5 +8,7 @@ namespace Game.MainGame
     public class DataShape : ScriptableObject
     {
         public List<GameObject> shapes;
+        public List<GameObject> shapesWall;
+        public List<GameObject> shapesWallCorner;
     }
 }

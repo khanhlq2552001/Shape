@@ -68,6 +68,18 @@ namespace Game.MainGame
 
                     }
                 }
+                else if(touch.phase == TouchPhase.Canceled)
+                {
+                    if (StateController == StateController.Drag)
+                    {
+
+                        MoveToCenter();
+                    }
+                    else
+                    {
+
+                    }
+                }
             }
 
             if (StateController == StateController.Drag)
@@ -81,6 +93,7 @@ namespace Game.MainGame
             Rigidbody2D rbShape = _objShape.rb;
             rbShape.bodyType = RigidbodyType2D.Dynamic;
             rbShape.gravityScale = 0f;
+            rbShape.angularDrag = 0f;
             float distance = Vector2.Distance((Vector2)_objShape.transform.position, _touchPosition);
 
             if (distance > _stopDistance)
@@ -92,6 +105,7 @@ namespace Game.MainGame
             {
                 rbShape.velocity = Vector2.zero; // Dừng lại
             }
+            CheckIdShape();
         }
 
         private void MoveToCenter()
@@ -118,6 +132,26 @@ namespace Game.MainGame
             StartCoroutine(MoveToTargetCoroutine(_objShape, posTarget, 10f));
         }
 
+        private void CheckIdShape()
+        {
+            List<GameObject> listItemGrid = LevelManager.Instance.GetListItemGrid();
+            float distanceMin = float.MaxValue;
+            GameObject objCentre =  listItemGrid[0];
+
+            for (int i = 0; i < listItemGrid.Count; i++)
+            {
+                float distance = Vector2.Distance((Vector2)listItemGrid[i].transform.position, (Vector2)_objShape.tranCentre.position);
+
+                if (distance < distanceMin)
+                {
+                    distanceMin = distance;
+                    objCentre = listItemGrid[i];
+                }
+            }
+
+            _objShape.CalculatorCoordinates(objCentre.GetComponent<ItemGrid>().ID);
+        }
+
         IEnumerator MoveToTargetCoroutine(ObjShape shape,Vector2 destination, float speed)
         {
             shape.CanMove = false;
@@ -134,6 +168,7 @@ namespace Game.MainGame
             shape.CanMove = true;
             shape.rb.bodyType = RigidbodyType2D.Kinematic;
             rb.velocity = Vector2.zero;
+            CheckIdShape();
         }
     }
 }

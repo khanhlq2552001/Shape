@@ -86,7 +86,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
   m_SpriteSortPoint: 0
 --- !u!60 &7846047843847615038
 PolygonCollider2D:
@@ -97,7 +97,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 6713387133045274278}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: bd79c9470c7da3f4e89c948c799addbf, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -132,21 +132,22 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.9836695, y: -0.10098773}
-      - {x: 0.85546875, y: 0.0044156313}
-      - {x: 0.0078125, y: 0.0078125}
-      - {x: 0.0078125, y: 0.8671875}
-      - {x: -0.11008996, y: 0.99029243}
-      - {x: -0.88873005, y: 0.9951463}
-      - {x: -0.9375, y: 0.97265625}
-      - {x: -1, y: 0.890625}
-      - {x: -1, y: -0.8828125}
-      - {x: -0.96484375, y: -0.93359375}
-      - {x: -0.91015625, y: -0.984375}
-      - {x: -0.87109375, y: -1}
-      - {x: 0.87890625, y: -1}
-      - {x: 0.94140625, y: -0.9765625}
-      - {x: 1, y: -0.88671875}
+    - - {x: 0.9435301, y: -0.14477617}
+      - {x: 0.84452176, y: -0.057618022}
+      - {x: -0.04692304, y: -0.050572038}
+      - {x: -0.032326937, y: 0.8343462}
+      - {x: -0.11728853, y: 0.9578989}
+      - {x: -0.8698248, y: 0.96764773}
+      - {x: -0.90484554, y: 0.9314084}
+      - {x: -0.91745055, y: 0.9170857}
+      - {x: -0.9725014, y: 0.8545332}
+      - {x: -0.9540264, y: -0.8470552}
+      - {x: -0.913762, y: -0.9029447}
+      - {x: -0.8514122, y: -0.9435096}
+      - {x: -0.8021333, y: -0.95402634}
+      - {x: 0.8278198, y: -0.95986056}
+      - {x: 0.91221404, y: -0.91452897}
+      - {x: 0.9525626, y: -0.86847365}
   m_UseDelaunayMesh: 0
 --- !u!50 &8530853824584770719
 Rigidbody2D:
@@ -162,7 +163,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: bd79c9470c7da3f4e89c948c799addbf, type: 2}
   m_IncludeLayers:
@@ -173,7 +174,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &2281011093384283657
 MonoBehaviour:
@@ -189,6 +190,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tranCentre: {fileID: 6994081465059061551}
   rb: {fileID: 0}
+  listCalculateXY:
+  - x: 0
+    y: 0
+  - x: -1
+    y: 0
+  - x: -1
+    y: -1
+  idsGrid: 000000000000000000000000
 --- !u!1 &7394673719625757761
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,7 +223,7 @@ Transform:
   m_GameObject: {fileID: 7394673719625757761}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0.5, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

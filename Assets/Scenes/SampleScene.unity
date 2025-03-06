@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b7aea8f18be44244be0fedbf3968303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedMove: 3
+  _speedMove: 9
   _stopDistance: 0.1
 --- !u!1 &565160629
 GameObject:
@@ -503,11 +503,79 @@ MonoBehaviour:
     ids: 000000000100000002000000030000000400000005000000060000000700000008000000
     idCentreShapes:
     - idShapes: 1
-      idGrid: 1
+      idGrid: 8
+      idGate: 0
     - idShapes: 0
       idGrid: 0
-  _dataShape: {fileID: 11400000, guid: 3556f8970a926ee41a75efe82c6aa190, type: 2}
+      idGate: 1
+    datasWall:
+    - idWall: 1
+      idDirection: 0
+      isWall: 1
+      idGate: 0
+      idGrid: 0
+    - idWall: 2
+      idDirection: 1
+      isWall: 0
+      idGate: 0
+      idGrid: 0
+    - idWall: 0
+      idDirection: 1
+      isWall: 1
+      idGate: 0
+      idGrid: 2
+    - idWall: 1
+      idDirection: 2
+      isWall: 1
+      idGate: 0
+      idGrid: 2
+    - idWall: 1
+      idDirection: 0
+      isWall: 1
+      idGate: 0
+      idGrid: 3
+    - idWall: 1
+      idDirection: 2
+      isWall: 1
+      idGate: 0
+      idGrid: 5
+    - idWall: 1
+      idDirection: 0
+      isWall: 1
+      idGate: 0
+      idGrid: 6
+    - idWall: 0
+      idDirection: 3
+      isWall: 0
+      idGate: 1
+      idGrid: 6
+    - idWall: 0
+      idDirection: 3
+      isWall: 1
+      idGate: 0
+      idGrid: 7
+    - idWall: 0
+      idDirection: 3
+      isWall: 1
+      idGate: 0
+      idGrid: 8
+    - idWall: 1
+      idDirection: 2
+      isWall: 1
+      idGate: 0
+      idGrid: 8
+    datasWallCorner:
+    - idWallCorner: 0
+      idGrid: 0
+    - idWallCorner: 1
+      idGrid: 2
+    - idWallCorner: 2
+      idGrid: 8
+    - idWallCorner: 3
+      idGrid: 6
   _spacing: 1.05
+  dataShape: {fileID: 11400000, guid: 3556f8970a926ee41a75efe82c6aa190, type: 2}
+  controller: {fileID: 56829670}
 --- !u!1 &1759580382
 GameObject:
   m_ObjectHideFlags: 0
