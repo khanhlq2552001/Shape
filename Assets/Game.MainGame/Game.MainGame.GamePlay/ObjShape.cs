@@ -6,14 +6,36 @@ using UnityEngine;
 
 namespace Game.MainGame
 {
+    public enum TypeBlock
+    {
+        DontBlock,
+        BlockHori,
+        BlockVer
+    }
+
+    public enum TypeShape
+    {
+        Normal,
+        Lock,
+        Key,
+        Freeze
+    }
+
     public class ObjShape : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _spr;
         [SerializeField] private List<SpriteRenderer> _sprShadows;
+        [SerializeField] private GameObject[] _arrowBlocks = new GameObject[2];
+        [SerializeField] private GameObject _border;
+        [SerializeField] private GameObject _key;
+        [SerializeField] private GameObject _lock;
+
 
         private bool _canMove = true;
         private int _idGate;
         private int _id;
+        private TypeBlock _typeBlock;
+        private TypeShape _typeShape;
 
         public Transform tranCentre;
         public Rigidbody2D rb;
@@ -28,6 +50,20 @@ namespace Game.MainGame
             {
                 idsGrid.Add(0);
             }
+        }
+
+        public TypeBlock TypeLock
+        {
+            get => _typeBlock;
+
+            set => _typeBlock = value;
+        }
+
+        public TypeShape TypeShape
+        {
+            get => _typeShape;
+
+            set => _typeShape = value;
         }
 
         private void Start()
@@ -56,6 +92,31 @@ namespace Game.MainGame
             set => _id = value;
         }
 
+        public void SetActiveBorder(bool active)
+        {
+            _border.SetActive(active);
+        }
+
+        public void UnLock()
+        {
+            _lock.SetActive(false);
+            TypeShape = TypeShape.Normal;
+            CanMove = true;
+        }
+
+        public void DestroyShape()
+        {
+
+        }
+
+        public void CheckKey()
+        {
+            if(TypeShape == TypeShape.Key)
+            {
+                LevelManager.Instance.CountKey--;
+            }
+        }
+
         public void SetColor(string strHex)
         {
             Color color;
@@ -68,6 +129,45 @@ namespace Game.MainGame
             {
                 _sprShadows[i].color = darkerColor;
             }
+        }
+
+        public void SetBlock(TypeBlock type)
+        {
+            switch (type)
+            {
+                case TypeBlock.DontBlock:
+                    _arrowBlocks[0].SetActive(false);
+                    _arrowBlocks[1].SetActive(false);
+                    TypeLock = type;
+                    break;
+                case TypeBlock.BlockHori:
+                    _arrowBlocks[0].SetActive(true);
+                    _arrowBlocks[1].SetActive(false);
+                    TypeLock = type;
+                    break;
+                case TypeBlock.BlockVer:
+                    _arrowBlocks[0].SetActive(false);
+                    _arrowBlocks[1].SetActive(true);
+                    TypeLock = type;
+                    break;
+            }
+        }
+
+        public void SetKeyLock(bool isKey, bool isLock)
+        {
+            if (isLock)
+            {
+                CanMove = false;
+                TypeShape = TypeShape.Lock;
+            }
+
+            if (isKey)
+            {
+                TypeShape = TypeShape.Key;
+            }
+
+            _key.SetActive(isKey);
+            _lock.SetActive(isLock);
         }
 
         public bool CheckResult(TypeWall type)
@@ -210,6 +310,8 @@ namespace Game.MainGame
         public void ResetAttribute()
         {
             CanMove = true;
+            SetActiveBorder(false);
+            TypeShape = TypeShape.Normal;
         }
     }
 }

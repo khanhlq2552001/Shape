@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Codice.Client.BaseCommands.Merge;
 using Lean.Pool;
 using UnityEngine;
 
@@ -17,6 +15,8 @@ namespace Game.MainGame
 
         private List<GameObject> _listItemGrid = new List<GameObject>();
         private List<ObjShape> _listItemShape = new List<ObjShape>();
+        private int _countKey = 0;
+        private ObjShape _objLock = new ObjShape();
 
         public DataShape dataShape;
         public GameController controller;
@@ -44,6 +44,21 @@ namespace Game.MainGame
         public Data GetData()
         {
             return _data;
+        }
+
+        public int CountKey
+        {
+            get => _countKey;
+
+            set
+            {
+                _countKey = value;
+                if(_countKey == 0)
+                {
+                    if(_objLock != null)
+                        _objLock.UnLock();
+                }
+            }
         }
 
         private void GenerateGrid()
@@ -109,6 +124,19 @@ namespace Game.MainGame
                 shape.IDGate = _data.idCentreShapes[i].idGate;
                 shape.ID = i;
                 shape.SetColor(_data.colorCodes[_data.idCentreShapes[i].idGate]);
+                shape.SetBlock((TypeBlock)_data.idCentreShapes[i].typeBlock);
+                shape.SetKeyLock(_data.idCentreShapes[i].isKey, _data.idCentreShapes[i].isLock);
+
+                if(_data.idCentreShapes[i].isKey)
+                {
+                    CountKey++;
+                }
+
+                if (_data.idCentreShapes[i].isLock)
+                {
+                    _objLock = shape;
+                }
+
                 Vector2 offset = shape.tranCentre.localPosition;
                 int x = _data.idCentreShapes[i].idGrid % _data.width;
                 int y = _data.idCentreShapes[i].idGrid / _data.width;
@@ -146,6 +174,17 @@ namespace Game.MainGame
             _listItemShape.Clear();
             _listItemGrid.Clear();
         }
+
+        //Booster
+        public void BoosterHammer()
+        {
+
+        }
+
+        public void BoosterFreeTime()
+        {
+
+        }
     }
 
     [System.Serializable]
@@ -153,6 +192,7 @@ namespace Game.MainGame
     {
         public int width;
         public int height;
+        public int time; // tinh bang giay
         public List<int> ids;
         public List<string> colorCodes;
         public List<ShapeCreate> idCentreShapes;
@@ -166,6 +206,9 @@ namespace Game.MainGame
         public int idShapes;
         public int idGrid;
         public int idGate;
+        public int typeBlock; // 0: khong block, 1: chi di chuyen ngang, 2: chi di chuyen doc
+        public bool isKey;
+        public bool isLock;
     }
 
     [System.Serializable]

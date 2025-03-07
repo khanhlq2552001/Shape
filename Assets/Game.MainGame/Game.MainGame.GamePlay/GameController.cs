@@ -1,8 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Codice.CM.Common;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 namespace Game.MainGame
 {
@@ -21,6 +20,8 @@ namespace Game.MainGame
         private ObjShape _objShape;
         private Vector2 _touchPosition;
 
+        public Action onActionInUpdate;
+
         public StateController StateController
         {
             get
@@ -35,6 +36,8 @@ namespace Game.MainGame
 
         private void Update()
         {
+            onActionInUpdate?.Invoke();
+
             if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0);
@@ -53,6 +56,7 @@ namespace Game.MainGame
                         {
                             _objShape = obj;
                             StateController = StateController.Drag;
+                            _objShape.SetActiveBorder(true);
                         }
                     }
                 }
@@ -60,7 +64,6 @@ namespace Game.MainGame
                 {
                     if (StateController == StateController.Drag)
                     {
-
                         MoveToCenter();
                     }
                     else
@@ -72,7 +75,6 @@ namespace Game.MainGame
                 {
                     if (StateController == StateController.Drag)
                     {
-
                         MoveToCenter();
                     }
                     else
@@ -81,7 +83,10 @@ namespace Game.MainGame
                     }
                 }
             }
+        }
 
+        private void FixedUpdate()
+        {
             if (StateController == StateController.Drag)
             {
                 MoveToTarget();
@@ -94,6 +99,20 @@ namespace Game.MainGame
             rbShape.bodyType = RigidbodyType2D.Dynamic;
             rbShape.gravityScale = 0f;
             rbShape.angularDrag = 0f;
+
+
+            switch (_objShape.TypeLock)
+            {
+                case TypeBlock.DontBlock:
+                    break;
+                case TypeBlock.BlockHori:
+                    _touchPosition = new Vector2(_touchPosition.x, _objShape.transform.position.y);
+                    break;
+                case TypeBlock.BlockVer:
+                    _touchPosition = new Vector2(_objShape.transform.position.x,_touchPosition.y);
+                    break;
+            }
+
             float distance = Vector2.Distance((Vector2)_objShape.transform.position, _touchPosition);
 
             if (distance > _stopDistance)
@@ -111,6 +130,7 @@ namespace Game.MainGame
         private void MoveToCenter()
         {
             StateController = StateController.NoDrag;
+            _objShape.SetActiveBorder(false);
             List<GameObject> listItemGrid = LevelManager.Instance.GetListItemGrid();
             float distanceMin = float.MaxValue;
             GameObject objCentre =  listItemGrid[0];

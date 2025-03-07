@@ -77,6 +77,10 @@ namespace Game.MainGame
                 {
                     wall.IDGate = idGate;
 
+                    wall.SetColor(LevelManager.Instance.GetData().colorCodes[idGate]);
+
+                    wall.SetArrow(type);
+
                     InfoWall infoWall = new InfoWall()
                     {
                         wall = wall,
@@ -85,6 +89,10 @@ namespace Game.MainGame
                     };
 
                     _listInfoWall.Add(infoWall);
+                }
+                else
+                {
+                    wall.SetColor("797979");
                 }
 
                 Vector2 centre = wall.centre.localPosition;
@@ -103,6 +111,10 @@ namespace Game.MainGame
                 {
                     wall.IDGate = idGate;
 
+                    wall.SetColor(LevelManager.Instance.GetData().colorCodes[idGate]);
+
+                    wall.SetArrow(type);
+
                     InfoWall infoWall = new InfoWall()
                     {
                         wall = wall,
@@ -111,6 +123,10 @@ namespace Game.MainGame
                     };
 
                     _listInfoWall.Add(infoWall);
+                }
+                else
+                {
+                    wall.SetColor("797979");
                 }
 
                 Vector2 centre = wall.centre.localPosition;
@@ -129,6 +145,10 @@ namespace Game.MainGame
                 {
                     wall.IDGate = idGate;
 
+                    wall.SetColor(LevelManager.Instance.GetData().colorCodes[idGate]);
+
+                    wall.SetArrow(type);
+
                     InfoWall infoWall = new InfoWall()
                     {
                         wall = wall,
@@ -137,6 +157,10 @@ namespace Game.MainGame
                     };
 
                     _listInfoWall.Add(infoWall);
+                }
+                else
+                {
+                    wall.SetColor("797979");
                 }
 
                 Vector2 centre = wall.centre.localPosition;
@@ -155,6 +179,10 @@ namespace Game.MainGame
                 {
                     wall.IDGate = idGate;
 
+                    wall.SetColor(LevelManager.Instance.GetData().colorCodes[idGate]);
+
+                    wall.SetArrow(type);
+
                     InfoWall infoWall = new InfoWall()
                     {
                         wall = wall,
@@ -162,6 +190,10 @@ namespace Game.MainGame
                         type = TypeWall.bot
                     };
                     _listInfoWall.Add(infoWall);
+                }
+                else
+                {
+                    wall.SetColor("797979");
                 }
 
                 Vector2 centre = wall.centre.localPosition;
@@ -181,9 +213,12 @@ namespace Game.MainGame
 
                     if (value)
                     {
-                        LevelManager.Instance.controller.StateController = StateController.NoDrag;
+                        shape.SetActiveBorder(false);
+                        shape.CheckKey();
                         shape.CanMove = false;
                         shape.EffectWin(_listInfoWall[i].type, _listInfoWall[i].wall);
+
+                        LevelManager.Instance.controller.StateController = StateController.NoDrag;
                     }
                 }
             }
@@ -194,6 +229,8 @@ namespace Game.MainGame
                 GameObject obj = LeanPool.Spawn(LevelManager.Instance.dataShape.shapesWallCorner[(int)type]);
 
                 obj.transform.position = transWallCorner[(int)type].position;
+                WallCorner wallCorner = obj.GetComponent<WallCorner>();
+                wallCorner.SetColor("797979");
         }
     }
 
