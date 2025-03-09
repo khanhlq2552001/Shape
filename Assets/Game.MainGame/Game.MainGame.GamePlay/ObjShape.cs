@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using BlitzyUI;
 using DG.Tweening;
 using Lean.Pool;
 using UnityEngine;
@@ -106,7 +107,50 @@ namespace Game.MainGame
 
         public void DestroyShape()
         {
+            LeanPool.Despawn(gameObject);
+        }
 
+        public bool CheckBoosterHammer()
+        {
+            if (TypeShape == TypeShape.Lock)
+            {
+                return false;
+            }
+
+            CheckKey();
+
+            DestroyShape();
+
+            return true;
+        }
+
+        public bool CheckBoosterMagic(Vector2 posTarget)
+        {
+            if(TypeShape == TypeShape.Lock)
+            {
+                return false;
+            }
+            SetActiveBorder(true);
+
+            CheckKey();
+
+            _spr.maskInteraction = SpriteMaskInteraction.None;
+
+            for(int i =0; i< _sprShadows.Count; i++)
+            {
+                _sprShadows[i].maskInteraction = SpriteMaskInteraction.None;
+            }
+
+            transform.DOScale(Vector2.zero, 0.7f)
+                .SetEase(Ease.InQuart);
+
+            transform.DOMove(posTarget, 0.7f)
+                .SetEase(Ease.InQuart)
+                .OnComplete(() => {
+                    DestroyShape();
+                });
+
+            return true;
         }
 
         public void CheckKey()
@@ -265,7 +309,7 @@ namespace Game.MainGame
                     Vector2 targetEnd = new Vector2(transform.position.x, newY);
                     transform.DOMove(targetEnd, 0.5f).SetEase(Ease.Linear).OnComplete(() =>
                     {
-                        LeanPool.Despawn(gameObject);
+                        DestroyShape();
                     });
                 }
                 else if(type == TypeWall.left || type == TypeWall.right)
@@ -274,7 +318,7 @@ namespace Game.MainGame
                     Vector2 targetEnd = new Vector2(newX, transform.position.y);
 
                     transform.DOMove(targetEnd, 0.5f).SetEase(Ease.Linear).OnComplete(() => {
-                        LeanPool.Despawn(gameObject);
+                        DestroyShape();
                     });
                 }
             });
@@ -312,6 +356,13 @@ namespace Game.MainGame
             CanMove = true;
             SetActiveBorder(false);
             TypeShape = TypeShape.Normal;
+
+            _spr.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
+
+            for (int i = 0; i < _sprShadows.Count; i++)
+            {
+                _sprShadows[i].maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
+            }
         }
     }
 }

@@ -1,4 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using BlitzyUI;
 using Lean.Pool;
 using UnityEngine;
 
@@ -16,6 +19,7 @@ namespace Game.MainGame
         private List<GameObject> _listItemGrid = new List<GameObject>();
         private List<ObjShape> _listItemShape = new List<ObjShape>();
         private int _countKey = 0;
+        private int _countShape = 0;
         private ObjShape _objLock = new ObjShape();
 
         public DataShape dataShape;
@@ -57,6 +61,20 @@ namespace Game.MainGame
                 {
                     if(_objLock != null)
                         _objLock.UnLock();
+                }
+            }
+        }
+
+        public int CountShape
+        {
+            get => _countShape;
+
+            set
+            {
+                _countShape = value;
+                if (_countShape == 0)
+                {
+
                 }
             }
         }
@@ -144,6 +162,8 @@ namespace Game.MainGame
                 obj.transform.position = position - offset;
                 shape.CalculatorCoordinates(_data.idCentreShapes[i].idGrid);
             }
+
+            CountShape = _listItemShape.Count;
         }
 
         private void CreateWall()
@@ -175,15 +195,47 @@ namespace Game.MainGame
             _listItemGrid.Clear();
         }
 
-        //Booster
-        public void BoosterHammer()
+        public void BoosterMagic(int idGate, Vector2 posTarget)
         {
-
+            StartCoroutine(DelayMagicCouroutine(idGate, posTarget));
         }
 
-        public void BoosterFreeTime()
+        IEnumerator DelayMagicCouroutine(int idGate, Vector2 posTarget)
         {
+            int count = 0;
 
+            for (int i = 0; i < _listItemShape.Count; i++)
+            {
+                if (_listItemShape[i].gameObject.active 
+                    && _listItemShape[i].IDGate == idGate
+                    && _listItemShape[i].TypeShape != TypeShape.Lock)
+                {
+                    _listItemShape[i].SetActiveBorder(true);
+                }
+            }
+
+            for (int i = 0; i < _listItemShape.Count; i++)
+            {
+                if (_listItemShape[i].gameObject.active && _listItemShape[i].IDGate == idGate)
+                {
+                    bool value =  _listItemShape[i].CheckBoosterMagic(posTarget);
+
+                    if (value)
+                    {
+                        count++;
+                    }
+
+                    float time = Random.Range(0,0.3f);
+                    yield return new WaitForSeconds(time);
+                }
+            }
+
+            if(count > 0)
+            {
+                yield return new WaitForSeconds(0.7f);
+                UIGamePlay ui =  UIManager.Instance.GetScreen<UIGamePlay>(GameManager.ScreenId_ExampleMenu);
+                ui.CloseBooster();
+            }
         }
     }
 

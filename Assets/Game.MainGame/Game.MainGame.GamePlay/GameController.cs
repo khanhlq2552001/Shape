@@ -8,7 +8,8 @@ namespace Game.MainGame
     public enum StateController
     {
         Drag,
-        NoDrag
+        NoDrag,
+        Pause
     }
 
     public class GameController : MonoBehaviour
@@ -19,8 +20,6 @@ namespace Game.MainGame
         private StateController _stateController = StateController.NoDrag;
         private ObjShape _objShape;
         private Vector2 _touchPosition;
-
-        public Action onActionInUpdate;
 
         public StateController StateController
         {
@@ -36,7 +35,7 @@ namespace Game.MainGame
 
         private void Update()
         {
-            onActionInUpdate?.Invoke();
+            if (_stateController == StateController.Pause) return;
 
             if (Input.touchCount > 0)
             {
@@ -114,11 +113,14 @@ namespace Game.MainGame
             }
 
             float distance = Vector2.Distance((Vector2)_objShape.transform.position, _touchPosition);
+            float ratio = (distance/2f) * 15f;
 
             if (distance > _stopDistance)
             {
                 Vector2 direction = (_touchPosition - (Vector2)_objShape.transform.position).normalized;
-                rbShape.velocity = direction * _speedMove;
+                Vector2 targetVelocity = direction * _speedMove;
+                rbShape.velocity = Vector2.Lerp(rbShape.velocity, targetVelocity, Time.deltaTime * ratio); // Điều chỉnh tham số 10f tùy ý
+                //
             }
             else
             {
