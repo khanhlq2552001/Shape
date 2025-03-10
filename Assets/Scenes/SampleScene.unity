@@ -213,7 +213,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2703d5b943095ec48b8aef94932e29ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasGroup: {fileID: 0}
 --- !u!1 &331644072
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,20 +803,34 @@ MonoBehaviour:
     - idShapes: 1
       idGrid: 8
       idGate: 0
+      idGate2: -1
+      countFreeze: 0
       typeBlock: 0
       isKey: 0
       isLock: 1
     - idShapes: 0
       idGrid: 0
       idGate: 1
+      idGate2: -1
+      countFreeze: 0
       typeBlock: 2
       isKey: 0
       isLock: 0
     - idShapes: 0
       idGrid: 1
       idGate: 1
+      idGate2: -1
+      countFreeze: 0
       typeBlock: 0
       isKey: 1
+      isLock: 0
+    - idShapes: 0
+      idGrid: 5
+      idGate: 1
+      idGate2: 0
+      countFreeze: 0
+      typeBlock: 0
+      isKey: 0
       isLock: 0
     datasWall:
     - idWall: 1

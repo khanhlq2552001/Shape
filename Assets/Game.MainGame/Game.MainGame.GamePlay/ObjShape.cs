@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using BlitzyUI;
 using DG.Tweening;
 using Lean.Pool;
+using TMPro;
 using UnityEngine;
 
 namespace Game.MainGame
@@ -31,12 +32,28 @@ namespace Game.MainGame
         [SerializeField] private GameObject _key;
         [SerializeField] private GameObject _lock;
 
+        [Header("Freeze")]
+        [SerializeField] private GameObject _objFreeze;
+        [SerializeField] private TextMeshPro _textCountFreeze;
 
+        [Header("Shape2")]
+        [SerializeField] private SpriteRenderer _shape2;
+        [SerializeField] private SpriteRenderer _shape2Shadow;
+        [SerializeField] private GameObject _shape2Border;
+
+        private Vector3 _posStartShape2;
+        private Vector3 _scaleStartShape2;
+        private string _hexColorShape2;
+
+        [Header("Shape")]
         private bool _canMove = true;
         private int _idGate;
+        private int _idGate2;
         private int _id;
         private TypeBlock _typeBlock;
         private TypeShape _typeShape;
+        private int _countFreeze = 0;
+        private string _hexColorShape1;
 
         public Transform tranCentre;
         public Rigidbody2D rb;
@@ -51,6 +68,9 @@ namespace Game.MainGame
             {
                 idsGrid.Add(0);
             }
+
+            _posStartShape2 = _shape2.transform.localPosition;
+            _scaleStartShape2 = _shape2.transform.localScale;
         }
 
         public TypeBlock TypeLock
@@ -86,11 +106,25 @@ namespace Game.MainGame
             set => _idGate = value;
         }
 
+        public int IDGate2
+        {
+            get => _idGate2;
+
+            set => _idGate2 = value;
+        }
+
         public int ID
         {
             get => _id;
 
             set => _id = value;
+        }
+
+        public int CountFreeze
+        {
+            get => _countFreeze;
+
+            set => _countFreeze = value;
         }
 
         public void SetActiveBorder(bool active)
@@ -107,6 +141,8 @@ namespace Game.MainGame
 
         public void DestroyShape()
         {
+            LevelManager.Instance.CheckShapeFreeze();
+            LevelManager.Instance.ReduceCountShape();
             LeanPool.Despawn(gameObject);
         }
 
@@ -115,6 +151,21 @@ namespace Game.MainGame
             if (TypeShape == TypeShape.Lock)
             {
                 return false;
+            }
+
+            if(CountFreeze > 0)
+            {
+                ReduceCountFreeze();
+                return true;
+            }
+
+            if(IDGate2 != -1)
+            {
+                IDGate = IDGate2;
+                IDGate2 = -1;
+                _shape2.gameObject.SetActive(false);
+                SetColor(_hexColorShape2, true);
+                return true;
             }
 
             CheckKey();
@@ -130,6 +181,38 @@ namespace Game.MainGame
             {
                 return false;
             }
+
+            if(CountFreeze > 0)
+            {
+                ReduceCountFreeze();
+                return true;
+            }
+
+            if(IDGate2 != -1)
+            {
+                _shape2.transform.localScale = Vector2.one;
+                _shape2.transform.localPosition = Vector2.zero;
+                SetColorShape2(_hexColorShape1, false);
+                SetColor(_hexColorShape2, true);
+                IDGate = IDGate2;
+                IDGate2 = -1;
+                _shape2Border.SetActive(true);
+                _shape2.maskInteraction = SpriteMaskInteraction.None;
+                _shape2Shadow.maskInteraction = SpriteMaskInteraction.None;
+                _shape2Border.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.None;
+
+                _shape2.transform.DOScale(Vector2.zero, 0.7f)
+                .SetEase(Ease.InQuart);
+
+                _shape2.transform.DOMove(posTarget, 0.7f)
+                    .SetEase(Ease.InQuart)
+                    .OnComplete(() => {
+                        _shape2.gameObject.SetActive(false);
+                    });
+
+                return true;
+            }
+
             SetActiveBorder(true);
 
             CheckKey();
@@ -161,11 +244,16 @@ namespace Game.MainGame
             }
         }
 
-        public void SetColor(string strHex)
+        public void SetColor(string strHex, bool saveColor)
         {
             Color color;
             ColorUtility.TryParseHtmlString("#"+ strHex, out color);
             _spr.color = color;
+
+            if (saveColor)
+            {
+                _hexColorShape1 = strHex;
+            }
 
             Color darkerColor = new Color(color.r *0.4f, color.g * 0.35f, color.b * 0.35f, color.a);
 
@@ -173,6 +261,33 @@ namespace Game.MainGame
             {
                 _sprShadows[i].color = darkerColor;
             }
+        }
+
+        public void SetColorShape2(string strHex, bool saveColor)
+        {
+            Color color;
+            ColorUtility.TryParseHtmlString("#" + strHex, out color);
+            _shape2Shadow.color = color;
+
+            if (saveColor)
+            {
+                _hexColorShape2 = strHex;
+            }
+
+            Color darkerColor = new Color(color.r *0.4f, color.g * 0.35f, color.b * 0.35f, color.a);
+
+            _shape2.color = darkerColor;
+        }
+
+        private void ResetShape2()
+        {
+            _shape2.gameObject.SetActive(false);
+            _shape2.transform.localPosition = _posStartShape2;
+            _shape2.transform.localScale = _scaleStartShape2;
+            _shape2.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
+            _shape2Shadow.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
+            _shape2Border.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
+            _shape2Border.SetActive(false);
         }
 
         public void SetBlock(TypeBlock type)
@@ -214,6 +329,36 @@ namespace Game.MainGame
             _lock.SetActive(isLock);
         }
 
+        public void SetIDGate2(string hexColor, int idGate2)
+        {
+            IDGate2 = idGate2;
+            _shape2.gameObject.SetActive(true);
+            SetColorShape2(hexColor, true);
+        }
+
+        public void SetFreeze(int count)
+        {
+            CountFreeze = count;
+            _objFreeze.SetActive(true);
+            CanMove = false;
+            _textCountFreeze.text = count.ToString();
+        }
+
+        public void ReduceCountFreeze()
+        {
+            if(CountFreeze > 0)
+            {
+                CountFreeze--;
+                _textCountFreeze.text = CountFreeze.ToString();
+
+                if(CountFreeze == 0)
+                {
+                    _objFreeze.SetActive(false);
+                    CanMove = true;
+                }
+            }
+        }
+
         public bool CheckResult(TypeWall type)
         {
 
@@ -229,11 +374,9 @@ namespace Game.MainGame
                         {
                             int id = k *  LevelManager.Instance.GetData().width + x;
                             ItemGrid item = LevelManager.Instance.GetListItemGrid()[id].GetComponent<ItemGrid>();
+                            bool value = item.CheckItem(ID, IDGate, type);
 
-                            if (item.IDShape != -1 && item.IDShape != ID)
-                            {
-                                return false;
-                            }
+                            if (!value) return false;
                         }
                     }
                     break;
@@ -248,10 +391,9 @@ namespace Game.MainGame
                             int id = k *  LevelManager.Instance.GetData().width + x;
                             ItemGrid item = LevelManager.Instance.GetListItemGrid()[id].GetComponent<ItemGrid>();
 
-                            if (item.IDShape != -1 && item.IDShape != ID)
-                            {
-                                return false;
-                            }
+                            bool value = item.CheckItem(ID, IDGate, type);
+
+                            if (!value) return false;
                         }
                     }
                     break;
@@ -266,10 +408,9 @@ namespace Game.MainGame
                             int id = y *  LevelManager.Instance.GetData().width + k;
                             ItemGrid item = LevelManager.Instance.GetListItemGrid()[id].GetComponent<ItemGrid>();
 
-                            if (item.IDShape != -1 && item.IDShape != ID)
-                            {
-                                return false;
-                            }
+                            bool value = item.CheckItem(ID, IDGate, type);
+
+                            if (!value) return false;
                         }
                     }
                     break;
@@ -284,10 +425,9 @@ namespace Game.MainGame
                             int id = y *  LevelManager.Instance.GetData().width + k;
                             ItemGrid item = LevelManager.Instance.GetListItemGrid()[id].GetComponent<ItemGrid>();
 
-                            if (item.IDShape != -1 && item.IDShape != ID)
-                            {
-                                return false;
-                            }
+                            bool value = item.CheckItem(ID, IDGate, type);
+
+                            if (!value) return false;
                         }
                     }
                     break;
@@ -307,6 +447,7 @@ namespace Game.MainGame
                 {
                     float newY = (wall.transform.position.y - transform.position.y) + wall.transform.position.y;
                     Vector2 targetEnd = new Vector2(transform.position.x, newY);
+
                     transform.DOMove(targetEnd, 0.5f).SetEase(Ease.Linear).OnComplete(() =>
                     {
                         DestroyShape();
@@ -319,6 +460,42 @@ namespace Game.MainGame
 
                     transform.DOMove(targetEnd, 0.5f).SetEase(Ease.Linear).OnComplete(() => {
                         DestroyShape();
+                    });
+                }
+            });
+        }
+
+        public void EffectEndShape2(TypeWall type, Wall wall)
+        {
+            CanMove = false;
+            Vector2 offset = tranCentre.localPosition;
+            Vector2 posTarget = (Vector2)LevelManager.Instance.GetListItemGrid()[idsGrid[0]].transform.position - offset;
+            _shape2.transform.localScale = Vector2.one;
+            _shape2.transform.localPosition = Vector2.zero;
+            SetColorShape2(_hexColorShape1, false);
+            SetColor(_hexColorShape2, true);
+            IDGate = IDGate2;
+            IDGate2 = -1;
+
+            transform.DOMove(posTarget, 0.2f).SetEase(Ease.Linear).OnComplete(() => {
+                if (type == TypeWall.top || type == TypeWall.bot)
+                {
+                    float newY = (wall.transform.position.y - _shape2.transform.position.y) + wall.transform.position.y;
+                    Vector2 targetEnd = new Vector2(transform.position.x, newY);
+
+                    _shape2.transform.DOMove(targetEnd, 0.5f).SetEase(Ease.Linear).OnComplete(() => {
+                        _shape2.gameObject.SetActive(false);
+                        CanMove = true;
+                    });
+                }
+                else if (type == TypeWall.left || type == TypeWall.right)
+                {
+                    float newX = (wall.transform.position.x - _shape2.transform.position.x) + wall.transform.position.x;
+                    Vector2 targetEnd = new Vector2(newX, _shape2.transform.position.y);
+
+                    _shape2.transform.DOMove(targetEnd, 0.5f).SetEase(Ease.Linear).OnComplete(() => {
+                        _shape2.gameObject.SetActive(false);
+                        CanMove = true;
                     });
                 }
             });
@@ -356,8 +533,11 @@ namespace Game.MainGame
             CanMove = true;
             SetActiveBorder(false);
             TypeShape = TypeShape.Normal;
-
+            _countFreeze = 0;
             _spr.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
+            _objFreeze.SetActive(false);
+            ResetShape2();
+            IDGate2 = -1;
 
             for (int i = 0; i < _sprShadows.Count; i++)
             {

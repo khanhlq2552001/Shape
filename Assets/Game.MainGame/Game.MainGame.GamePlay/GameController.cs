@@ -113,13 +113,14 @@ namespace Game.MainGame
             }
 
             float distance = Vector2.Distance((Vector2)_objShape.transform.position, _touchPosition);
-            float ratio = (distance/2f) * 15f;
+            float ratio = (distance/2f) * 20f;
 
             if (distance > _stopDistance)
             {
                 Vector2 direction = (_touchPosition - (Vector2)_objShape.transform.position).normalized;
-                Vector2 targetVelocity = direction * _speedMove;
-                rbShape.velocity = Vector2.Lerp(rbShape.velocity, targetVelocity, Time.deltaTime * ratio); // Điều chỉnh tham số 10f tùy ý
+                Vector2 targetVelocity = direction *ratio;
+                rbShape.velocity = targetVelocity;
+             //   rbShape.velocity = Vector2.Lerp(rbShape.velocity, targetVelocity, Time.deltaTime * ratio); // Điều chỉnh tham số 10f tùy ý
                 //
             }
             else

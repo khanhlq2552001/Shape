@@ -4,7 +4,9 @@
     "references": [
         "LeanPool",
         "DOTween.Modules",
-        "DOTweenPro.Scripts"
+        "DOTweenPro.Scripts",
+        "Unity.TextMeshPro.Editor",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

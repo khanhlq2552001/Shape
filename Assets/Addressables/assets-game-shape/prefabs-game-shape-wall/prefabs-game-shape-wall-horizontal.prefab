@@ -531,6 +531,9 @@ MonoBehaviour:
   _arrowRightLeft:
   - {fileID: 0}
   - {fileID: 0}
+  listCalculateXY:
+  - x: 0
+    y: 0
 --- !u!50 &8009045570203972050
 Rigidbody2D:
   serializedVersion: 4

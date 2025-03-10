@@ -14,6 +14,7 @@ namespace Game.MainGame
         [SerializeField] private List<SpriteRenderer> _sprShadows;
         [SerializeField] private GameObject[] _arrowTopDown = new GameObject[2];
         [SerializeField] private GameObject[] _arrowRightLeft = new GameObject[2];
+        [SerializeField] private TypeWall _typeWall;
 
         private int _idGate;
 
@@ -24,6 +25,13 @@ namespace Game.MainGame
             {
                 idsItemGrid.Add(0);
             }
+        }
+
+        public TypeWall Type
+        {
+            get => _typeWall;
+
+            set => _typeWall = value;
         }
 
         public int IDGate
@@ -49,10 +57,13 @@ namespace Game.MainGame
 
         public void SetMask(TypeWall type)
         {
+            Type = type;
+
             for(int i=0; i< _listMasks.Count; i++)
             {
                 _listMasks[i].SetActive(false);
             }
+
             switch (type)
             {
                 case TypeWall.top:
@@ -105,6 +116,7 @@ namespace Game.MainGame
                 newX = x + _calculateXies[i].x;
                 newY = y + _calculateXies[i].y;
                 idsItemGrid[i] = newY * LevelManager.Instance.GetData().width + newX;
+                LevelManager.Instance.GetListItemGrid()[idsItemGrid[i]].GetComponent<ItemGrid>().AddInfoWall(this, _typeWall, _idGate);
             }
         }
     }

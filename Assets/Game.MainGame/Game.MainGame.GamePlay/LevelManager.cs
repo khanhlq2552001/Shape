@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using BlitzyUI;
 using Lean.Pool;
 using UnityEngine;
@@ -18,6 +17,7 @@ namespace Game.MainGame
 
         private List<GameObject> _listItemGrid = new List<GameObject>();
         private List<ObjShape> _listItemShape = new List<ObjShape>();
+        private List<ObjShape> _listShapeFreeze = new List<ObjShape>();
         private int _countKey = 0;
         private int _countShape = 0;
         private ObjShape _objLock = new ObjShape();
@@ -32,7 +32,7 @@ namespace Game.MainGame
 
         private void Start()
         {
-            GenerateGrid();
+         //   GenerateGrid();
         }
 
         public List<GameObject> GetListItemGrid()
@@ -43,6 +43,11 @@ namespace Game.MainGame
         public List<ObjShape> GetListItemShape()
         {
             return _listItemShape;
+        }
+
+        public Transform TranParent()
+        {
+            return _tranParent;
         }
 
         public Data GetData()
@@ -79,7 +84,7 @@ namespace Game.MainGame
             }
         }
 
-        private void GenerateGrid()
+        public void GenerateGrid()
         {
             ClearCell();
 
@@ -134,6 +139,7 @@ namespace Game.MainGame
             for (int i = 0; i < _data.idCentreShapes.Count; i++)
             {
                 GameObject obj = LeanPool.Spawn(dataShape.shapes[_data.idCentreShapes[i].idShapes]);
+                obj.transform.SetParent(_tranParent);
 
                 ObjShape shape = obj.GetComponent<ObjShape>();
 
@@ -141,11 +147,11 @@ namespace Game.MainGame
                 shape.ResetAttribute();
                 shape.IDGate = _data.idCentreShapes[i].idGate;
                 shape.ID = i;
-                shape.SetColor(_data.colorCodes[_data.idCentreShapes[i].idGate]);
+                shape.SetColor(_data.colorCodes[_data.idCentreShapes[i].idGate], true);
                 shape.SetBlock((TypeBlock)_data.idCentreShapes[i].typeBlock);
                 shape.SetKeyLock(_data.idCentreShapes[i].isKey, _data.idCentreShapes[i].isLock);
 
-                if(_data.idCentreShapes[i].isKey)
+                if (_data.idCentreShapes[i].isKey)
                 {
                     CountKey++;
                 }
@@ -155,15 +161,43 @@ namespace Game.MainGame
                     _objLock = shape;
                 }
 
+                if (_data.idCentreShapes[i].countFreeze > 0)
+                {
+                    _listShapeFreeze.Add(shape);
+                    shape.SetFreeze(_data.idCentreShapes[i].countFreeze);
+                }
+
+                if (_data.idCentreShapes[i].idGate2 != -1)
+                {
+                    shape.SetIDGate2(_data.colorCodes[_data.idCentreShapes[i].idGate2], _data.idCentreShapes[i].idGate2);
+                }
+
                 Vector2 offset = shape.tranCentre.localPosition;
                 int x = _data.idCentreShapes[i].idGrid % _data.width;
                 int y = _data.idCentreShapes[i].idGrid / _data.width;
+
+                _listItemGrid[_data.idCentreShapes[i].idGrid].GetComponent<ItemGrid>().IDShape = i;
                 Vector2 position = startPosition + new Vector2(x * _spacing, -y * _spacing);
                 obj.transform.position = position - offset;
                 shape.CalculatorCoordinates(_data.idCentreShapes[i].idGrid);
             }
 
             CountShape = _listItemShape.Count;
+        }
+
+        public void ReduceCountShape()
+        {
+            if(CountShape > 0)
+            {
+                CountShape--;
+                if(CountShape == 0)
+                {
+                    controller.StateController = StateController.Pause;
+                    UIManager.Instance.QueuePush(GameManager.ScreenId_UIWin, null, "UIWin", null);
+                    UIGamePlay ui = UIManager.Instance.GetScreen<UIGamePlay>(GameManager.ScreenId_ExampleMenu);
+                    ui.StopTime();
+                }
+            }
         }
 
         private void CreateWall()
@@ -193,6 +227,15 @@ namespace Game.MainGame
             }
             _listItemShape.Clear();
             _listItemGrid.Clear();
+            _listShapeFreeze.Clear();
+        }
+
+        public void CheckShapeFreeze()
+        {
+            for(int i=0; i< _listShapeFreeze.Count; i++)
+            {
+                _listShapeFreeze[i].ReduceCountFreeze();
+            }
         }
 
         public void BoosterMagic(int idGate, Vector2 posTarget)
@@ -206,9 +249,11 @@ namespace Game.MainGame
 
             for (int i = 0; i < _listItemShape.Count; i++)
             {
-                if (_listItemShape[i].gameObject.active 
+                if (_listItemShape[i].gameObject.active
                     && _listItemShape[i].IDGate == idGate
-                    && _listItemShape[i].TypeShape != TypeShape.Lock)
+                    && _listItemShape[i].TypeShape != TypeShape.Lock
+                    && _listItemShape[i].CountFreeze == 0
+                    && _listItemShape[i].IDGate2 == -1)
                 {
                     _listItemShape[i].SetActiveBorder(true);
                 }
@@ -258,6 +303,8 @@ namespace Game.MainGame
         public int idShapes;
         public int idGrid;
         public int idGate;
+        public int idGate2;
+        public int countFreeze;
         public int typeBlock; // 0: khong block, 1: chi di chuyen ngang, 2: chi di chuyen doc
         public bool isKey;
         public bool isLock;

@@ -88,7 +88,7 @@ namespace BlitzyUI
             if (_rootCanvasScalar == null) {
                 throw new System.Exception(string.Format("{0} must have a CanvasScalar component attached to it for UIManager.", rootCanvas.name));
             }
-                                          
+
             _cache = new Dictionary<string, Screen>();
             _queue = new Queue<QueuedScreen>();
             _stack = new List<Screen>();
@@ -108,7 +108,7 @@ namespace BlitzyUI
         }
 
         /// <summary>
-        /// Queue the screen to be pushed onto the screen stack. 
+        /// Queue the screen to be pushed onto the screen stack.
         /// Callback will be invoked when the screen is pushed to the stack.
         /// </summary>
         public void QueuePush (BlitzyUI.Screen.Id id, BlitzyUI.Screen.Data data, string prefabName = null, PushedDelegate callback = null)
@@ -282,7 +282,7 @@ namespace BlitzyUI
                 return true;
             }
 
-            bool isVisible = canvasGroup.alpha > 0.0f && 
+            bool isVisible = canvasGroup.alpha > 0.0f &&
                             canvasGroup.interactable == true &&
                             canvasGroup.blocksRaycasts == true;
 
@@ -428,7 +428,7 @@ namespace BlitzyUI
 
         private void UpdateSortOrderOverrides() {
             int managedOrder = 0;
-            
+
             int childCount = this.rootCanvas.transform.childCount;
             for (int i = 0; i < childCount; i++) {
                 var screen = this.rootCanvas.transform.GetChild(i).GetComponent<Screen>();

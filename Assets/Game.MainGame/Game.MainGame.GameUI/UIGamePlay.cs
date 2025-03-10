@@ -1,5 +1,7 @@
 using System.Collections;
+using BlitzyUI;
 using DG.Tweening;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -144,9 +146,23 @@ namespace Game.MainGame
             GameManager.Instance.AddActionToOnActionUpdate(CheckInputMagic);
         }
 
+        public void StopTime()
+        {
+            StopCoroutine(_countdownCoroutine);
+        }
+
         private void BtnCloseBooster()
         {
             _objBooster.SetActive(false);
+        }
+
+        private void BtnPause()
+        {
+            BlitzyUI.Screen.Data settingData = new BlitzyUI.Screen.Data();
+            settingData.Add("pause", true);
+
+            LevelManager.Instance.controller.StateController = StateController.Pause;
+            UIManager.Instance.QueuePush(GameManager.ScreenId_Setting, settingData, "UISetting", null);
         }
 
         public void CheckInputHammer()
@@ -205,7 +221,6 @@ namespace Game.MainGame
                             Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, Camera.main.nearClipPlane));
 
                             LevelManager.Instance.BoosterMagic(obj.IDGate , (Vector2)worldPos);
-                            Debug.Log(worldPos);
                         }
                     }
                 }
@@ -231,12 +246,14 @@ namespace Game.MainGame
 
         public override void OnPop()
         {
+            PopFinished();
         }
 
         public override void OnPush(Data data)
         {
             _lockBtnFreeze = false;
             StartCountdown(75);
+            PushFinished();
         }
 
         public override void OnSetup()
@@ -249,6 +266,7 @@ namespace Game.MainGame
             _btnBoosterMagic.onClick.AddListener(() => BtnMagic());
             _btnCloseBooster.onClick.RemoveAllListeners();
             _btnCloseBooster.onClick.AddListener(() => BtnCloseBooster());
+            _btnPause.onClick.AddListener(() => BtnPause());
         }
     }
 }

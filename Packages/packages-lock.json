@@ -6,6 +6,12 @@
       "source": "local-tarball",
       "dependencies": {}
     },
+    "com.text-mesh": {
+      "version": "file:com.text-mesh-0.0.1.tgz",
+      "depth": 0,
+      "source": "local-tarball",
+      "dependencies": {}
+    },
     "com.unity.2d.animation": {
       "version": "9.1.0",
       "depth": 1,

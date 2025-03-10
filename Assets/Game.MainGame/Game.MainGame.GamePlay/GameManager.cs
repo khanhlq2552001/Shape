@@ -9,8 +9,10 @@ namespace Game.MainGame
         public static GameManager Instance;
 
         public static readonly BlitzyUI.Screen.Id ScreenId_ExampleMenu = new BlitzyUI.Screen.Id("ExampleMenu");
+        public static readonly BlitzyUI.Screen.Id ScreenId_Setting = new BlitzyUI.Screen.Id("SettingUI");
+        public static readonly BlitzyUI.Screen.Id ScreenId_UIWin = new BlitzyUI.Screen.Id("WinUI");
+        public static readonly BlitzyUI.Screen.Id ScreenId_UIHome = new BlitzyUI.Screen.Id("HomeUI");
 
-        public CanvasGroup canvasGroup;
         private Action _onActionUpdate;
 
         // Start is called before the first frame update
@@ -24,7 +26,7 @@ namespace Game.MainGame
 
         void Start()
         {
-            UIManager.Instance.QueuePush(ScreenId_ExampleMenu, null, "UIInGame", null);
+            UIManager.Instance.QueuePush(ScreenId_UIHome, null, "UIHome", null);
 
             Application.targetFrameRate = 60;
         }

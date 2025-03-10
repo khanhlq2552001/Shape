@@ -49,6 +49,27 @@ namespace Game.MainGame
             }
         }
 
+        public List<InfoWall> GetListInfoWall()
+        {
+            return _listInfoWall;
+        }
+
+        public bool CheckItem(int idShape, int idGate, TypeWall type)
+        {
+            if (idShape != _idShape && _idShape != -1) return false;
+
+            if (_listInfoWall.Count == 0) return true;
+
+            for(int i=0; i< _listInfoWall.Count; i++)
+            {
+                if (_listInfoWall[i].idGate == idGate && _listInfoWall[i].type == type)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public int ID
         {
             get => _id;
@@ -67,9 +88,9 @@ namespace Game.MainGame
             if(type == TypeWall.left)
             {
                 GameObject obj = LeanPool.Spawn(LevelManager.Instance.dataShape.shapesWall[idWall]);
+                obj.transform.SetParent(LevelManager.Instance.TranParent());
 
                 Wall wall = obj.GetComponent<Wall>();
-                wall.CalculatorCoordinates(ID);
                 wall.SetMask(type);
 
                 if (!isWall)
@@ -79,15 +100,7 @@ namespace Game.MainGame
                     wall.SetColor(LevelManager.Instance.GetData().colorCodes[idGate]);
 
                     wall.SetArrow(type);
-
-                    InfoWall infoWall = new InfoWall()
-                    {
-                        wall = wall,
-                        idGate = idGate,
-                        type = TypeWall.left
-                    };
-
-                    _listInfoWall.Add(infoWall);
+                    wall.CalculatorCoordinates(ID);
                 }
                 else
                 {
@@ -101,9 +114,9 @@ namespace Game.MainGame
             else if(type == TypeWall.top)
             {
                 GameObject obj = LeanPool.Spawn(LevelManager.Instance.dataShape.shapesWall[idWall]);
+                obj.transform.SetParent(LevelManager.Instance.TranParent());
 
                 Wall wall = obj.GetComponent<Wall>();
-                wall.CalculatorCoordinates(ID);
                 wall.SetMask(type);
 
                 if (!isWall)
@@ -114,14 +127,7 @@ namespace Game.MainGame
 
                     wall.SetArrow(type);
 
-                    InfoWall infoWall = new InfoWall()
-                    {
-                        wall = wall,
-                        idGate = idGate,
-                        type = TypeWall.top
-                    };
-
-                    _listInfoWall.Add(infoWall);
+                    wall.CalculatorCoordinates(ID);
                 }
                 else
                 {
@@ -135,9 +141,9 @@ namespace Game.MainGame
             else if (type == TypeWall.right)
             {
                 GameObject obj = LeanPool.Spawn(LevelManager.Instance.dataShape.shapesWall[idWall]);
+                obj.transform.SetParent(LevelManager.Instance.TranParent());
 
                 Wall wall = obj.GetComponent<Wall>();
-                wall.CalculatorCoordinates(ID);
                 wall.SetMask(type);
 
                 if (!isWall)
@@ -148,14 +154,7 @@ namespace Game.MainGame
 
                     wall.SetArrow(type);
 
-                    InfoWall infoWall = new InfoWall()
-                    {
-                        wall = wall,
-                        idGate = idGate,
-                        type = TypeWall.right
-                    };
-
-                    _listInfoWall.Add(infoWall);
+                    wall.CalculatorCoordinates(ID);
                 }
                 else
                 {
@@ -169,9 +168,9 @@ namespace Game.MainGame
             else if (type == TypeWall.bot)
             {
                 GameObject obj = LeanPool.Spawn(LevelManager.Instance.dataShape.shapesWall[idWall]);
+                obj.transform.SetParent(LevelManager.Instance.TranParent());
 
                 Wall wall = obj.GetComponent<Wall>();
-                wall.CalculatorCoordinates(ID);
                 wall.SetMask(type);
 
                 if (!isWall)
@@ -182,13 +181,7 @@ namespace Game.MainGame
 
                     wall.SetArrow(type);
 
-                    InfoWall infoWall = new InfoWall()
-                    {
-                        wall = wall,
-                        idGate = idGate,
-                        type = TypeWall.bot
-                    };
-                    _listInfoWall.Add(infoWall);
+                    wall.CalculatorCoordinates(ID);
                 }
                 else
                 {
@@ -201,12 +194,21 @@ namespace Game.MainGame
             }
         }
 
+        public void AddInfoWall(Wall newWall, TypeWall type, int idGate)
+        {
+            _listInfoWall.Add(new InfoWall() {
+                wall = newWall,
+                type = type,
+                idGate = idGate
+            });
+        }
+
         public void CheckResult()
         {
             ObjShape shape = LevelManager.Instance.GetListItemShape()[IDShape];
             for (int i = 0; i < _listInfoWall.Count; i++)
             {
-                if (_listInfoWall[i].idGate == shape.IDGate)
+                if (_listInfoWall[i].idGate == shape.IDGate && shape.IDGate2 == -1)
                 {
                     bool value = shape.CheckResult(_listInfoWall[i].type);
 
@@ -220,12 +222,28 @@ namespace Game.MainGame
                         LevelManager.Instance.controller.StateController = StateController.NoDrag;
                     }
                 }
+                else if(_listInfoWall[i].idGate == shape.IDGate && shape.IDGate2 != -1)
+                {
+                    bool value = shape.CheckResult(_listInfoWall[i].type);
+
+                    if (value)
+                    {
+                        shape.SetActiveBorder(false);
+                        shape.CheckKey();
+                        shape.CanMove = false;
+                        shape.EffectEndShape2(_listInfoWall[i].type, _listInfoWall[i].wall);
+
+                        LevelManager.Instance.controller.StateController = StateController.NoDrag;
+                    }
+                }
+
             }
         }
 
         public void SetWallCorner(TypeWallCorner type)
         {
                 GameObject obj = LeanPool.Spawn(LevelManager.Instance.dataShape.shapesWallCorner[(int)type]);
+                obj.transform.SetParent(LevelManager.Instance.TranParent());
 
                 obj.transform.position = transWallCorner[(int)type].position;
                 WallCorner wallCorner = obj.GetComponent<WallCorner>();
