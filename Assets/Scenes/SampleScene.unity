@@ -898,6 +898,8 @@ MonoBehaviour:
     - idWallCorner: 3
       idGrid: 6
   _spacing: 1.05
+  _dataLevels: {fileID: 11400000, guid: 90c5fba97aac2f043a3a702bb5f768e8, type: 2}
+  _cameraMain: {fileID: 963194227}
   dataShape: {fileID: 11400000, guid: 3556f8970a926ee41a75efe82c6aa190, type: 2}
   controller: {fileID: 56829670}
 --- !u!1 &1759580382

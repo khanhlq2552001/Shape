@@ -1128,7 +1128,8 @@ MonoBehaviour:
   keepCached: 0
   overrideManagedSorting: 0
   overrideSortValue: 0
-  _txtHeal: {fileID: 7719239011893232820}
+  _txtHeal: {fileID: 3549651627470722598}
+  _txtTimeHeal: {fileID: 7719239011893232820}
   _txtCoin: {fileID: 5595879841231426137}
   _btnSetting: {fileID: 507652918108140130}
   _txtLevel: {fileID: 7715278898203356303}

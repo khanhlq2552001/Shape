@@ -1,6 +1,7 @@
 using System.Collections;
 using BlitzyUI;
 using DG.Tweening;
+using log4net.Core;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +18,7 @@ namespace Game.MainGame
         [SerializeField] private Image _imgFreezeTime;
         [SerializeField] private Image _imgBgFreeze;
         [SerializeField] private Text _txtTimeCountDown;
+        [SerializeField] private Text _txtLevel;
 
         [Header("FreezingUI")]
         [SerializeField] private CanvasGroup _groupProgressFreezing;
@@ -73,6 +75,8 @@ namespace Game.MainGame
             }
 
             DisplayTime(0);
+            LevelManager.Instance.controller.StateController = StateController.Pause;
+            UIManager.Instance.QueuePush(GameManager.ScreenId_UIWin, null, "UILose", null);
         }
 
         private IEnumerator CountdownRoutineFreeze(int time)
@@ -236,6 +240,11 @@ namespace Game.MainGame
             _objBooster.SetActive(false);
         }
 
+        public void UpdateTextLevel()
+        {
+            _txtLevel.text = "Level " + PlayerPrefs.GetInt("level").ToString();
+        }
+
         public override void OnFocus()
         {
         }
@@ -254,6 +263,7 @@ namespace Game.MainGame
             _lockBtnFreeze = false;
             StartCountdown(75);
             PushFinished();
+            UpdateTextLevel();
         }
 
         public override void OnSetup()
@@ -267,6 +277,7 @@ namespace Game.MainGame
             _btnCloseBooster.onClick.RemoveAllListeners();
             _btnCloseBooster.onClick.AddListener(() => BtnCloseBooster());
             _btnPause.onClick.AddListener(() => BtnPause());
+            GameManager.Instance.AddActionLevel(UpdateTextLevel);
         }
     }
 }

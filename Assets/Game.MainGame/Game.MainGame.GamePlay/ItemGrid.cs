@@ -60,14 +60,21 @@ namespace Game.MainGame
 
             if (_listInfoWall.Count == 0) return true;
 
+
             for(int i=0; i< _listInfoWall.Count; i++)
             {
                 if (_listInfoWall[i].idGate == idGate && _listInfoWall[i].type == type)
                 {
                     return true;
                 }
+
+                if (_listInfoWall[i].type == type)
+                {
+                    return false;
+                }
             }
-            return false;
+
+            return true;
         }
 
         public int ID
@@ -92,7 +99,7 @@ namespace Game.MainGame
 
                 Wall wall = obj.GetComponent<Wall>();
                 wall.SetMask(type);
-
+                
                 if (!isWall)
                 {
                     wall.IDGate = idGate;
@@ -100,11 +107,13 @@ namespace Game.MainGame
                     wall.SetColor(LevelManager.Instance.GetData().colorCodes[idGate]);
 
                     wall.SetArrow(type);
-                    wall.CalculatorCoordinates(ID);
+
+                    wall.CalculatorCoordinates(ID, isWall, idGate);
                 }
                 else
                 {
                     wall.SetColor("797979");
+                    wall.CalculatorCoordinates(ID, isWall, -1);
                 }
 
                 Vector2 centre = wall.centre.localPosition;
@@ -127,11 +136,13 @@ namespace Game.MainGame
 
                     wall.SetArrow(type);
 
-                    wall.CalculatorCoordinates(ID);
+                    wall.CalculatorCoordinates(ID, isWall, idGate);
                 }
                 else
                 {
                     wall.SetColor("797979");
+
+                    wall.CalculatorCoordinates(ID, isWall, -1);
                 }
 
                 Vector2 centre = wall.centre.localPosition;
@@ -154,11 +165,13 @@ namespace Game.MainGame
 
                     wall.SetArrow(type);
 
-                    wall.CalculatorCoordinates(ID);
+                    wall.CalculatorCoordinates(ID, isWall, idGate);
                 }
                 else
                 {
                     wall.SetColor("797979");
+
+                    wall.CalculatorCoordinates(ID, isWall, -1);
                 }
 
                 Vector2 centre = wall.centre.localPosition;
@@ -181,11 +194,13 @@ namespace Game.MainGame
 
                     wall.SetArrow(type);
 
-                    wall.CalculatorCoordinates(ID);
+                    wall.CalculatorCoordinates(ID, isWall, idGate);
                 }
                 else
                 {
                     wall.SetColor("797979");
+
+                    wall.CalculatorCoordinates(ID, isWall, -1);
                 }
 
                 Vector2 centre = wall.centre.localPosition;
@@ -210,6 +225,7 @@ namespace Game.MainGame
             {
                 if (_listInfoWall[i].idGate == shape.IDGate && shape.IDGate2 == -1)
                 {
+                    Debug.Log("okok");
                     bool value = shape.CheckResult(_listInfoWall[i].type);
 
                     if (value)

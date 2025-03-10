@@ -104,7 +104,7 @@ namespace Game.MainGame
             }
         }
 
-        public void CalculatorCoordinates(int id)
+        public void CalculatorCoordinates(int id, bool isWall, int iDGate)
         {
             int x = id % LevelManager.Instance.GetData().width;
             int y = id / LevelManager.Instance.GetData().width;
@@ -116,7 +116,8 @@ namespace Game.MainGame
                 newX = x + _calculateXies[i].x;
                 newY = y + _calculateXies[i].y;
                 idsItemGrid[i] = newY * LevelManager.Instance.GetData().width + newX;
-                LevelManager.Instance.GetListItemGrid()[idsItemGrid[i]].GetComponent<ItemGrid>().AddInfoWall(this, _typeWall, _idGate);
+                LevelManager.Instance.GetListItemGrid()[idsItemGrid[i]].GetComponent<ItemGrid>().AddInfoWall(this, _typeWall, iDGate);
+                    
             }
         }
     }

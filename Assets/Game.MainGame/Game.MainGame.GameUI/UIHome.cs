@@ -7,6 +7,7 @@ namespace Game.MainGame
     public class UIHome : BlitzyUI.Screen
     {
         [SerializeField] private Text _txtHeal;
+        [SerializeField] private Text _txtTimeHeal;
         [SerializeField] private Text _txtCoin;
         [SerializeField] private Button _btnSetting;
         [SerializeField] private Text _txtLevel;
@@ -14,6 +15,7 @@ namespace Game.MainGame
         [SerializeField] private Button _btnHome;
         [SerializeField] private Button _btnShop;
         [SerializeField] private Button _btnLeaderBoard;
+
 
         public override void OnFocus()
         {
@@ -31,6 +33,9 @@ namespace Game.MainGame
         public override void OnPush(Data data)
         {
             PushFinished();
+            UpdateTextCoint();
+            UpdateTextLevel();
+            UpdateTextTym();
         }
 
         public override void OnSetup()
@@ -40,6 +45,25 @@ namespace Game.MainGame
             _btnPlay.onClick.AddListener(() => BtnPlay());
             _btnShop.onClick.AddListener(() => BtnShop());
             _btnLeaderBoard.onClick.AddListener(() => BtnLeaderBoard());
+
+            GameManager.Instance.AddActionCoin(UpdateTextCoint);
+            GameManager.Instance.AddActionLevel(UpdateTextLevel);
+            GameManager.Instance.AddActionTym(UpdateTextTym);
+        }
+
+        public void UpdateTextCoint()
+        {
+            _txtCoin.text = PlayerPrefs.GetInt("coin").ToString();
+        }
+
+        public void UpdateTextLevel()
+        {
+            _txtLevel.text = PlayerPrefs.GetInt("level").ToString();
+        }
+
+        public void UpdateTextTym()
+        {
+            _txtHeal.text = PlayerPrefs.GetInt("tym").ToString();
         }
 
         public void BtnSetting()
@@ -56,7 +80,7 @@ namespace Game.MainGame
             UIManager.Instance.QueuePop();
             LevelManager.Instance.controller.StateController = StateController.NoDrag;
             UIManager.Instance.QueuePush(GameManager.ScreenId_ExampleMenu, null, "UIInGame", null);
-            LevelManager.Instance.GenerateGrid();
+            LevelManager.Instance.GenerateGrid(PlayerPrefs.GetInt("level") - 1);
         }
 
         public void BtnHome()

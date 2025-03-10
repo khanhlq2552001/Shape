@@ -120,8 +120,6 @@ namespace Game.MainGame
                 Vector2 direction = (_touchPosition - (Vector2)_objShape.transform.position).normalized;
                 Vector2 targetVelocity = direction *ratio;
                 rbShape.velocity = targetVelocity;
-             //   rbShape.velocity = Vector2.Lerp(rbShape.velocity, targetVelocity, Time.deltaTime * ratio); // Điều chỉnh tham số 10f tùy ý
-                //
             }
             else
             {

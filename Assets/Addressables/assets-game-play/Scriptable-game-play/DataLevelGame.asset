@@ -1,0 +1,156 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a800c61870a1d604bbab2206574867a4, type: 3}
+  m_Name: DataLevelGame
+  m_EditorClassIdentifier: 
+  listDatas:
+  - width: 5
+    height: 6
+    time: 75
+    ids: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d000000
+    colorCodes:
+    - 1B88FA
+    - 1BFA1F
+    - FA1BC2
+    - EA6308
+    - E90928
+    idCentreShapes:
+    - idShapes: 4
+      idGrid: 12
+      idGate: 0
+      idGate2: -1
+      countFreeze: 0
+      typeBlock: 0
+      isKey: 0
+      isLock: 0
+    - idShapes: 3
+      idGrid: 16
+      idGate: 1
+      idGate2: -1
+      countFreeze: 0
+      typeBlock: 0
+      isKey: 0
+      isLock: 0
+    - idShapes: 3
+      idGrid: 19
+      idGate: 2
+      idGate2: -1
+      countFreeze: 0
+      typeBlock: 0
+      isKey: 0
+      isLock: 0
+    - idShapes: 2
+      idGrid: 23
+      idGate: 3
+      idGate2: -1
+      countFreeze: 0
+      typeBlock: 0
+      isKey: 0
+      isLock: 0
+    - idShapes: 2
+      idGrid: 28
+      idGate: 4
+      idGate2: -1
+      countFreeze: 0
+      typeBlock: 0
+      isKey: 0
+      isLock: 0
+    datasWall:
+    - idWall: 2
+      idDirection: 1
+      isWall: 0
+      idGate: 2
+      idGrid: 0
+    - idWall: 0
+      idDirection: 1
+      isWall: 1
+      idGate: 0
+      idGrid: 2
+    - idWall: 2
+      idDirection: 1
+      isWall: 0
+      idGate: 1
+      idGrid: 3
+    - idWall: 1
+      idDirection: 0
+      isWall: 1
+      idGate: 0
+      idGrid: 0
+    - idWall: 1
+      idDirection: 2
+      isWall: 1
+      idGate: 0
+      idGrid: 4
+    - idWall: 1
+      idDirection: 0
+      isWall: 1
+      idGate: 0
+      idGrid: 5
+    - idWall: 1
+      idDirection: 2
+      isWall: 1
+      idGate: 0
+      idGrid: 9
+    - idWall: 1
+      idDirection: 0
+      isWall: 1
+      idGate: 0
+      idGrid: 10
+    - idWall: 1
+      idDirection: 2
+      isWall: 1
+      idGate: 0
+      idGrid: 14
+    - idWall: 1
+      idDirection: 0
+      isWall: 1
+      idGate: 0
+      idGrid: 15
+    - idWall: 1
+      idDirection: 2
+      isWall: 1
+      idGate: 0
+      idGrid: 19
+    - idWall: 4
+      idDirection: 0
+      isWall: 0
+      idGate: 3
+      idGrid: 20
+    - idWall: 4
+      idDirection: 2
+      isWall: 0
+      idGate: 4
+      idGrid: 24
+    - idWall: 0
+      idDirection: 3
+      isWall: 1
+      idGate: 0
+      idGrid: 25
+    - idWall: 3
+      idDirection: 3
+      isWall: 0
+      idGate: 0
+      idGrid: 26
+    - idWall: 0
+      idDirection: 3
+      isWall: 1
+      idGate: 0
+      idGrid: 29
+    datasWallCorner:
+    - idWallCorner: 0
+      idGrid: 0
+    - idWallCorner: 1
+      idGrid: 4
+    - idWallCorner: 3
+      idGrid: 25
+    - idWallCorner: 2
+      idGrid: 29

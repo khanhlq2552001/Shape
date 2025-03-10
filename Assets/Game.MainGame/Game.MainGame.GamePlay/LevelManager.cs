@@ -14,6 +14,8 @@ namespace Game.MainGame
         [SerializeField] private Transform  _tranParent;
         [SerializeField] private Data _data;
         [SerializeField] private float _spacing = 1.1f;
+        [SerializeField] private DataLevel _dataLevels;
+        [SerializeField] private Camera _cameraMain;
 
         private List<GameObject> _listItemGrid = new List<GameObject>();
         private List<ObjShape> _listItemShape = new List<ObjShape>();
@@ -84,8 +86,10 @@ namespace Game.MainGame
             }
         }
 
-        public void GenerateGrid()
+        public void GenerateGrid(int id)
         {
+            _data = _dataLevels.listDatas[id];
+
             ClearCell();
 
             // Tính toán kích thước tổng thể của lưới
@@ -93,6 +97,8 @@ namespace Game.MainGame
             float totalHeight = (_data.height - 1) * _spacing;
             int count = (_data.width * _data.height);
             int idCount= 0;
+
+            _cameraMain.orthographicSize = ((float)_data.width / 3f) * 5f;
 
             // Tính toán vị trí bắt đầu để lưới được đặt ở giữa màn hình
             Vector2 startPosition = new Vector2(-totalWidth * 0.5f, totalHeight * 0.5f);
@@ -178,11 +184,12 @@ namespace Game.MainGame
 
                 _listItemGrid[_data.idCentreShapes[i].idGrid].GetComponent<ItemGrid>().IDShape = i;
                 Vector2 position = startPosition + new Vector2(x * _spacing, -y * _spacing);
-                obj.transform.position = position - offset;
+                obj.transform.position = (Vector2)_listItemGrid[_data.idCentreShapes[i].idGrid].transform.position - offset;
                 shape.CalculatorCoordinates(_data.idCentreShapes[i].idGrid);
             }
 
             CountShape = _listItemShape.Count;
+            Debug.Log(CountShape);
         }
 
         public void ReduceCountShape()
@@ -197,6 +204,7 @@ namespace Game.MainGame
                     UIGamePlay ui = UIManager.Instance.GetScreen<UIGamePlay>(GameManager.ScreenId_ExampleMenu);
                     ui.StopTime();
                 }
+
             }
         }
 

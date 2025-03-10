@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using BlitzyUI;
 using DG.Tweening;
 using Lean.Pool;
 using TMPro;
@@ -141,8 +139,12 @@ namespace Game.MainGame
 
         public void DestroyShape()
         {
-            LevelManager.Instance.CheckShapeFreeze();
-            LevelManager.Instance.ReduceCountShape();
+            if (gameObject.active)
+            {
+                LevelManager.Instance.ReduceCountShape();
+                LevelManager.Instance.CheckShapeFreeze();
+            }
+                
             LeanPool.Despawn(gameObject);
         }
 

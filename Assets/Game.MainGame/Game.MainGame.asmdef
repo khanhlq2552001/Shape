@@ -6,7 +6,8 @@
         "DOTween.Modules",
         "DOTweenPro.Scripts",
         "Unity.TextMeshPro.Editor",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        ""
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
