@@ -1,21 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game.MainGame
 {
     public class UIBuyBooster : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
+        [SerializeField] private Text _txtName;
+        [SerializeField] private Text _txtDescript;
+        [SerializeField] private Button _btnBuyCoin;
+        [SerializeField] private Button _btnBuyAds;
     }
 }
