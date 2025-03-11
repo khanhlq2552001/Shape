@@ -672,6 +672,41 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 57cdb629024d2ac4b94eac21e955f492
+    m_Address: prefabs-game-shape_LShape_22_2 2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 73ed1a1929d26ed41ae1ecd429da22eb
+    m_Address: prefabs-game-shape_LShape_22_2 1 1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 09e06966cadf6914687b10ca354e5161
+    m_Address: prefabs-game-shape_LShape_22_2 3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ef1c4ab8f9b0d041831d561a82be1a3
+    m_Address: prefabs-game-shape-wall-straight 1 1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c4e0cbcbb0b0f5841b0b670b071145ea
+    m_Address: prefabs-game-shape_LShape_22_2 4
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c27be4b6e61c97e49ad8875d86e551b6
+    m_Address: prefabs-game-shape_LShape_22_2 5
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 296756fabd78694469eec1afb0859acc
+    m_Address: prefabs-game-shape_LShape_22_2 3 1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d402ae232a39aec4e9c0ae91be417cce, type: 2}
   m_SchemaSet:

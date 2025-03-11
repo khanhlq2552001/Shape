@@ -533,6 +533,7 @@ namespace Game.MainGame
                 newX = x + listCalculateXY[i].x;
                 newY = y + listCalculateXY[i].y;
                 idsGrid[i] = newY * LevelManager.Instance.GetData().width + newX;
+                Debug.Log(newX + " " + newY);
                 LevelManager.Instance.GetListItemGrid()[idsGrid[i]].GetComponent<ItemGrid>().IDShape = ID;
                 if(check == false)
                 {
