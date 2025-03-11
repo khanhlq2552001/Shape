@@ -648,7 +648,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2748564921e3e3848bf6b441d222f886
-    m_Address: prefabs-game-shape_LShape_22_2 2
+    m_Address: prefabs-game-shape_LShape_Vuong
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -664,6 +664,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c04c647ca633eb848b57ff1eedad7680
     m_Address: prefabs-game-shape-wall-straight 1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2dd5de73a518ca148bd12f55bbe0ef8e
+    m_Address: prefabs-game-shape_LShape_22_2 2 1 1
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

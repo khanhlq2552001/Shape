@@ -1997,7 +1997,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2146003331511537417
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2683,6 +2683,15 @@ MonoBehaviour:
   _sprBoosterHammer: {fileID: 21300000, guid: 4b02884b9048b514fa44c748410a3d6d, type: 3}
   _sprBoosterMagic: {fileID: 21300000, guid: 43b7e7e96d9802346a97cf2828ad2c29, type: 3}
   _tranTarget: {fileID: 1771568910648960468}
+  _countItemTime: {fileID: 4998419712606997679}
+  _txtCountTime: {fileID: 8523868841275196106}
+  _increTime: {fileID: 4379384512011710000}
+  _countItemHammer: {fileID: 4503710718949155760}
+  _txtCountHammer: {fileID: 4692318412715209724}
+  _increHammer: {fileID: 519038566040018253}
+  _countItemMagic: {fileID: 3386963498620307634}
+  _txtCountMagic: {fileID: 4958256602148462212}
+  _increMagic: {fileID: 5601758527570264402}
 --- !u!223 &1536109155949685774
 Canvas:
   m_ObjectHideFlags: 0
@@ -2974,7 +2983,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8177575540118228510
 RectTransform:
   m_ObjectHideFlags: 0

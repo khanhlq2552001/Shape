@@ -1,3 +1,4 @@
+using BlitzyUI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,28 +19,44 @@ namespace Game.MainGame
 
         public override void OnFocusLost()
         {
+
         }
 
         public override void OnPop()
         {
             PopFinished();
-
         }
 
         public override void OnPush(Data data)
         {
             PushFinished();
             GetComponent<Canvas>().overrideSorting = false;
+            _txtLevel.text = "Level " + PlayerPrefs.GetInt("level").ToString();
+            UpdateTextCoint();
+        }
+
+        public void UpdateTextCoint()
+        {
+            _txtCoin.text = PlayerPrefs.GetInt("coin").ToString();
         }
 
         public override void OnSetup()
         {
-
+            GameManager.Instance.AddActionCoin(UpdateTextCoint);
+            _btnClaimVideo.onClick.AddListener(() => BtnClaimVideo());
         }
 
         public void BtnClaimVideo()
         {
+            int coin = PlayerPrefs.GetInt("coin");
+            int level = PlayerPrefs.GetInt("level");
+            level++;
+            coin += 100;
 
+            GameManager.Instance.UpdateCoin(coin);
+            GameManager.Instance.UpdateLevel(level);
+            LevelManager.Instance.GenerateGrid(level - 1);
+            UIManager.Instance.QueuePop();
         }
     }
 }

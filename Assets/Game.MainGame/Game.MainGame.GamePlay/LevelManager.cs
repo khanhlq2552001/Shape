@@ -20,6 +20,7 @@ namespace Game.MainGame
         private List<GameObject> _listItemGrid = new List<GameObject>();
         private List<ObjShape> _listItemShape = new List<ObjShape>();
         private List<ObjShape> _listShapeFreeze = new List<ObjShape>();
+        private List<GameObject> _listWall = new List<GameObject>();
         private int _countKey = 0;
         private int _countShape = 0;
         private ObjShape _objLock = new ObjShape();
@@ -45,6 +46,11 @@ namespace Game.MainGame
         public List<ObjShape> GetListItemShape()
         {
             return _listItemShape;
+        }
+
+        public void AddWall(GameObject obj)
+        {
+            _listWall.Add(obj);
         }
 
         public Transform TranParent()
@@ -89,6 +95,9 @@ namespace Game.MainGame
         public void GenerateGrid(int id)
         {
             _data = _dataLevels.listDatas[id];
+            controller.StateController = StateController.NoDrag;
+            UIGamePlay ui =  UIManager.Instance.GetScreen<UIGamePlay>(GameManager.ScreenId_ExampleMenu);
+            ui.StartCountdown(_data.time);
 
             ClearCell();
 
@@ -144,7 +153,7 @@ namespace Game.MainGame
 
             for (int i = 0; i < _data.idCentreShapes.Count; i++)
             {
-                GameObject obj = LeanPool.Spawn(dataShape.shapes[_data.idCentreShapes[i].idShapes]);
+                GameObject obj = Instantiate(dataShape.shapes[_data.idCentreShapes[i].idShapes]);
                 obj.transform.SetParent(_tranParent);
 
                 ObjShape shape = obj.GetComponent<ObjShape>();
@@ -233,9 +242,21 @@ namespace Game.MainGame
             {
                 LeanPool.Despawn(_listItemGrid[i]);
             }
+
+            for (int i=0; i< _listWall.Count; i++)
+            {
+                LeanPool.Despawn(_listWall[i]);
+            }
+
+            for(int i=0; i< _listItemShape.Count; i++)
+            {
+                LeanPool.Despawn(_listItemShape[i]);
+            }
+
             _listItemShape.Clear();
             _listItemGrid.Clear();
             _listShapeFreeze.Clear();
+            _listWall.Clear();
         }
 
         public void CheckShapeFreeze()

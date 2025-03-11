@@ -546,7 +546,8 @@ namespace BlitzyUI
             }
             else
             {
-                // Destroy screen.
+                //
+                // screen.
                 Object.Destroy(screen.gameObject);
             }
 

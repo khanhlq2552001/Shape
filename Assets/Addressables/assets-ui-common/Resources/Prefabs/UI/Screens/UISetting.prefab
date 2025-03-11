@@ -546,13 +546,13 @@ MonoBehaviour:
   _sprOn: {fileID: 21300000, guid: 24b69f6c0e3600142b7a675e9ffd4687, type: 3}
   _sprOff: {fileID: 21300000, guid: 151cbc69d26eb0c45a3fba2b1f027f78, type: 3}
   _btnSound: {fileID: 2077006479325965548}
-  _txtSound: {fileID: 0}
+  _txtSound: {fileID: 7167081210927079930}
   _btnMusic: {fileID: 9065543731684428810}
-  _txtMusic: {fileID: 0}
+  _txtMusic: {fileID: 6158853791623591773}
   _btnVibration: {fileID: 7813378520444726110}
-  _txtVibration: {fileID: 0}
+  _txtVibration: {fileID: 2238522011568053286}
   _btnNotification: {fileID: 193986050690587875}
-  _txtNotification: {fileID: 0}
+  _txtNotification: {fileID: 4762429388591449935}
   _btnRestore: {fileID: 4395015083657916590}
   _btnLaguage: {fileID: 8178067002550664246}
   _btnContinous: {fileID: 2292657366985579429}

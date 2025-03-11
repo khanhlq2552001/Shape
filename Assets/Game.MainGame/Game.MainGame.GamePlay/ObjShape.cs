@@ -144,7 +144,7 @@ namespace Game.MainGame
                 LevelManager.Instance.ReduceCountShape();
                 LevelManager.Instance.CheckShapeFreeze();
             }
-                
+
             LeanPool.Despawn(gameObject);
         }
 
@@ -449,19 +449,29 @@ namespace Game.MainGame
                 {
                     float newY = (wall.transform.position.y - transform.position.y) + wall.transform.position.y;
                     Vector2 targetEnd = new Vector2(transform.position.x, newY);
+                    wall.TweenAnVatThe();
 
                     transform.DOMove(targetEnd, 0.5f).SetEase(Ease.Linear).OnComplete(() =>
                     {
-                        DestroyShape();
+                        if (gameObject.active)
+                        {
+                            wall.TweenNayLen();
+                            DestroyShape();
+                        }
                     });
                 }
                 else if(type == TypeWall.left || type == TypeWall.right)
                 {
                     float newX = (wall.transform.position.x - transform.position.x) + wall.transform.position.x;
                     Vector2 targetEnd = new Vector2(newX, transform.position.y);
+                    wall.TweenAnVatThe();
 
                     transform.DOMove(targetEnd, 0.5f).SetEase(Ease.Linear).OnComplete(() => {
-                        DestroyShape();
+                        if (gameObject.active)
+                        {
+                            wall.TweenNayLen();
+                            DestroyShape();
+                        }
                     });
                 }
             });
@@ -511,14 +521,27 @@ namespace Game.MainGame
             int y = id / LevelManager.Instance.GetData().width;
             int newX = 0;
             int newY = 0;
+            bool check = false;
 
             for (int i=0; i< listCalculateXY.Count; i++)
             {
                 newX = x + listCalculateXY[i].x;
                 newY = y + listCalculateXY[i].y;
                 idsGrid[i] = newY * LevelManager.Instance.GetData().width + newX;
-
                 LevelManager.Instance.GetListItemGrid()[idsGrid[i]].GetComponent<ItemGrid>().IDShape = ID;
+                if(check == false)
+                {
+                    InfoWall valueCheck =  LevelManager.Instance.GetListItemGrid()[idsGrid[i]].GetComponent<ItemGrid>().CheckResult();
+                    if (valueCheck.idGate != -1)
+                    {
+                        check = true;
+                        SetActiveBorder(false);
+                        CheckKey();
+                        CanMove = false;
+                        EffectWin(valueCheck.type, valueCheck.wall);
+                        LevelManager.Instance.controller.StateController = StateController.NoDrag;
+                    }
+                }
             }
         }
 

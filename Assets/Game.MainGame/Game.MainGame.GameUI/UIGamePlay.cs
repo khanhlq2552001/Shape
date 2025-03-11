@@ -1,8 +1,6 @@
 using System.Collections;
 using BlitzyUI;
 using DG.Tweening;
-using log4net.Core;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -40,6 +38,17 @@ namespace Game.MainGame
         [Header("MagicUI")]
         [SerializeField] private RectTransform _tranTarget;
 
+        [Header("UIBot")]
+        [SerializeField] private GameObject _countItemTime;
+        [SerializeField] private Text _txtCountTime;
+        [SerializeField] private GameObject _increTime;
+        [SerializeField] private GameObject _countItemHammer;
+        [SerializeField] private Text _txtCountHammer;
+        [SerializeField] private GameObject _increHammer;
+        [SerializeField] private GameObject _countItemMagic;
+        [SerializeField] private Text _txtCountMagic;
+        [SerializeField] private GameObject _increMagic;
+
         private float _timeRemaining;
         private Coroutine _countdownCoroutine;
         private bool _lockBtnFreeze = false;
@@ -76,7 +85,13 @@ namespace Game.MainGame
 
             DisplayTime(0);
             LevelManager.Instance.controller.StateController = StateController.Pause;
-            UIManager.Instance.QueuePush(GameManager.ScreenId_UIWin, null, "UILose", null);
+
+            if(PlayerPrefs.GetInt("tym") > 1)
+            {
+                int tym = PlayerPrefs.GetInt("tym") -1;
+                GameManager.Instance.UpdateTym(tym);
+                UIManager.Instance.QueuePush(GameManager.ScreenId_UIWin, null, "UILose", null);
+            }
         }
 
         private IEnumerator CountdownRoutineFreeze(int time)
@@ -91,7 +106,8 @@ namespace Game.MainGame
                 {
                     _groupProgressFreezing.DOFade(0, 2f).SetEase(Ease.Linear);
 
-                    _bgFreezing.DOFade(0, 2f).SetEase(Ease.Linear);
+                    Image img = GameManager.Instance.uiBackGround.imgBackGroundFreeze;
+                    img.DOFade(0, 2f).SetEase(Ease.Linear);
 
                     _bgTimeFreezing.DOFade(0, 2f).SetEase(Ease.Linear).OnComplete(() => StartCoroutine(CountdownRoutine()));
                 }
@@ -117,12 +133,13 @@ namespace Game.MainGame
 
             _groupProgressFreezing.DOFade(1, _fadeDuration).SetEase(Ease.Linear);
 
-            _bgFreezing.gameObject.SetActive(true);
-            Color startColor = _bgFreezing.color;
+            Image img = GameManager.Instance.uiBackGround.imgBackGroundFreeze;
+            img.gameObject.SetActive(true);
+            Color startColor = img.color;
             startColor.a = 0;
-            _bgFreezing.color = startColor;
+            img.color = startColor;
 
-            _bgFreezing.DOFade(1, _fadeDuration).SetEase(Ease.Linear);
+            img.DOFade(1, _fadeDuration).SetEase(Ease.Linear);
 
             _bgTimeFreezing.gameObject.SetActive(true);
             startColor = _bgTimeFreezing.color;
@@ -245,6 +262,69 @@ namespace Game.MainGame
             _txtLevel.text = "Level " + PlayerPrefs.GetInt("level").ToString();
         }
 
+        public void UpdateBoosterTime()
+        {
+            int countTime = PlayerPrefs.GetInt("boosterTime");
+            if (countTime > 0)
+            {
+                _countItemTime.gameObject.SetActive(true);
+                _increTime.gameObject.SetActive(false);
+                _txtCountTime.text = countTime.ToString();
+            }
+            else
+            {
+                _countItemTime.gameObject.SetActive(false);
+                _increTime.gameObject.SetActive(true);
+            }
+        }
+
+        public void UpdateBoosterHammer()
+        {
+            int countTime = PlayerPrefs.GetInt("boosterHammer");
+            if (countTime > 0)
+            {
+                _countItemHammer.gameObject.SetActive(true);
+                _increHammer.gameObject.SetActive(false);
+                _txtCountHammer.text = countTime.ToString();
+            }
+            else
+            {
+                _countItemHammer.gameObject.SetActive(false);
+                _increHammer.gameObject.SetActive(true);
+            }
+        }
+
+        public void UpdateBoosterMagic()
+        {
+            int countTime = PlayerPrefs.GetInt("boosterMagic");
+            if (countTime > 0)
+            {
+                _countItemMagic.gameObject.SetActive(true);
+                _increMagic.gameObject.SetActive(false);
+                _txtCountMagic.text = countTime.ToString();
+            }
+            else
+            {
+                _countItemMagic.gameObject.SetActive(false);
+                _increMagic.gameObject.SetActive(true);
+            }
+        }
+
+        public void CloseUI()
+        {
+            if(_countdownCoroutine != null)
+            {
+                StopCoroutine(_countdownCoroutine);
+            }
+            OnPop();
+            gameObject.SetActive(false);
+        }
+
+        public void BtnReplay()
+        {
+            UIManager.Instance.QueuePush(GameManager.ScreenId_UIReplay, null, "UIReplay", null);
+        }
+
         public override void OnFocus()
         {
         }
@@ -264,6 +344,9 @@ namespace Game.MainGame
             StartCountdown(75);
             PushFinished();
             UpdateTextLevel();
+            UpdateBoosterTime();
+            UpdateBoosterMagic();
+            UpdateBoosterHammer();
         }
 
         public override void OnSetup()
@@ -277,7 +360,12 @@ namespace Game.MainGame
             _btnCloseBooster.onClick.RemoveAllListeners();
             _btnCloseBooster.onClick.AddListener(() => BtnCloseBooster());
             _btnPause.onClick.AddListener(() => BtnPause());
+            _btnRestart.onClick.AddListener(() => BtnReplay());
+
             GameManager.Instance.AddActionLevel(UpdateTextLevel);
+            GameManager.Instance.AddActionBooster(UpdateBoosterTime, 0);
+            GameManager.Instance.AddActionBooster(UpdateBoosterHammer, 1);
+            GameManager.Instance.AddActionBooster(UpdateBoosterMagic, 2);
         }
     }
 }

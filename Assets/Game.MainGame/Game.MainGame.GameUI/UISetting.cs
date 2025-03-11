@@ -55,16 +55,22 @@ namespace Game.MainGame
 
         public void BtnContinous()
         {
+            LevelManager.Instance.controller.StateController = StateController.NoDrag;
             UIManager.Instance.QueuePop();
         }
 
         public void BtnQuit()
         {
-
+            UIManager.Instance.QueuePop();
+            LevelManager.Instance.ClearCell();
+            UIGamePlay ui = UIManager.Instance.GetScreen<UIGamePlay>(GameManager.ScreenId_ExampleMenu);
+            ui.CloseUI();
+            UIManager.Instance.QueuePush(GameManager.ScreenId_UIHome, null, "UIHome", null);
         }
 
         public void BtnClose()
         {
+            LevelManager.Instance.controller.StateController = StateController.NoDrag;
             UIManager.Instance.QueuePop();
         }
 
@@ -117,6 +123,62 @@ namespace Game.MainGame
             }
         }
 
+        public void CheckSound()
+        {
+            if(PlayerPrefs.GetInt("sound") == 1)
+            {
+                _btnSound.GetComponent<Image>().sprite = _sprOn;
+                _txtSound.text = "ON";
+            }
+            else
+            {
+                _btnSound.GetComponent<Image>().sprite = _sprOff;
+                _txtSound.text = "OFF";
+            }
+        }
+
+        public void CheckMusic()
+        {
+            if (PlayerPrefs.GetInt("music") == 1)
+            {
+                _btnMusic.GetComponent<Image>().sprite = _sprOn;
+                _txtMusic.text = "ON";
+            }
+            else
+            {
+                _btnMusic.GetComponent<Image>().sprite = _sprOff;
+                _txtMusic.text = "OFF";
+            }
+        }
+
+        public void CheckVibra()
+        {
+            if (PlayerPrefs.GetInt("vibra") == 1)
+            {
+                _btnVibration.GetComponent<Image>().sprite = _sprOn;
+                _txtVibration.text = "ON";
+            }
+            else
+            {
+                _btnVibration.GetComponent<Image>().sprite = _sprOff;
+                _txtVibration.text = "OFF";
+            }
+        }
+
+        public void CheckNoti()
+        {
+            if (PlayerPrefs.GetInt("noti") == 1)
+            {
+                _btnNotification.GetComponent<Image>().sprite = _sprOn;
+                _txtNotification.text = "ON";
+            }
+            else
+            {
+                _btnNotification.GetComponent<Image>().sprite = _sprOff;
+                _txtNotification.text = "OFF";
+            }
+        }
+
         public override void OnSetup()
         {
             _btnSound.onClick.AddListener(BtnSound);
@@ -128,6 +190,11 @@ namespace Game.MainGame
             _btnContinous.onClick.AddListener(BtnContinous);
             _btnQuit.onClick.AddListener(BtnQuit);
             _btnClose.onClick.AddListener(BtnClose);
+
+            CheckMusic();
+            CheckNoti();
+            CheckSound();
+            CheckVibra();
         }
     }
 }

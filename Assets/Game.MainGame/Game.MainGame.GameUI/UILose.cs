@@ -1,3 +1,4 @@
+using BlitzyUI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,16 +30,32 @@ namespace Game.MainGame
         {
             PushFinished();
             GetComponent<Canvas>().overrideSorting = false;
+            UpdateCoint();
+            UpdateLevel();
         }
 
         public override void OnSetup()
         {
-
+            GameManager.Instance.AddActionCoin(UpdateCoint);
+            GameManager.Instance.AddActionLevel(UpdateLevel);
+            _btnReplay.onClick.AddListener(() => BtnReplay());
         }
 
-        public void BtnClaimVideo()
+        public void BtnReplay()
         {
+            int level = PlayerPrefs.GetInt("level");
+            LevelManager.Instance.GenerateGrid(level - 1);
+            UIManager.Instance.QueuePop();
+        }
 
+        public void UpdateCoint()
+        {
+            _txtCoin.text = PlayerPrefs.GetInt("coin").ToString();
+        }
+
+        public void UpdateLevel()
+        {
+            _txtLevel.text = "level " + PlayerPrefs.GetInt("level").ToString();
         }
     }
 }

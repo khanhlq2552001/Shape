@@ -27,6 +27,7 @@ namespace Game.MainGame
 
         public override void OnPop()
         {
+            GameManager.Instance.RemoveActionTimeHeal(UpdateTime);
             PopFinished();
         }
 
@@ -36,6 +37,8 @@ namespace Game.MainGame
             UpdateTextCoint();
             UpdateTextLevel();
             UpdateTextTym();
+            UpdateTime();
+            GameManager.Instance.AddActionTimeHeal(UpdateTime);
         }
 
         public override void OnSetup()
@@ -49,6 +52,11 @@ namespace Game.MainGame
             GameManager.Instance.AddActionCoin(UpdateTextCoint);
             GameManager.Instance.AddActionLevel(UpdateTextLevel);
             GameManager.Instance.AddActionTym(UpdateTextTym);
+        }
+
+        public void UpdateTime()
+        {
+            _txtTimeHeal.text = GameManager.Instance.timeHeal;
         }
 
         public void UpdateTextCoint()
@@ -79,6 +87,11 @@ namespace Game.MainGame
         {
             UIManager.Instance.QueuePop();
             LevelManager.Instance.controller.StateController = StateController.NoDrag;
+            UIGamePlay uiGameObject = UIManager.Instance.GetScreen<UIGamePlay>(GameManager.ScreenId_ExampleMenu);
+            if (uiGameObject != null)
+            {
+                uiGameObject.gameObject.SetActive(true); // Bật UI lên nếu nó đang ẩn
+            }
             UIManager.Instance.QueuePush(GameManager.ScreenId_ExampleMenu, null, "UIInGame", null);
             LevelManager.Instance.GenerateGrid(PlayerPrefs.GetInt("level") - 1);
         }

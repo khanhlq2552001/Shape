@@ -40,11 +40,6 @@ namespace Game.MainGame
                 if(value != _idShape)
                 {
                     _idShape = value;
-
-                    if(value != -1)
-                    {
-                        CheckResult();
-                    }
                 }
             }
         }
@@ -99,7 +94,9 @@ namespace Game.MainGame
 
                 Wall wall = obj.GetComponent<Wall>();
                 wall.SetMask(type);
-                
+                wall.ResetAtribute();
+                LevelManager.Instance.AddWall(obj);
+
                 if (!isWall)
                 {
                     wall.IDGate = idGate;
@@ -127,6 +124,8 @@ namespace Game.MainGame
 
                 Wall wall = obj.GetComponent<Wall>();
                 wall.SetMask(type);
+                wall.ResetAtribute();
+                LevelManager.Instance.AddWall(obj);
 
                 if (!isWall)
                 {
@@ -156,6 +155,8 @@ namespace Game.MainGame
 
                 Wall wall = obj.GetComponent<Wall>();
                 wall.SetMask(type);
+                wall.ResetAtribute();
+                LevelManager.Instance.AddWall(obj);
 
                 if (!isWall)
                 {
@@ -185,6 +186,8 @@ namespace Game.MainGame
 
                 Wall wall = obj.GetComponent<Wall>();
                 wall.SetMask(type);
+                wall.ResetAtribute();
+                LevelManager.Instance.AddWall(obj);
 
                 if (!isWall)
                 {
@@ -218,24 +221,18 @@ namespace Game.MainGame
             });
         }
 
-        public void CheckResult()
+        public InfoWall CheckResult()
         {
             ObjShape shape = LevelManager.Instance.GetListItemShape()[IDShape];
             for (int i = 0; i < _listInfoWall.Count; i++)
             {
                 if (_listInfoWall[i].idGate == shape.IDGate && shape.IDGate2 == -1)
                 {
-                    Debug.Log("okok");
                     bool value = shape.CheckResult(_listInfoWall[i].type);
 
                     if (value)
                     {
-                        shape.SetActiveBorder(false);
-                        shape.CheckKey();
-                        shape.CanMove = false;
-                        shape.EffectWin(_listInfoWall[i].type, _listInfoWall[i].wall);
-
-                        LevelManager.Instance.controller.StateController = StateController.NoDrag;
+                        return _listInfoWall[i];
                     }
                 }
                 else if(_listInfoWall[i].idGate == shape.IDGate && shape.IDGate2 != -1)
@@ -244,22 +241,23 @@ namespace Game.MainGame
 
                     if (value)
                     {
-                        shape.SetActiveBorder(false);
-                        shape.CheckKey();
-                        shape.CanMove = false;
-                        shape.EffectEndShape2(_listInfoWall[i].type, _listInfoWall[i].wall);
-
-                        LevelManager.Instance.controller.StateController = StateController.NoDrag;
+                        return _listInfoWall[i];
                     }
                 }
 
             }
+            return new InfoWall() {
+                wall = new Wall(),
+                type = TypeWall.left,
+                idGate = -1,
+            };
         }
 
         public void SetWallCorner(TypeWallCorner type)
         {
                 GameObject obj = LeanPool.Spawn(LevelManager.Instance.dataShape.shapesWallCorner[(int)type]);
                 obj.transform.SetParent(LevelManager.Instance.TranParent());
+                LevelManager.Instance.AddWall(obj);
 
                 obj.transform.position = transWallCorner[(int)type].position;
                 WallCorner wallCorner = obj.GetComponent<WallCorner>();

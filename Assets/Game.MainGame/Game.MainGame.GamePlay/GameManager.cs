@@ -13,11 +13,25 @@ namespace Game.MainGame
         public static readonly BlitzyUI.Screen.Id ScreenId_UIWin = new BlitzyUI.Screen.Id("WinUI");
         public static readonly BlitzyUI.Screen.Id ScreenId_UIHome = new BlitzyUI.Screen.Id("HomeUI");
         public static readonly BlitzyUI.Screen.Id ScreenId_UILose = new BlitzyUI.Screen.Id("LoseUI");
+        public static readonly BlitzyUI.Screen.Id ScreenId_UIReplay = new BlitzyUI.Screen.Id("ReplayUI");
+
+        [SerializeField] private float _remainingTime;
+        [SerializeField] private float _remainingTimeStart;
 
         private Action _onActionUpdate;
         private Action _onUpdateCoin;
         private Action _onUpdateLevel;
         private Action _onUpdateTym;
+        private Action _onUpdateBoosterTime;
+        private Action _onUpdateBoosterHammer;
+        private Action _onUpdateBoosterMagic;
+        private Action _onUpdateTimeHeal;
+        private bool _isCountTime = true;
+
+        public string timeHeal;
+        public ParticleBreak particleBreak;
+        public UIBG uiBackGround;
+
 
         // Start is called before the first frame update
         private void Awake()
@@ -35,13 +49,49 @@ namespace Game.MainGame
             UIManager.Instance.QueuePush(ScreenId_UIHome, null, "UIHome", null);
 
             Application.targetFrameRate = 60;
-
-            
         }
 
         private void Update()
         {
             _onActionUpdate?.Invoke();
+
+            UpdateTimeTym();
+;        }
+
+        public void UpdateTimeTym()
+        {
+            if(PlayerPrefs.GetInt("tym") < 5 && _isCountTime)
+            {
+                _isCountTime = false;
+                _remainingTime = _remainingTimeStart;
+            }
+
+            if (!_isCountTime)
+            {
+                _remainingTime -= Time.deltaTime;  // Giảm thời gian theo thời gian thực
+                if (_remainingTime <= 0)
+                {
+                    _remainingTime = 0;
+                    _isCountTime = true;
+                    int tym = PlayerPrefs.GetInt("tym") + 1;
+                    UpdateTym(tym);
+                }
+            }
+            FormatTime(_remainingTime);
+
+            _onUpdateTimeHeal?.Invoke();
+        }
+
+        private void FormatTime(float timeInSeconds)
+        {
+            if (PlayerPrefs.GetInt("tym") == 5) {
+                timeHeal = "Full";
+                return;
+            }
+
+            int minutes = Mathf.FloorToInt(timeInSeconds / 60);
+            int seconds = Mathf.FloorToInt(timeInSeconds % 60);
+            timeHeal =  string.Format("{0:00}:{1:00}", minutes, seconds);
         }
 
         public void AddActionToOnActionUpdate(Action action)
@@ -94,6 +144,26 @@ namespace Game.MainGame
             _onUpdateLevel += action;
         }
 
+        public void RemoveActionTimeHeal(Action action)
+        {
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action), "Action cannot be null.");
+            }
+
+            _onUpdateTimeHeal -= action;
+        }
+
+        public void AddActionTimeHeal(Action action)
+        {
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action), "Action cannot be null.");
+            }
+
+            _onUpdateTimeHeal += action;
+        }
+
         public void RemoveActionLevel(Action action)
         {
             if (action == null)
@@ -124,6 +194,48 @@ namespace Game.MainGame
             _onUpdateTym -= action;
         }
 
+        public void AddActionBooster(Action action, int id)
+        {
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action), "Action cannot be null.");
+            }
+
+            if (id == 0)
+            {
+                _onUpdateBoosterTime += action;
+            }
+            else if (id == 1)
+            {
+                _onUpdateBoosterHammer += action;
+            }
+            else if (id == 2)
+            {
+                _onUpdateBoosterMagic += action;
+            }
+        }
+
+        public void RemoveActionBooster(Action action, int id)
+        {
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action), "Action cannot be null.");
+            }
+
+            if (id == 0)
+            {
+                _onUpdateBoosterTime -= action;
+            }
+            else if (id == 1)
+            {
+                _onUpdateBoosterHammer -= action;
+            }
+            else if (id == 2)
+            {
+                _onUpdateBoosterMagic -= action;
+            }
+        }
+
         public void UpdateCoin(int coin)
         {
             PlayerPrefs.SetInt("coin", coin);
@@ -142,6 +254,42 @@ namespace Game.MainGame
             _onUpdateTym?.Invoke();
         }
 
+        public void UpdateBooster(int value, int id)
+        {
+            switch (id)
+            {
+                case 0:
+                    PlayerPrefs.SetInt("boosterTime", value);
+                    _onUpdateBoosterTime?.Invoke();
+                    break;
+                case 1:
+                    PlayerPrefs.SetInt("boosterHammer", value);
+                    _onUpdateBoosterHammer?.Invoke();
+                    break;
+                case 2:
+                    PlayerPrefs.SetInt("boosterMagic", value);
+                    _onUpdateBoosterMagic?.Invoke();
+                    break;
+            }
+        }
+
+        public void UpdateSound(bool value)
+        {
+            PlayerPrefs.SetInt("sound", value ? 1 : 0);
+        }
+        public void UpdateMusic(bool value)
+        {
+            PlayerPrefs.SetInt("music", value ? 1 : 0);
+        }
+        public void UpdateVibration(bool value)
+        {
+            PlayerPrefs.SetInt("vibra", value ? 1 : 0);
+        }
+        public void UpdateNoti(bool value)
+        {
+            PlayerPrefs.SetInt("noti", value ? 1 : 0);
+        }
+
         public void CheckData()
         {
             if (!PlayerPrefs.HasKey("isFirst"))
@@ -150,6 +298,13 @@ namespace Game.MainGame
                 UpdateLevel(1);
                 UpdateCoin(0);
                 UpdateTym(5);
+                UpdateBooster(0, 0);
+                UpdateBooster(0, 1);
+                UpdateBooster(0, 2);
+                UpdateSound(true);
+                UpdateMusic(true);
+                UpdateVibration(true);
+                UpdateNoti(true);
             }
         }
     }

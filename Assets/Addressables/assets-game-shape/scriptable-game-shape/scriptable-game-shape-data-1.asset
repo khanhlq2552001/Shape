@@ -18,6 +18,7 @@ MonoBehaviour:
   - {fileID: 3418175066037346991, guid: 9b7b2a75dfc36274a94529570c003012, type: 3}
   - {fileID: 4110575927003876965, guid: 2748564921e3e3848bf6b441d222f886, type: 3}
   - {fileID: 5017504293041468134, guid: 2cfd678cc9c0bfc4c980eaa2ad53758e, type: 3}
+  - {fileID: 8170163860163516807, guid: 2dd5de73a518ca148bd12f55bbe0ef8e, type: 3}
   shapesWall:
   - {fileID: 5034319180997102158, guid: a9107cae981208a41a13b54d462261d1, type: 3}
   - {fileID: 9127622651059974590, guid: 27cb222f932a15d4e8eed4fe5e70cdeb, type: 3}
