@@ -35,6 +35,16 @@ namespace Game.MainGame
             UpdateTextCoint();
         }
 
+        public void BtnHome()
+        {
+            UIManager.Instance.QueuePop();
+            LevelManager.Instance.controller.StateController = StateController.Pause;
+            LevelManager.Instance.ClearCell();
+            UIGamePlay ui =  UIManager.Instance.GetScreen<UIGamePlay>(GameManager.ScreenId_ExampleMenu);
+            ui.CloseUI();
+            UIManager.Instance.QueuePush(GameManager.ScreenId_UIHome, null, "UIHome", null);
+        }
+
         public void UpdateTextCoint()
         {
             _txtCoin.text = PlayerPrefs.GetInt("coin").ToString();
@@ -44,6 +54,8 @@ namespace Game.MainGame
         {
             GameManager.Instance.AddActionCoin(UpdateTextCoint);
             _btnClaimVideo.onClick.AddListener(() => BtnClaimVideo());
+            _btnHome.onClick.AddListener(() => BtnHome());
+            _btnClaim.onClick.AddListener(() => BtnClaim());
         }
 
         public void BtnClaimVideo()
@@ -52,6 +64,19 @@ namespace Game.MainGame
             int level = PlayerPrefs.GetInt("level");
             level++;
             coin += 100;
+
+            GameManager.Instance.UpdateCoin(coin);
+            GameManager.Instance.UpdateLevel(level);
+            LevelManager.Instance.GenerateGrid(level - 1);
+            UIManager.Instance.QueuePop();
+        }
+
+        public void BtnClaim()
+        {
+            int coin = PlayerPrefs.GetInt("coin");
+            int level = PlayerPrefs.GetInt("level");
+            level++;
+            coin += 50;
 
             GameManager.Instance.UpdateCoin(coin);
             GameManager.Instance.UpdateLevel(level);

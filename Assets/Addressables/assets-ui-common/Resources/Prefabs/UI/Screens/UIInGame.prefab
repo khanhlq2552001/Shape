@@ -2669,6 +2669,7 @@ MonoBehaviour:
   _imgBgFreeze: {fileID: 4706266737642520857}
   _txtTimeCountDown: {fileID: 5252322758367204054}
   _txtLevel: {fileID: 139189715287749672}
+  _hammerAnim: {fileID: 6044497027907794005, guid: 7e3cd86225adafc45a9ab09bb17db6c9, type: 3}
   _groupProgressFreezing: {fileID: 7318433954038301666}
   _progressFreezing: {fileID: 9139896560501665116}
   _bgFreezing: {fileID: 4706266737642520857}

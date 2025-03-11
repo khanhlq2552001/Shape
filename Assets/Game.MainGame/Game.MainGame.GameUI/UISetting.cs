@@ -25,22 +25,54 @@ namespace Game.MainGame
 
         public void BtnSound()
         {
-
+            if(PlayerPrefs.GetInt("sound") == 0)
+            {
+                GameManager.Instance.UpdateSound(true);
+            }
+            else
+            {
+                GameManager.Instance.UpdateSound(false);
+            }
+            CheckSound();
         }
 
         public void BtnMusic()
         {
-
+            if (PlayerPrefs.GetInt("music") == 0)
+            {
+                GameManager.Instance.UpdateMusic(true);
+            }
+            else
+            {
+                GameManager.Instance.UpdateMusic(false);
+            }
+            CheckMusic();
         }
 
         public void BtnVibration()
         {
-
+            if (PlayerPrefs.GetInt("vibra") == 0)
+            {
+                GameManager.Instance.UpdateVibration(true);
+            }
+            else
+            {
+                GameManager.Instance.UpdateVibration(false);
+            }
+            CheckVibra();
         }
 
         public void BtnNotification()
         {
-
+            if (PlayerPrefs.GetInt("noti") == 0)
+            {
+                GameManager.Instance.UpdateNoti(true);
+            }
+            else
+            {
+                GameManager.Instance.UpdateNoti(false);
+            }
+            CheckNoti();
         }
 
         public void BtnRestore()

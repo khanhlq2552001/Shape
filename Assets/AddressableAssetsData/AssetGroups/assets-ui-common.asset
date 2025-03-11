@@ -487,6 +487,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4d8856012fdf0684eb7066d2331045eb
+    m_Address: Gobua
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 51e11236757c762469aa8ff631ea9681
+    m_Address: Hammer
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d402ae232a39aec4e9c0ae91be417cce, type: 2}
   m_SchemaSet:

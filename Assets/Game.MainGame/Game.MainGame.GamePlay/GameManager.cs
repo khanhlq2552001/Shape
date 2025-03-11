@@ -31,6 +31,8 @@ namespace Game.MainGame
         public string timeHeal;
         public ParticleBreak particleBreak;
         public UIBG uiBackGround;
+        public ParticleSystem particleHammer;
+        public ParticleSystem particleFreeze;
 
 
         // Start is called before the first frame update

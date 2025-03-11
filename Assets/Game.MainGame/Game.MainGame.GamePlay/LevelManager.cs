@@ -153,11 +153,10 @@ namespace Game.MainGame
 
             for (int i = 0; i < _data.idCentreShapes.Count; i++)
             {
-                GameObject obj = Instantiate(dataShape.shapes[_data.idCentreShapes[i].idShapes]);
-                obj.transform.SetParent(_tranParent);
+                GameObject obj = LeanPool.Spawn(dataShape.shapes[_data.idCentreShapes[i].idShapes]);
 
                 ObjShape shape = obj.GetComponent<ObjShape>();
-
+                //
                 _listItemShape.Add(shape);
                 shape.ResetAttribute();
                 shape.IDGate = _data.idCentreShapes[i].idGate;
@@ -250,7 +249,8 @@ namespace Game.MainGame
 
             for(int i=0; i< _listItemShape.Count; i++)
             {
-                LeanPool.Despawn(_listItemShape[i]);
+                if (_listItemShape[i].gameObject.active)
+                    LeanPool.Despawn(_listItemShape[i]);
             }
 
             _listItemShape.Clear();

@@ -66,7 +66,7 @@ namespace Game.MainGame
             {
                 idsGrid.Add(0);
             }
-
+            rb = GetComponent<Rigidbody2D>();
             _posStartShape2 = _shape2.transform.localPosition;
             _scaleStartShape2 = _shape2.transform.localScale;
         }
@@ -87,7 +87,7 @@ namespace Game.MainGame
 
         private void Start()
         {
-            rb = GetComponent<Rigidbody2D>();
+
         }
 
         public bool CanMove
@@ -128,6 +128,11 @@ namespace Game.MainGame
         public void SetActiveBorder(bool active)
         {
             _border.SetActive(active);
+        }
+
+        public string GetColor()
+        {
+            return _hexColorShape1;
         }
 
         public void UnLock()
@@ -555,6 +560,7 @@ namespace Game.MainGame
 
         public void ResetAttribute()
         {
+            rb.bodyType = RigidbodyType2D.Kinematic;
             CanMove = true;
             SetActiveBorder(false);
             TypeShape = TypeShape.Normal;

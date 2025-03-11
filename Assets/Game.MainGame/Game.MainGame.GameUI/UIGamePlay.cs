@@ -1,6 +1,7 @@
 using System.Collections;
 using BlitzyUI;
 using DG.Tweening;
+using Lean.Pool;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,7 @@ namespace Game.MainGame
         [SerializeField] private Image _imgBgFreeze;
         [SerializeField] private Text _txtTimeCountDown;
         [SerializeField] private Text _txtLevel;
+        [SerializeField] private GameObject _hammerAnim;
 
         [Header("FreezingUI")]
         [SerializeField] private CanvasGroup _groupProgressFreezing;
@@ -97,6 +99,10 @@ namespace Game.MainGame
         private IEnumerator CountdownRoutineFreeze(int time)
         {
             _progressFreezing.DOFillAmount(0, time).SetEase(Ease.Linear);
+
+            FxFreeze fx = GameManager.Instance.particleFreeze.GetComponent<FxFreeze>();
+            fx.SetPos();
+            GameManager.Instance.particleFreeze.Play();
             while (time > 0)
             {
                 _textTimeFreeze.text = time.ToString();
@@ -112,6 +118,7 @@ namespace Game.MainGame
                     _bgTimeFreezing.DOFade(0, 2f).SetEase(Ease.Linear).OnComplete(() => StartCoroutine(CountdownRoutine()));
                 }
             }
+            GameManager.Instance.particleFreeze.Stop();
             _lockBtnFreeze = false;
         }
 
@@ -203,21 +210,30 @@ namespace Game.MainGame
 
                         if (obj != null)
                         {
-                            bool value = obj.CheckBoosterHammer();
-
-                            if (value)
-                            {
-                                _objBooster.SetActive(false);
-
-                                CloseBooster();
-                            }
-                            else
-                            {
-
-                            }
+                            StartCoroutine(delayHammer(obj));
                         }
                     }
                 }
+            }
+        }
+
+        IEnumerator delayHammer(ObjShape obj)
+        {
+            GameObject hammer =  LeanPool.Spawn(_hammerAnim, obj.transform.position, Quaternion.identity);
+            Hammer h = hammer.GetComponent<Hammer>();
+            h.hex = obj.GetColor();
+
+            yield return new WaitForSeconds(1f);
+            bool value = obj.CheckBoosterHammer();
+
+            if (value)
+            {
+                _objBooster.SetActive(false);
+                CloseBooster();
+            }
+            else
+            {
+
             }
         }
 
