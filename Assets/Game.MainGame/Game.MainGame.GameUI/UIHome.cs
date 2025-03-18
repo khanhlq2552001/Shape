@@ -1,3 +1,4 @@
+using System.Collections;
 using BlitzyUI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,7 +16,17 @@ namespace Game.MainGame
         [SerializeField] private Button _btnHome;
         [SerializeField] private Button _btnShop;
         [SerializeField] private Button _btnLeaderBoard;
-
+        [SerializeField] private GameObject _objShop;
+        [SerializeField] private GameObject _objHome;
+        [SerializeField] private Sprite _sprOnLeft;
+        [SerializeField] private Sprite _sprOffLeft;
+        [SerializeField] private Sprite _sprOnMid;
+        [SerializeField] private Sprite _sprOffMid;
+        [SerializeField] private Sprite _sprOnRight;
+        [SerializeField] private Sprite _sprOffRight;
+        [SerializeField] private Image _imgMid;
+        [SerializeField] private Image _imgLeft;
+        [SerializeField] private Image _imgRight;
 
         public override void OnFocus()
         {
@@ -38,6 +49,9 @@ namespace Game.MainGame
             UpdateTextLevel();
             UpdateTextTym();
             UpdateTime();
+            _imgMid.sprite = _sprOnMid;
+            _imgLeft.sprite = _sprOffLeft;
+            _imgRight.sprite = _sprOffRight;
             GameManager.Instance.AddActionTimeHeal(UpdateTime);
         }
 
@@ -98,17 +112,49 @@ namespace Game.MainGame
 
         public void BtnHome()
         {
+            _imgMid.sprite = _sprOnMid;
+            _imgLeft.sprite = _sprOffLeft;
+            _imgRight.sprite = _sprOffRight;
+            _objHome.SetActive(true);
+            _btnHome.interactable = false;
+            _btnShop.interactable = true;
+            _btnLeaderBoard.interactable = true;
 
+            if (_objShop.active) StartCoroutine(DelayOffCoroutine());
         }
 
         public void BtnShop()
         {
-
+            _objShop.SetActive(true);
+            _imgMid.sprite = _sprOffMid;
+            _imgLeft.sprite = _sprOnLeft;
+            _imgRight.sprite = _sprOffRight;
+            _objHome.SetActive(false);
+            _btnShop.interactable = false;
+            _btnHome.interactable = true;
+            _btnLeaderBoard.interactable = true;
         }
+    
 
         public void BtnLeaderBoard()
         {
-
+            _imgMid.sprite = _sprOffMid;
+            _imgLeft.sprite = _sprOffLeft;
+            _imgRight.sprite = _sprOnRight;
+            _objHome.SetActive(false);
+            _btnLeaderBoard.interactable = false;
+            _btnShop.interactable = true;
+            _btnHome.interactable = true;
+            if (_objShop.active) StartCoroutine(DelayOffCoroutine());
         }
+
+        IEnumerator DelayOffCoroutine()
+        {
+            _objShop.GetComponent<Animator>().SetBool("off", true);
+            yield return new WaitForSeconds(0.25f);
+            _objShop.SetActive(false);
+        }
+
+    
     }
 }

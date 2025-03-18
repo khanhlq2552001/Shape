@@ -502,6 +502,121 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e5854243221fa274a8d634fe576af47f
+    m_Address: UINewObject
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8d5ff4cd81026484d9dcf7252c55d51e
+    m_Address: UINewObject 1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fccbf1afa73b2784fa5710a4d0832323
+    m_Address: image_coin3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8536daa45d202d40b186ad0b9cb7bd9
+    m_Address: image_remove_ads_m
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 23c2b718250c731499636223e2c2db35
+    m_Address: shop_board2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d838a25e513255748926400cf88a7b20
+    m_Address: shop_board4
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 478857e8068e1d5498991f04e72de524
+    m_Address: shop_board4_slot2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2eeb372b119e416469260e099be709f8
+    m_Address: shop_board_ribbon_red
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1a3a4d744d661f24d82ef42051bbe4a4
+    m_Address: shop_board4_slot1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7990a7840f7ac684ca7d3fe979944bd6
+    m_Address: image_coin4
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1fafb7184aa365945ac5c147c79b2f54
+    m_Address: shop_button_green
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 19e8a627e4412ac4991961fc7078e0d7
+    m_Address: image_coin5
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2ac451575394205438ac867c7911a2e6
+    m_Address: shop_board3_slot1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d14d7dc668ad7064d9108c0b96b8978c
+    m_Address: shop_banner
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dc3b225625e11dc4bbc6a4d7037b89e6
+    m_Address: image_coin2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3b0735ae61bc2904d91b1b5b2a70abd2
+    m_Address: image_remove_ads_s
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd47945eccb292a4db8810657395e4b8
+    m_Address: image_coin1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8033dc452a849ef4dbc224bd59981cff
+    m_Address: image_coin6
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 266b25c778473694682d454066737934
+    m_Address: image_life_infinity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bec689f5aafd3804b8d0a55b09ec4488
+    m_Address: shop_board1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e4e0066329142fd44a6096bb124d6a72
+    m_Address: shop_board3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f1fde0491133c1c4aa8714736c51257a
+    m_Address: shop_board3_slot2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 64c0d1e2f70609a44a6252867d51f359
+    m_Address: shop_board_ribbon_purple
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d402ae232a39aec4e9c0ae91be417cce, type: 2}
   m_SchemaSet:
