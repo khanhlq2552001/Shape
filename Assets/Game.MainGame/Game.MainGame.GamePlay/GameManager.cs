@@ -33,6 +33,7 @@ namespace Game.MainGame
         public UIBG uiBackGround;
         public ParticleSystem particleHammer;
         public ParticleSystem particleFreeze;
+        public DataBooster dataBooster;
 
 
         // Start is called before the first frame update

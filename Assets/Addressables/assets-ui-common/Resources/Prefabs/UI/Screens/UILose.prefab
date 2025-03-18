@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9207705830206659750}
   - component: {fileID: 8473751633851841544}
   - component: {fileID: 3411341476668594783}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4595040318775435909}
   - component: {fileID: 708289960202831120}
   - component: {fileID: 5361229676765764415}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TextCoin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 4032331795856537007}
   - component: {fileID: 6191804122691137244}
   - component: {fileID: 6440517190682124556}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 8101614126268691334}
   - component: {fileID: 4781460790428349580}
   - component: {fileID: 8440629445233031907}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BtnReplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -392,7 +392,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4682203347277430133}
   - component: {fileID: 5444711821837715862}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UiTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -457,7 +457,7 @@ GameObject:
   - component: {fileID: 2034835358592125099}
   - component: {fileID: 6324892869879103461}
   - component: {fileID: 1926660007160139901}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TxtLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -534,7 +534,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5811590422813178173}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -578,7 +578,7 @@ GameObject:
   - component: {fileID: 7686017408774926973}
   - component: {fileID: 4339440977892405974}
   - component: {fileID: 4673996939306541455}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -672,7 +672,7 @@ GameObject:
   - component: {fileID: 2391121915093900738}
   - component: {fileID: 220039045803702071}
   - component: {fileID: 9215985459266862849}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -749,7 +749,7 @@ GameObject:
   - component: {fileID: 722493620893253764}
   - component: {fileID: 4723513593494135397}
   - component: {fileID: 8919604073505825656}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UILose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -847,7 +847,7 @@ GameObject:
   - component: {fileID: 937003770368256498}
   - component: {fileID: 6442357940588969637}
   - component: {fileID: 9119094985624854857}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BtnHome
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -966,7 +966,7 @@ GameObject:
   - component: {fileID: 6156248991328757462}
   - component: {fileID: 8263912773367085979}
   - component: {fileID: 3531968332005209564}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Bg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1041,7 +1041,7 @@ GameObject:
   - component: {fileID: 5602832303451410387}
   - component: {fileID: 3733611946767819073}
   - component: {fileID: 9175238821290923958}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Coint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1118,7 +1118,7 @@ GameObject:
   - component: {fileID: 4224946321528816090}
   - component: {fileID: 5956517243617238969}
   - component: {fileID: 7994321605898738288}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9071914860208054028}
   - component: {fileID: 5394169501846640215}
   - component: {fileID: 4986557666452031954}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 2045771196506588669}
   - component: {fileID: 7139780815451762521}
   - component: {fileID: 8299580129083921426}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 25734753521198883}
   - component: {fileID: 7956992895400895347}
   - component: {fileID: 4125804325066415960}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BtnClose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,7 +317,7 @@ GameObject:
   - component: {fileID: 3407145116037834368}
   - component: {fileID: 3509849411307260208}
   - component: {fileID: 8923069782082057516}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -394,7 +394,7 @@ GameObject:
   - component: {fileID: 5279757329506326464}
   - component: {fileID: 9210243517226034029}
   - component: {fileID: 3532838199975193367}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -469,7 +469,7 @@ GameObject:
   - component: {fileID: 638281221591417465}
   - component: {fileID: 5309780167972196417}
   - component: {fileID: 9106556585588865224}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 3063826050939145069}
   - component: {fileID: 8051203659757450866}
   - component: {fileID: 5156562361762048538}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BtnReplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -670,7 +670,7 @@ GameObject:
   - component: {fileID: 1256857971169713039}
   - component: {fileID: 2603234075899972926}
   - component: {fileID: 7120947075580492885}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -748,7 +748,7 @@ GameObject:
   - component: {fileID: 8974980273730714567}
   - component: {fileID: 615771375143856808}
   - component: {fileID: 1015840859791276710}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TxtLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -855,7 +855,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1095825959950350507}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -894,7 +894,7 @@ GameObject:
   - component: {fileID: 5022809777642822492}
   - component: {fileID: 6773447968999672246}
   - component: {fileID: 131718054511073026}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -989,7 +989,7 @@ GameObject:
   - component: {fileID: 1228558952808557455}
   - component: {fileID: 2184663454088412245}
   - component: {fileID: 6553129121678374709}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UIReplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
