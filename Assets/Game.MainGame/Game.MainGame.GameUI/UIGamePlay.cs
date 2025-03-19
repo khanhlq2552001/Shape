@@ -115,7 +115,9 @@ namespace Game.MainGame
                     Image img = GameManager.Instance.uiBackGround.imgBackGroundFreeze;
                     img.DOFade(0, 2f).SetEase(Ease.Linear);
 
-                    _bgTimeFreezing.DOFade(0, 2f).SetEase(Ease.Linear).OnComplete(() => StartCoroutine(CountdownRoutine()));
+                    _bgTimeFreezing.DOFade(0, 2f).SetEase(Ease.Linear).OnComplete(() => {
+                        _countdownCoroutine = StartCoroutine(CountdownRoutine());
+                        });
                 }
             }
             GameManager.Instance.particleFreeze.Stop();
@@ -124,54 +126,94 @@ namespace Game.MainGame
 
         private void BtnFreezeTime()
         {
-            if (_lockBtnFreeze) return;
-
-            _lockBtnFreeze = true;
-
-            if (_countdownCoroutine != null)
+            if (GameManager.Instance.pref.GetCountBooster(0) > 0)
             {
-                StopCoroutine(_countdownCoroutine);
+                if (_lockBtnFreeze) return;
+
+                _lockBtnFreeze = true;
+                int count = GameManager.Instance.pref.GetCountBooster(0);
+                count--;
+                GameManager.Instance.UpdateBooster(count, 0);
+                UpdateBoosterTime();
+
+                if (_countdownCoroutine != null)
+                {
+                    StopCoroutine(_countdownCoroutine);
+                }
+
+                _textTimeFreeze.text = _timeFreeze.ToString();
+                _progressFreezing.fillAmount = 1f;
+                _groupProgressFreezing.gameObject.SetActive(true);
+                _groupProgressFreezing.alpha = 0f;
+
+                _groupProgressFreezing.DOFade(1, _fadeDuration).SetEase(Ease.Linear);
+
+                Image img = GameManager.Instance.uiBackGround.imgBackGroundFreeze;
+                img.gameObject.SetActive(true);
+                Color startColor = img.color;
+                startColor.a = 0;
+                img.color = startColor;
+
+                img.DOFade(1, _fadeDuration).SetEase(Ease.Linear);
+
+                _bgTimeFreezing.gameObject.SetActive(true);
+                startColor = _bgTimeFreezing.color;
+                startColor.a = 0;
+                _bgTimeFreezing.color = startColor;
+
+                _bgTimeFreezing.DOFade(1, _fadeDuration).SetEase(Ease.Linear).OnComplete(() => StartCoroutine(CountdownRoutineFreeze(_timeFreeze)));
             }
+            else
+            {
+                LevelManager.Instance.controller.StateController = StateController.Pause;
+                BlitzyUI.Screen.Data data = new BlitzyUI.Screen.Data();
+                data.Add("booster", "freeze");
 
-            _textTimeFreeze.text = _timeFreeze.ToString();
-            _progressFreezing.fillAmount = 1f;
-            _groupProgressFreezing.gameObject.SetActive(true);
-            _groupProgressFreezing.alpha = 0f;
-
-            _groupProgressFreezing.DOFade(1, _fadeDuration).SetEase(Ease.Linear);
-
-            Image img = GameManager.Instance.uiBackGround.imgBackGroundFreeze;
-            img.gameObject.SetActive(true);
-            Color startColor = img.color;
-            startColor.a = 0;
-            img.color = startColor;
-
-            img.DOFade(1, _fadeDuration).SetEase(Ease.Linear);
-
-            _bgTimeFreezing.gameObject.SetActive(true);
-            startColor = _bgTimeFreezing.color;
-            startColor.a = 0;
-            _bgTimeFreezing.color = startColor;
-
-            _bgTimeFreezing.DOFade(1, _fadeDuration).SetEase(Ease.Linear).OnComplete(()=> StartCoroutine(CountdownRoutineFreeze(_timeFreeze)));
+                UIManager.Instance.QueuePush(GameManager.ScreenId_UIBuyBooster, data, "UIBuyBooster", null);
+            }
         }
 
         private void BtnHammer()
         {
-            _objBooster.SetActive(true);
-            _txtDescribe.text = "Choose one block \n to break";
-            _imgBooster.sprite = _sprBoosterHammer;
-            LevelManager.Instance.controller.StateController = StateController.Pause;
-            GameManager.Instance.AddActionToOnActionUpdate(CheckInputHammer);
+            if(GameManager.Instance.pref.GetCountBooster(1) > 0)
+            {
+                _objBooster.SetActive(true);
+                _txtDescribe.text = "Choose one block \n to break";
+                _imgBooster.sprite = _sprBoosterHammer;
+                GameManager.Instance.cameraMain.depth = 1;
+                LevelManager.Instance.controller.StateController = StateController.Pause;
+                GameManager.Instance.AddActionToOnActionUpdate(CheckInputHammer);
+            }
+            else
+            {
+                LevelManager.Instance.controller.StateController = StateController.Pause;
+                BlitzyUI.Screen.Data data = new BlitzyUI.Screen.Data();
+                data.Add("booster", "hammer");
+
+                UIManager.Instance.QueuePush(GameManager.ScreenId_UIBuyBooster, data, "UIBuyBooster", null);
+            }
+
         }
 
         private void BtnMagic()
         {
-            _objBooster.SetActive(true);
-            _txtDescribe.text = "Tap and vacuum blocks \n with the same color!";
-            _imgBooster.sprite = _sprBoosterMagic;
-            LevelManager.Instance.controller.StateController = StateController.Pause;
-            GameManager.Instance.AddActionToOnActionUpdate(CheckInputMagic);
+            if (GameManager.Instance.pref.GetCountBooster(2) > 0)
+            {
+                _objBooster.SetActive(true);
+                _txtDescribe.text = "Tap and vacuum blocks \n with the same color!";
+                _imgBooster.sprite = _sprBoosterMagic;
+                GameManager.Instance.cameraMain.depth = 1;
+                LevelManager.Instance.controller.StateController = StateController.Pause;
+                GameManager.Instance.AddActionToOnActionUpdate(CheckInputMagic);
+            }
+            else
+            {
+                LevelManager.Instance.controller.StateController = StateController.Pause;
+                BlitzyUI.Screen.Data data = new BlitzyUI.Screen.Data();
+                data.Add("booster", "magic");
+
+                UIManager.Instance.QueuePush(GameManager.ScreenId_UIBuyBooster, data, "UIBuyBooster", null);
+            }
         }
 
         public void StopTime()
@@ -181,7 +223,7 @@ namespace Game.MainGame
 
         private void BtnCloseBooster()
         {
-            _objBooster.SetActive(false);
+            CloseBooster();
         }
 
         private void BtnPause()
@@ -210,19 +252,23 @@ namespace Game.MainGame
 
                         if (obj != null)
                         {
-                            StartCoroutine(delayHammer(obj));
+                            StartCoroutine(DelayHammerCoroutine(obj));
                         }
                     }
                 }
             }
         }
 
-        IEnumerator delayHammer(ObjShape obj)
+        IEnumerator DelayHammerCoroutine(ObjShape obj)
         {
+            int count = GameManager.Instance.pref.GetCountBooster(1);
+            count--;
+            GameManager.Instance.UpdateBooster(count, 1);
+            UpdateBoosterHammer();
+
             GameObject hammer =  LeanPool.Spawn(_hammerAnim, obj.transform.position, Quaternion.identity);
             Hammer h = hammer.GetComponent<Hammer>();
             h.hex = obj.GetColor();
-
             yield return new WaitForSeconds(1f);
             bool value = obj.CheckBoosterHammer();
 
@@ -230,6 +276,7 @@ namespace Game.MainGame
             {
                 _objBooster.SetActive(false);
                 CloseBooster();
+                GameManager.Instance.cameraMain.depth = -1;
             }
             else
             {
@@ -269,7 +316,7 @@ namespace Game.MainGame
             LevelManager.Instance.controller.StateController = StateController.NoDrag;
             GameManager.Instance.RemoveActionFromOnActionInStart(CheckInputHammer);
             GameManager.Instance.RemoveActionFromOnActionInStart(CheckInputMagic);
-
+            GameManager.Instance.cameraMain.depth = -1;
             _objBooster.SetActive(false);
         }
 
@@ -379,9 +426,9 @@ namespace Game.MainGame
             _btnRestart.onClick.AddListener(() => BtnReplay());
 
             GameManager.Instance.AddActionLevel(UpdateTextLevel);
-            GameManager.Instance.AddActionBooster(UpdateBoosterTime, 0);
-            GameManager.Instance.AddActionBooster(UpdateBoosterHammer, 1);
-            GameManager.Instance.AddActionBooster(UpdateBoosterMagic, 2);
+            //GameManager.Instance.AddActionBooster(UpdateBoosterTime, 0);
+            //GameManager.Instance.AddActionBooster(UpdateBoosterHammer, 1);
+            //GameManager.Instance.AddActionBooster(UpdateBoosterMagic, 2);
         }
     }
 }

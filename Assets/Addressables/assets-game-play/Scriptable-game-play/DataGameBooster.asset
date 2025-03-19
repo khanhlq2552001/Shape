@@ -15,7 +15,7 @@ MonoBehaviour:
   listDatas:
   - name: Time Freeze
     price: 100
-    sprBooster: {fileID: 21300000, guid: f2e265e33390c9c4ea79ae9ed07d8cbb, type: 3}
+    sprBooster: {fileID: 21300000, guid: 2088473cce49cc34c9eb7e1389764426, type: 3}
     describe: Stop the clock for 10 seconds
   - name: Hammer
     price: 100

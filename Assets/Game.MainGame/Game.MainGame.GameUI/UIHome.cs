@@ -1,5 +1,6 @@
 using System.Collections;
 using BlitzyUI;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,8 @@ namespace Game.MainGame
         [SerializeField] private Button _btnHome;
         [SerializeField] private Button _btnShop;
         [SerializeField] private Button _btnLeaderBoard;
+        [SerializeField] private Button _btnBuyTym;
+        [SerializeField] private Button _btnBuyCoin;
         [SerializeField] private GameObject _objShop;
         [SerializeField] private GameObject _objHome;
         [SerializeField] private Sprite _sprOnLeft;
@@ -27,6 +30,10 @@ namespace Game.MainGame
         [SerializeField] private Image _imgMid;
         [SerializeField] private Image _imgLeft;
         [SerializeField] private Image _imgRight;
+        [SerializeField] private GameObject _effTym;
+        [SerializeField] private Transform _tranStart;
+        [SerializeField] private Transform _tranMid;
+        [SerializeField] private Transform _tranEnd;
 
         public override void OnFocus()
         {
@@ -52,6 +59,7 @@ namespace Game.MainGame
             _imgMid.sprite = _sprOnMid;
             _imgLeft.sprite = _sprOffLeft;
             _imgRight.sprite = _sprOffRight;
+            _effTym.gameObject.SetActive(false);
             GameManager.Instance.AddActionTimeHeal(UpdateTime);
         }
 
@@ -62,6 +70,8 @@ namespace Game.MainGame
             _btnPlay.onClick.AddListener(() => BtnPlay());
             _btnShop.onClick.AddListener(() => BtnShop());
             _btnLeaderBoard.onClick.AddListener(() => BtnLeaderBoard());
+            _btnBuyTym.onClick.AddListener(() => BtnBuyTym());
+            _btnBuyCoin.onClick.AddListener(() => BtnBuyCoin());
 
             GameManager.Instance.AddActionCoin(UpdateTextCoint);
             GameManager.Instance.AddActionLevel(UpdateTextLevel);
@@ -155,6 +165,33 @@ namespace Game.MainGame
             _objShop.SetActive(false);
         }
 
+        private void BtnBuyTym()
+        {
+            if(GameManager.Instance.pref.GetTym() < 5)
+            {
+                UIManager.Instance.QueuePush(GameManager.ScreenId_UIBuyLife, null, "UIBuyTym", null);
+            }
+        }
+
+        private void BtnBuyCoin()
+        {
+
+        }
+
+        public void LoadEffectTym()
+        {
+            _effTym.gameObject.SetActive(true);
+            _effTym.transform.localScale = new Vector3(0.9f, 0.9f, 1f);
+            _effTym.transform.position = _tranStart.position;
+            Vector3[] paths = new Vector3[]{_tranMid.position, _tranEnd.position};
+            _effTym.transform.DOPath(paths, 0.3f, PathType.CatmullRom) // Sử dụng CatmullRom để tạo đường cong
+              .SetEase(Ease.Linear) // Chuyển động đều
+              .OnComplete(() => {
+                  _effTym.transform.DOScale(Vector3.zero, 0.2f).SetEase(Ease.InBack).OnComplete(() => {
+                      _effTym.gameObject.SetActive(false);
+                  });
+              }); // Giúp vật thể xoay theo hướng di chuyển
+        }
     
     }
 }

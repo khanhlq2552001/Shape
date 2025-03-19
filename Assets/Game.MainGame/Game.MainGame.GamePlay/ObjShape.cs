@@ -207,15 +207,7 @@ namespace Game.MainGame
                 _shape2.maskInteraction = SpriteMaskInteraction.None;
                 _shape2Shadow.maskInteraction = SpriteMaskInteraction.None;
                 _shape2Border.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.None;
-
-                _shape2.transform.DOScale(Vector2.zero, 0.7f)
-                .SetEase(Ease.InQuart);
-
-                _shape2.transform.DOMove(posTarget, 0.7f)
-                    .SetEase(Ease.InQuart)
-                    .OnComplete(() => {
-                        _shape2.gameObject.SetActive(false);
-                    });
+              //  _shape2.gameObject.SetActive(false);
 
                 return true;
             }
@@ -230,17 +222,19 @@ namespace Game.MainGame
             {
                 _sprShadows[i].maskInteraction = SpriteMaskInteraction.None;
             }
-
-            transform.DOScale(Vector2.zero, 0.7f)
-                .SetEase(Ease.InQuart);
-
-            transform.DOMove(posTarget, 0.7f)
-                .SetEase(Ease.InQuart)
-                .OnComplete(() => {
-                    DestroyShape();
-                });
+          //  DestroyShape();
 
             return true;
+        }
+
+        public void DestroyIfMagic()
+        {
+            if (IDGate2 != -1)
+            {
+                _shape2.gameObject.SetActive(false);
+                return;
+            }
+            DestroyShape();
         }
 
         public void CheckKey()

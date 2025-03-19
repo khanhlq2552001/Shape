@@ -11,10 +11,10 @@ namespace Game.MainGame
         {
             Color color;
             ColorUtility.TryParseHtmlString("#" + hex, out color);
-            GameManager.Instance.particleHammer.startColor = color;
-            GameManager.Instance.particleHammer.transform.position = transform.position;
-            GameManager.Instance.particleHammer.Play();
 
+            ParticleSystem _par = LeanPool.Spawn(GameManager.Instance.particleHammer, transform.position, Quaternion.identity);
+            _par.Play();
+            _par.GetComponent<FxSmoke>().SetColor(color);
         }
 
         public void DestroyOBj()

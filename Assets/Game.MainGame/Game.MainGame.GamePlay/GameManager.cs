@@ -14,6 +14,9 @@ namespace Game.MainGame
         public static readonly BlitzyUI.Screen.Id ScreenId_UIHome = new BlitzyUI.Screen.Id("HomeUI");
         public static readonly BlitzyUI.Screen.Id ScreenId_UILose = new BlitzyUI.Screen.Id("LoseUI");
         public static readonly BlitzyUI.Screen.Id ScreenId_UIReplay = new BlitzyUI.Screen.Id("ReplayUI");
+        public static readonly BlitzyUI.Screen.Id ScreenId_UIBuyLife = new BlitzyUI.Screen.Id("UIBuyTym");
+        public static readonly BlitzyUI.Screen.Id ScreenId_UINewObject = new BlitzyUI.Screen.Id("UINewObject");
+        public static readonly BlitzyUI.Screen.Id ScreenId_UIBuyBooster = new BlitzyUI.Screen.Id("UIBuyBooster");
 
         [SerializeField] private float _remainingTime;
         [SerializeField] private float _remainingTimeStart;
@@ -33,7 +36,13 @@ namespace Game.MainGame
         public UIBG uiBackGround;
         public ParticleSystem particleHammer;
         public ParticleSystem particleFreeze;
+        public GameObject parMagic;
+        public GameObject objmagic;
         public DataBooster dataBooster;
+        public PrefData pref;
+        public Camera cameraMain;
+        public Camera cameraUI;
+        public Camera cameraBG;
 
 
         // Start is called before the first frame update
@@ -253,8 +262,11 @@ namespace Game.MainGame
 
         public void UpdateTym(int tym)
         {
-            PlayerPrefs.SetInt("tym", tym);
-            _onUpdateTym?.Invoke();
+            if(tym <= 5)
+            {
+                PlayerPrefs.SetInt("tym", tym);
+                _onUpdateTym?.Invoke();
+            }
         }
 
         public void UpdateBooster(int value, int id)
@@ -299,11 +311,11 @@ namespace Game.MainGame
             {
                 PlayerPrefs.SetInt("isFirst", 1);
                 UpdateLevel(1);
-                UpdateCoin(0);
+                UpdateCoin(100);
                 UpdateTym(5);
-                UpdateBooster(0, 0);
-                UpdateBooster(0, 1);
-                UpdateBooster(0, 2);
+                UpdateBooster(1, 0);
+                UpdateBooster(1, 1);
+                UpdateBooster(1, 2);
                 UpdateSound(true);
                 UpdateMusic(true);
                 UpdateVibration(true);

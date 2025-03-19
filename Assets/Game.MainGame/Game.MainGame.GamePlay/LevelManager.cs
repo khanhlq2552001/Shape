@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using BlitzyUI;
+using DG.Tweening;
 using Lean.Pool;
 using UnityEngine;
 
@@ -208,12 +209,16 @@ namespace Game.MainGame
                 if(CountShape == 0)
                 {
                     controller.StateController = StateController.Pause;
-                    UIManager.Instance.QueuePush(GameManager.ScreenId_UIWin, null, "UIWin", null);
                     UIGamePlay ui = UIManager.Instance.GetScreen<UIGamePlay>(GameManager.ScreenId_ExampleMenu);
                     ui.StopTime();
+                    Invoke("ShowWin", 1f);
                 }
-
             }
+        }
+
+        private void ShowWin()
+        {
+            UIManager.Instance.QueuePush(GameManager.ScreenId_UIWin, null, "UIWin", null);
         }
 
         private void CreateWall()
@@ -288,19 +293,37 @@ namespace Game.MainGame
                 }
             }
 
+            float scale = GameManager.Instance.cameraMain.orthographicSize/5f;
+            GameObject magic = LeanPool.Spawn(GameManager.Instance.objmagic, posTarget, Quaternion.identity);
+            magic.transform.localScale = new Vector3(scale * 0.6f, scale * 0.6f, scale * 0.6f);
+            Magic magicBoo = magic.GetComponent<Magic>();
+            yield return new WaitForSeconds(1f);
+
             for (int i = 0; i < _listItemShape.Count; i++)
             {
                 if (_listItemShape[i].gameObject.active && _listItemShape[i].IDGate == idGate)
                 {
                     bool value =  _listItemShape[i].CheckBoosterMagic(posTarget);
+                    int idx = i;
 
                     if (value)
                     {
                         count++;
-                    }
+                        GameObject parMagic = LeanPool.Spawn(GameManager.Instance.parMagic, magicBoo.tranStart.position, Quaternion.identity);
+                        parMagic.transform.localScale = new Vector3(scale * 0.6f, scale * 0.6f, scale * 0.6f);
 
-                    float time = Random.Range(0,0.3f);
-                    yield return new WaitForSeconds(time);
+                        parMagic.transform.DOMove(_listItemShape[idx].tranCentre.position, 0.5f).SetEase(Ease.Linear).OnComplete(()=> {
+                            _listItemShape[idx].DestroyIfMagic();
+                            ParticleSystem par = LeanPool.Spawn(GameManager.Instance.particleHammer, _listItemShape[idx].tranCentre.position, Quaternion.identity);
+                            par.transform.localScale = new Vector3(scale * 0.8f, scale* 0.8f, scale * 0.8f);
+                            par.Play();
+                            Color color;
+                            ColorUtility.TryParseHtmlString("#" + _listItemShape[idx].GetColor(), out color);
+                            par.GetComponent<FxSmoke>().SetColor(color);
+
+                            magicBoo.End();
+                        });
+                    }
                 }
             }
 
@@ -309,10 +332,15 @@ namespace Game.MainGame
                 yield return new WaitForSeconds(0.7f);
                 UIGamePlay ui =  UIManager.Instance.GetScreen<UIGamePlay>(GameManager.ScreenId_ExampleMenu);
                 ui.CloseBooster();
+
+                int x = GameManager.Instance.pref.GetCountBooster(2);
+                x--;
+                GameManager.Instance.UpdateBooster(x, 2);
+                ui.UpdateBoosterMagic();
             }
         }
     }
-
+    //
     [System.Serializable]
     public class Data
     {
