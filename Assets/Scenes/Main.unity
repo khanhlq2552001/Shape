@@ -227,6 +227,7 @@ MonoBehaviour:
   cameraMain: {fileID: 963194227}
   cameraUI: {fileID: 1622264694}
   cameraBG: {fileID: 252132408}
+  dataObject: {fileID: 11400000, guid: 0d7c7a227de9eb240ab4af59776853ec, type: 2}
 --- !u!1 &252132406
 GameObject:
   m_ObjectHideFlags: 0
@@ -6043,6 +6044,7 @@ MonoBehaviour:
   _itemGrid: {fileID: 6821112152341136596, guid: 6b3e0cc116b43094c997f737ff913d50, type: 3}
   _tranParent: {fileID: 1403209606}
   _data:
+    diff: 0
     width: 3
     height: 3
     time: 0

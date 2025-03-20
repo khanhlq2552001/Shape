@@ -52,6 +52,7 @@ namespace Game.MainGame
         private TypeShape _typeShape;
         private int _countFreeze = 0;
         private string _hexColorShape1;
+        private PolygonCollider2D _col;
 
         public Transform tranCentre;
         public Rigidbody2D rb;
@@ -67,6 +68,7 @@ namespace Game.MainGame
                 idsGrid.Add(0);
             }
             rb = GetComponent<Rigidbody2D>();
+            _col = GetComponent<PolygonCollider2D>();
             _posStartShape2 = _shape2.transform.localPosition;
             _scaleStartShape2 = _shape2.transform.localScale;
         }
@@ -438,6 +440,7 @@ namespace Game.MainGame
 
         public void EffectWin(TypeWall type, Wall wall)
         {
+            _col.isTrigger = true;
             CanMove = false;
             Vector2 offset = tranCentre.localPosition;
             Vector2 posTarget = (Vector2)LevelManager.Instance.GetListItemGrid()[idsGrid[0]].transform.position - offset;
@@ -512,9 +515,10 @@ namespace Game.MainGame
             });
         }
 
-        public void CalculatorCoordinates(int id)
+        public void CalculatorCoordinates(int id, bool isStart = false)
         {
-            ResetIDItemGrid();
+            if(!isStart)
+                ResetIDItemGrid();
 
             int x = id % LevelManager.Instance.GetData().width;
             int y = id / LevelManager.Instance.GetData().width;
@@ -527,7 +531,6 @@ namespace Game.MainGame
                 newX = x + listCalculateXY[i].x;
                 newY = y + listCalculateXY[i].y;
                 idsGrid[i] = newY * LevelManager.Instance.GetData().width + newX;
-                Debug.Log(newX + " " + newY);
                 LevelManager.Instance.GetListItemGrid()[idsGrid[i]].GetComponent<ItemGrid>().IDShape = ID;
                 if(check == false)
                 {
@@ -556,6 +559,7 @@ namespace Game.MainGame
         public void ResetAttribute()
         {
             rb.bodyType = RigidbodyType2D.Kinematic;
+            _col.isTrigger = false;
             CanMove = true;
             SetActiveBorder(false);
             TypeShape = TypeShape.Normal;

@@ -194,7 +194,7 @@ namespace Game.MainGame
                 _listItemGrid[_data.idCentreShapes[i].idGrid].GetComponent<ItemGrid>().IDShape = i;
                 Vector2 position = startPosition + new Vector2(x * _spacing, -y * _spacing);
                 obj.transform.position = (Vector2)_listItemGrid[_data.idCentreShapes[i].idGrid].transform.position - offset;
-                shape.CalculatorCoordinates(_data.idCentreShapes[i].idGrid);
+                shape.CalculatorCoordinates(_data.idCentreShapes[i].idGrid, true);
             }
 
             CountShape = _listItemShape.Count;
@@ -219,6 +219,11 @@ namespace Game.MainGame
         private void ShowWin()
         {
             UIManager.Instance.QueuePush(GameManager.ScreenId_UIWin, null, "UIWin", null);
+            UIWin ui = UIManager.Instance.GetScreen<UIWin>(GameManager.ScreenId_UIWin);
+            if (!ui.gameObject.active)
+            {
+                ui.gameObject.SetActive(true);
+            }
         }
 
         private void CreateWall()
@@ -344,6 +349,7 @@ namespace Game.MainGame
     [System.Serializable]
     public class Data
     {
+        public Difficulty diff;
         public int width;
         public int height;
         public int time; // tinh bang giay

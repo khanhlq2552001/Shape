@@ -322,10 +322,9 @@ namespace BlitzyUI
                     // Use cached instance of screen.
                     _cache.Remove(queuedPush.prefabName);
 
-                    #if PRINT_CACHE
+#if PRINT_CACHE
                     DebugPrintCache(string.Format("[UIManager] Screen retrieved from Cache: {0}", queuedPush.prefabName));
-                    #endif
-
+#endif
                     // Move cached to the front of the transfrom heirarchy so that it is sorted properly.
                     screenInstance.transform.SetAsLastSibling();
 
@@ -561,6 +560,37 @@ namespace BlitzyUI
 
             if (CanExecuteNextQueueItem())
                 ExecuteNextQueueItem();
+        }
+
+        public void ForceRemoveScreen(BlitzyUI.Screen.Id id)
+        {
+            for (int i = 0; i < _stack.Count; i++)
+            {
+                if (_stack[i].id == id)
+                {
+                    // Tìm thấy màn hình cần loại bỏ
+                    Screen screenToRemove = _stack[i];
+
+                    // Loại bỏ khỏi ngăn xếp
+                    _stack.RemoveAt(i);
+
+                    // Tắt màn hình
+                    if (screenToRemove.keepCached)
+                    {
+                        screenToRemove.gameObject.SetActive(false);
+                        _cache[screenToRemove.PrefabName] = screenToRemove;
+                    }
+                    else
+                    {
+                        Object.Destroy(screenToRemove.gameObject);
+                    }
+
+                    Debug.Log($"Screen {id} has been forcibly removed.");
+                    return;
+                }
+            }
+
+            Debug.LogWarning($"Screen {id} not found in the stack.");
         }
     }
 }

@@ -541,8 +541,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keepCached: 1
-  overrideManagedSorting: 0
-  overrideSortValue: 50
+  overrideManagedSorting: 1
+  overrideSortValue: 15
   _sprOn: {fileID: 21300000, guid: 24b69f6c0e3600142b7a675e9ffd4687, type: 3}
   _sprOff: {fileID: 21300000, guid: 151cbc69d26eb0c45a3fba2b1f027f78, type: 3}
   _btnSound: {fileID: 2077006479325965548}

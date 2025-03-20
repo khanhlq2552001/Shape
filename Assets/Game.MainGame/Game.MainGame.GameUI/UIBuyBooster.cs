@@ -18,8 +18,6 @@ namespace Game.MainGame
 
         private InfoBooster _info;
 
-        private int _price;
-
         public override void OnFocus()
         {
         }
@@ -74,21 +72,21 @@ namespace Game.MainGame
             {
                 case InfoBooster.freezeTime:
                     _txtName.text = data.listDatas[0].name;
-                    _txtDescript.text = data.listDatas[0].describe.Replace("\\n", "\n"); ;
+                    _txtDescript.text = data.listDatas[0].describe.Replace("\\n", "\n");
                     _imgItem.sprite = data.listDatas[0].sprBooster;
                     _imgItemx3.sprite = data.listDatas[0].sprBooster;
                     _imgItemx1.sprite = data.listDatas[0].sprBooster;
                     break;
                 case InfoBooster.hammer:
                     _txtName.text = data.listDatas[1].name;
-                    _txtDescript.text = data.listDatas[1].describe.Replace("\\n", "\n"); ;
+                    _txtDescript.text = data.listDatas[1].describe.Replace("\\n", "\n");
                     _imgItem.sprite = data.listDatas[1].sprBooster;
                     _imgItemx3.sprite = data.listDatas[1].sprBooster;
                     _imgItemx1.sprite = data.listDatas[1].sprBooster;
                     break;
                 case InfoBooster.magic:
                     _txtName.text = data.listDatas[2].name;
-                    _txtDescript.text = data.listDatas[2].describe.Replace("\\n", "\n"); ;
+                    _txtDescript.text = data.listDatas[2].describe.Replace("\\n", "\n");
                     _imgItem.sprite = data.listDatas[2].sprBooster;
                     _imgItemx3.sprite = data.listDatas[2].sprBooster;
                     _imgItemx1.sprite = data.listDatas[2].sprBooster;
@@ -110,21 +108,49 @@ namespace Game.MainGame
                 case InfoBooster.freezeTime:
                     if(GameManager.Instance.pref.GetCoin() >= data.listDatas[0].price)
                     {
+                        int coin = GameManager.Instance.pref.GetCoin();
+                        coin -= data.listDatas[0].price;
+                        GameManager.Instance.UpdateCoin(coin);
+                        int booster = GameManager.Instance.pref.GetCountBooster(0);
+                        booster += 3;
+                        GameManager.Instance.UpdateBooster(booster, 0);
 
+                        UIGamePlay ui = UIManager.Instance.GetScreen<UIGamePlay>(GameManager.ScreenId_ExampleMenu);
+                        ui.EffBuy(InfoBooster.freezeTime, 3);
+
+                        BtnClose();
                     }
 
                     break;
                 case InfoBooster.hammer:
                     if (GameManager.Instance.pref.GetCoin() >= data.listDatas[1].price)
                     {
+                        int coin = GameManager.Instance.pref.GetCoin();
+                        coin -= data.listDatas[1].price;
+                        GameManager.Instance.UpdateCoin(coin);
+                        int booster = GameManager.Instance.pref.GetCountBooster(1);
+                        booster += 3;
+                        GameManager.Instance.UpdateBooster(booster, 1);
 
+                        UIGamePlay ui = UIManager.Instance.GetScreen<UIGamePlay>(GameManager.ScreenId_ExampleMenu);
+                        ui.EffBuy(InfoBooster.hammer, 3);
+                        BtnClose();
                     }
 
                     break;
                 case InfoBooster.magic:
                     if (GameManager.Instance.pref.GetCoin() >= data.listDatas[2].price)
                     {
+                        int coin = GameManager.Instance.pref.GetCoin();
+                        coin -= data.listDatas[2].price;
+                        GameManager.Instance.UpdateCoin(coin);
+                        int booster = GameManager.Instance.pref.GetCountBooster(2);
+                        booster += 3;
+                        GameManager.Instance.UpdateBooster(booster, 2);
 
+                        UIGamePlay ui = UIManager.Instance.GetScreen<UIGamePlay>(GameManager.ScreenId_ExampleMenu);
+                        ui.EffBuy(InfoBooster.magic, 3);
+                        BtnClose();
                     }
 
                     break;
@@ -133,7 +159,39 @@ namespace Game.MainGame
 
         private void BtnBuyAds(InfoBooster info)
         {
+            DataBooster data = GameManager.Instance.dataBooster;
 
+            switch (info)
+            {
+                case InfoBooster.freezeTime:
+                        int booster = GameManager.Instance.pref.GetCountBooster(0);
+                        booster += 1;
+                        GameManager.Instance.UpdateBooster(booster, 0);
+
+                        UIGamePlay ui = UIManager.Instance.GetScreen<UIGamePlay>(GameManager.ScreenId_ExampleMenu);
+                        ui.EffBuy(InfoBooster.freezeTime, 1);
+
+                        BtnClose();
+                        break;
+                case InfoBooster.hammer:
+                        booster = GameManager.Instance.pref.GetCountBooster(1);
+                        booster += 1;
+                        GameManager.Instance.UpdateBooster(booster, 1);
+
+                        ui = UIManager.Instance.GetScreen<UIGamePlay>(GameManager.ScreenId_ExampleMenu);
+                        ui.EffBuy(InfoBooster.hammer, 1);
+                        BtnClose();
+                        break;
+                case InfoBooster.magic:
+                        booster = GameManager.Instance.pref.GetCountBooster(2);
+                        booster += 1;
+                        GameManager.Instance.UpdateBooster(booster, 2);
+
+                        ui = UIManager.Instance.GetScreen<UIGamePlay>(GameManager.ScreenId_ExampleMenu);
+                        ui.EffBuy(InfoBooster.magic, 1);
+                        BtnClose();
+                        break;
+            }
         }
 
         private void BtnClose()

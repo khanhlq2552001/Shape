@@ -20,12 +20,26 @@ namespace Game.MainGame
         {
             if(PlayerPrefs.GetInt("tym") > 0)
             {
-                LevelManager.Instance.GenerateGrid(PlayerPrefs.GetInt("level") - 1);
-                UIManager.Instance.QueuePop();
                 int tym = PlayerPrefs.GetInt("tym") - 1;
                 GameManager.Instance.UpdateTym(tym);
+                UIManager.Instance.QueuePush(GameManager.ScreenId_UIFadeScreen, null, "UIFadeScene", null);
+
+                UIFadeScreen ui = UIManager.Instance.GetScreen<UIFadeScreen>(GameManager.ScreenId_UIFadeScreen);
+
+                if (ui != null && !ui.gameObject.active) ui.gameObject.SetActive(true);
+
+                ui.SetAction(() => {
+                    LevelManager.Instance.GenerateGrid(PlayerPrefs.GetInt("level") - 1);
+                    Close();
+                }, true);
             }
         }
+
+        private void Close()
+        {
+            UIManager.Instance.ForceRemoveScreen(GameManager.ScreenId_UIReplay);
+        }
+
 
         public void UpdateTextLevel()
         {
@@ -51,7 +65,6 @@ namespace Game.MainGame
             PushFinished();
             LevelManager.Instance.controller.StateController = StateController.Pause;
             UpdateTextLevel();
-            GetComponent<Canvas>().overrideSorting = false;
         }
 
         public override void OnSetup()

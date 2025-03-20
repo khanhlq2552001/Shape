@@ -93,17 +93,30 @@ namespace Game.MainGame
 
         public void BtnQuit()
         {
-            UIManager.Instance.QueuePop();
-            LevelManager.Instance.ClearCell();
-            UIGamePlay ui = UIManager.Instance.GetScreen<UIGamePlay>(GameManager.ScreenId_ExampleMenu);
-            ui.CloseUI();
-            UIManager.Instance.QueuePush(GameManager.ScreenId_UIHome, null, "UIHome", null);
+
+            UIManager.Instance.QueuePush(GameManager.ScreenId_UIFadeScreen, null, "UIFadeScene", null);
+            UIFadeScreen ui = UIManager.Instance.GetScreen<UIFadeScreen>(GameManager.ScreenId_UIFadeScreen);
+
+            if (ui != null && !ui.gameObject.active) ui.gameObject.SetActive(true);
+
+            ui.SetAction(() => {
+                UIManager.Instance.QueuePush(GameManager.ScreenId_UIHome, null, "UIHome", null);
+                UIGamePlay uigame = UIManager.Instance.GetScreen<UIGamePlay>(GameManager.ScreenId_ExampleMenu);
+                uigame.CloseUI();
+                LevelManager.Instance.ClearCell();
+                Close();
+            });
         }
 
         public void BtnClose()
         {
             LevelManager.Instance.controller.StateController = StateController.NoDrag;
-            UIManager.Instance.QueuePop();
+            Close();
+        }
+
+        public void Close()
+        {
+            UIManager.Instance.ForceRemoveScreen(GameManager.ScreenId_Setting);
         }
 
         public void OpenSetting()
@@ -140,7 +153,6 @@ namespace Game.MainGame
         public override void OnPush(Data data)
         {
             PushFinished();
-            GetComponent<Canvas>().overrideSorting = false;
             if(data != null)
             {
                 bool isPause = data.Get<bool>("pause");

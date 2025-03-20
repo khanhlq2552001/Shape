@@ -507,11 +507,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8d5ff4cd81026484d9dcf7252c55d51e
-    m_Address: UINewObject 1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fccbf1afa73b2784fa5710a4d0832323
     m_Address: image_coin3
     m_ReadOnly: 0
@@ -624,6 +619,21 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8d0d624ea4234b148817a2a4965bd803
     m_Address: UIBuyTym
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d11e111071629de4aa31ba20d49a173a
+    m_Address: UIOutTime
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: afa1b3f81b562ab4caf037a520eaa7a9
+    m_Address: UIFadeScene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8d5ff4cd81026484d9dcf7252c55d51e
+    m_Address: UINewObject
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

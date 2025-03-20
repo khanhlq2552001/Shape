@@ -74,8 +74,8 @@ namespace Game.MainGame
         public void TweenAnVatThe()
         {
             Color darkerColor = new Color(_colorLight.r *0.4f, _colorLight.g * 0.35f, _colorLight.b * 0.35f, _colorLight.a);
-            _spr.DOColor(darkerColor, 0.2f);
-            _spr.transform.DOMove(transform.position, 0.2f).SetEase(Ease.InOutSine);
+            _spr.DOColor(darkerColor, 0.1f);
+            _spr.transform.DOMove(transform.position, 0.1f).SetEase(Ease.InOutSine);
 
             if(_typeWall == TypeWall.top)
             {
@@ -117,8 +117,8 @@ namespace Game.MainGame
 
         public void TweenNayLen()
         {
-            _spr.DOColor(_colorLight, 0.2f);
-            _spr.transform.DOLocalMove(_posStartSpr, 0.2f).SetEase(Ease.InOutSine);
+            _spr.DOColor(_colorLight, 0.1f);
+            _spr.transform.DOLocalMove(_posStartSpr, 0.1f).SetEase(Ease.InOutSine);
         }
 
         public void SetMask(TypeWall type)

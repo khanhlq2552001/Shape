@@ -28,6 +28,10 @@ namespace Game.MainGame
         [SerializeField] private Text _textTimeFreeze;
         [SerializeField] private float _fadeDuration;
         [SerializeField] private int _timeFreeze;
+        [SerializeField] private GameObject[] _itemsBuyFreeze;
+        [SerializeField] private GameObject[] _itemsBuyHammer;
+        [SerializeField] private GameObject[] _itemsBuyMagic;
+        [SerializeField] private Transform _tranStart;
 
         [Header("HammerUI")]
         [SerializeField] private GameObject _objBooster;
@@ -90,9 +94,7 @@ namespace Game.MainGame
 
             if(PlayerPrefs.GetInt("tym") > 1)
             {
-                int tym = PlayerPrefs.GetInt("tym") -1;
-                GameManager.Instance.UpdateTym(tym);
-                UIManager.Instance.QueuePush(GameManager.ScreenId_UIWin, null, "UILose", null);
+                UIManager.Instance.QueuePush(GameManager.ScreenId_UIOutOfTime, null, "UIOutTime", null);
             }
         }
 
@@ -126,9 +128,9 @@ namespace Game.MainGame
 
         private void BtnFreezeTime()
         {
+            if (_lockBtnFreeze) return;
             if (GameManager.Instance.pref.GetCountBooster(0) > 0)
             {
-                if (_lockBtnFreeze) return;
 
                 _lockBtnFreeze = true;
                 int count = GameManager.Instance.pref.GetCountBooster(0);
@@ -233,6 +235,9 @@ namespace Game.MainGame
 
             LevelManager.Instance.controller.StateController = StateController.Pause;
             UIManager.Instance.QueuePush(GameManager.ScreenId_Setting, settingData, "UISetting", null);
+
+            UISetting ui = UIManager.Instance.GetScreen<UISetting>(GameManager.ScreenId_Setting);
+            if (!ui.gameObject.active) ui.gameObject.SetActive(true);
         }
 
         public void CheckInputHammer()
@@ -379,13 +384,187 @@ namespace Game.MainGame
             {
                 StopCoroutine(_countdownCoroutine);
             }
-            OnPop();
-            gameObject.SetActive(false);
+            UIManager.Instance.ForceRemoveScreen(GameManager.ScreenId_ExampleMenu);
+        }
+
+        public void EffBuy(InfoBooster info, int quantity)
+        {
+            StartCoroutine(EffBuyCoroutine(info, quantity));
+        }
+
+        IEnumerator EffBuyCoroutine(InfoBooster info, int quantity)
+        {
+            if(quantity == 3)
+            {
+                switch (info)
+                {
+                    case InfoBooster.freezeTime:
+                        for(int i=0; i< _itemsBuyFreeze.Length; i++)
+                        {
+                            int idx = i;
+                            _itemsBuyFreeze[i].transform.position = _tranStart.position;
+                            _itemsBuyFreeze[i].SetActive(true);
+                            _itemsBuyFreeze[i].transform.DOMove(_btnBoosterFreeze.transform.position, 0.3f).SetEase(Ease.Linear);
+                            Image img = _itemsBuyFreeze[i].GetComponent<Image>();
+                            Color color = img.color;
+                            color.a = 1f;
+                            img.color = color;
+                            if(idx != 2)
+                            {
+                                img.DOFade(0.9f, 0.3f).OnComplete(() => {
+                                    _itemsBuyFreeze[idx].SetActive(false);
+                                });
+                            }
+                            else
+                            {
+                                img.DOFade(0.9f, 0.3f).OnComplete(() => {
+                                    _itemsBuyFreeze[idx].SetActive(false);
+                                    _btnBoosterFreeze.transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.15f).SetEase(Ease.OutBack).OnComplete(() => {
+                                        _btnBoosterFreeze.transform.DOScale(new Vector3(1f, 1f, 1f), 0.1f).SetEase(Ease.OutBack).OnComplete(() => {
+                                            UpdateBoosterTime();
+                                        });
+                                    });
+                                });
+                            }
+
+                            yield return new WaitForSeconds(0.1f);
+                        }
+                        break;
+                    case InfoBooster.hammer:
+                        for (int i = 0; i < _itemsBuyHammer.Length; i++)
+                        {
+                            int idx = i;
+                            _itemsBuyHammer[i].transform.position = _tranStart.position;
+                            _itemsBuyHammer[i].SetActive(true);
+                            _itemsBuyHammer[i].transform.DOMove(_btnBoosterHammer.transform.position, 0.3f).SetEase(Ease.Linear);
+                            Image img = _itemsBuyHammer[i].GetComponent<Image>();
+                            Color color = img.color;
+                            color.a = 1f;
+                            img.color = color;
+                            if (idx != 2)
+                            {
+                                img.DOFade(0.9f, 0.3f).OnComplete(() => {
+                                    _itemsBuyHammer[idx].SetActive(false);
+                                });
+                            }
+                            else
+                            {
+                                img.DOFade(0.9f, 0.3f).OnComplete(() => {
+                                    _itemsBuyHammer[idx].SetActive(false);
+                                    _btnBoosterHammer.transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.15f).SetEase(Ease.OutBack).OnComplete(() => {
+                                        _btnBoosterHammer.transform.DOScale(new Vector3(1f, 1f, 1f), 0.1f).SetEase(Ease.OutBack).OnComplete(() => {
+                                            UpdateBoosterHammer();
+                                        });
+                                    });
+                                });
+                            }
+
+                            yield return new WaitForSeconds(0.1f);
+                        }
+                        break;
+                    case InfoBooster.magic:
+                        for (int i = 0; i < _itemsBuyMagic.Length; i++)
+                        {
+                            int idx = i;
+                            _itemsBuyMagic[i].transform.position = _tranStart.position;
+                            _itemsBuyMagic[i].SetActive(true);
+                            _itemsBuyMagic[i].transform.DOMove(_btnBoosterMagic.transform.position, 0.3f).SetEase(Ease.Linear);
+                            Image img = _itemsBuyMagic[i].GetComponent<Image>();
+                            Color color = img.color;
+                            color.a = 1f;
+                            img.color = color;
+                            if (idx != 2)
+                            {
+                                img.DOFade(0.9f, 0.3f).OnComplete(() => {
+                                    _itemsBuyMagic[idx].SetActive(false);
+                                });
+                            }
+                            else
+                            {
+                                img.DOFade(0.9f, 0.3f).OnComplete(() => {
+                                    _itemsBuyMagic[idx].SetActive(false);
+                                    _btnBoosterMagic.transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.15f).SetEase(Ease.OutBack).OnComplete(() => {
+                                        _btnBoosterMagic.transform.DOScale(new Vector3(1f, 1f, 1f), 0.1f).SetEase(Ease.OutBack).OnComplete(() => {
+                                            UpdateBoosterMagic();
+                                        });
+                                    });
+                                });
+                            }
+
+                            yield return new WaitForSeconds(0.1f);
+                        }
+                        break;
+                }
+
+            }
+            else
+            {
+                switch (info)
+                {
+                    case InfoBooster.freezeTime:
+                            int idx = 0;
+                            _itemsBuyFreeze[idx].transform.position = _tranStart.position;
+                            _itemsBuyFreeze[idx].SetActive(true);
+                            _itemsBuyFreeze[idx].transform.DOMove(_btnBoosterFreeze.transform.position, 0.3f).SetEase(Ease.Linear);
+                            Image img = _itemsBuyFreeze[idx].GetComponent<Image>();
+                            Color color = img.color;
+                            color.a = 1f;
+                            img.color = color;
+                            img.DOFade(0.9f, 0.3f).OnComplete(() => {
+                                    _itemsBuyFreeze[idx].SetActive(false);
+                                    _btnBoosterFreeze.transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.15f).SetEase(Ease.OutBack).OnComplete(() => {
+                                        _btnBoosterFreeze.transform.DOScale(new Vector3(1f, 1f, 1f), 0.1f).SetEase(Ease.OutBack).OnComplete(() => {
+                                            UpdateBoosterTime();
+                                        });
+                                    });
+                                });
+                            break;
+                    case InfoBooster.hammer:
+                            idx = 0;
+                            _itemsBuyHammer[idx].transform.position = _tranStart.position;
+                            _itemsBuyHammer[idx].SetActive(true);
+                            _itemsBuyHammer[idx].transform.DOMove(_btnBoosterHammer.transform.position, 0.3f).SetEase(Ease.Linear);
+                            img = _itemsBuyHammer[idx].GetComponent<Image>();
+                            color = img.color;
+                            color.a = 1f;
+                            img.color = color;
+                            img.DOFade(0.9f, 0.3f).OnComplete(() => {
+                                    _itemsBuyHammer[idx].SetActive(false);
+                                    _btnBoosterHammer.transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.15f).SetEase(Ease.OutBack).OnComplete(() => {
+                                        _btnBoosterHammer.transform.DOScale(new Vector3(1f, 1f, 1f), 0.1f).SetEase(Ease.OutBack).OnComplete(() => {
+                                            UpdateBoosterHammer();
+                                        });
+                                    });
+                                });
+                            break;
+                    case InfoBooster.magic:
+                            idx = 0;
+                            _itemsBuyMagic[idx].transform.position = _tranStart.position;
+                            _itemsBuyMagic[idx].SetActive(true);
+                            _itemsBuyMagic[idx].transform.DOMove(_btnBoosterMagic.transform.position, 0.3f).SetEase(Ease.Linear);
+                            img = _itemsBuyMagic[idx].GetComponent<Image>();
+                            color = img.color;
+                            color.a = 1f;
+                            img.color = color;
+                            img.DOFade(0.9f, 0.3f).OnComplete(() => {
+                                    _itemsBuyMagic[idx].SetActive(false);
+                                    _btnBoosterMagic.transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.15f).SetEase(Ease.OutBack).OnComplete(() => {
+                                        _btnBoosterMagic.transform.DOScale(new Vector3(1f, 1f, 1f), 0.1f).SetEase(Ease.OutBack).OnComplete(() => {
+                                            UpdateBoosterMagic();
+                                        });
+                                    });
+                                });
+                            break;
+                }
+            }
         }
 
         public void BtnReplay()
         {
             UIManager.Instance.QueuePush(GameManager.ScreenId_UIReplay, null, "UIReplay", null);
+            UIReplay ui = UIManager.Instance.GetScreen<UIReplay>(GameManager.ScreenId_UIReplay);
+            if (!ui.gameObject.active) ui.gameObject.SetActive(true);
+
         }
 
         public override void OnFocus()

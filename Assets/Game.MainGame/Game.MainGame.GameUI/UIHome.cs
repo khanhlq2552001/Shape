@@ -35,6 +35,17 @@ namespace Game.MainGame
         [SerializeField] private Transform _tranMid;
         [SerializeField] private Transform _tranEnd;
 
+        [Header("icon")]
+        [SerializeField] private Sprite _sprIconOnLeft;
+        [SerializeField] private Sprite _sprIconOffLeft;
+        [SerializeField] private Sprite _sprIconOnMid;
+        [SerializeField] private Sprite _sprIconOffMid;
+        [SerializeField] private Sprite _sprIconOnRight;
+        [SerializeField] private Sprite _sprIconOffRight;
+        [SerializeField] private Image _imgIconMid;
+        [SerializeField] private Image _imgIconLeft;
+        [SerializeField] private Image _imgIconRight;
+
         public override void OnFocus()
         {
         }
@@ -59,8 +70,19 @@ namespace Game.MainGame
             _imgMid.sprite = _sprOnMid;
             _imgLeft.sprite = _sprOffLeft;
             _imgRight.sprite = _sprOffRight;
+            _imgIconMid.sprite = _sprIconOnMid;
+            _imgIconLeft.sprite = _sprIconOffLeft;
+            _imgIconRight.sprite = _sprIconOffRight;
             _effTym.gameObject.SetActive(false);
             GameManager.Instance.AddActionTimeHeal(UpdateTime);
+            UIFadeScreen ui = UIManager.Instance.GetScreen<UIFadeScreen>(GameManager.ScreenId_UIFadeScreen);
+            if (ui != null)
+            {
+                if (ui.gameObject.active)
+                {
+                    ui.FadeEnd();
+                }
+            }
         }
 
         public override void OnSetup()
@@ -105,6 +127,9 @@ namespace Game.MainGame
 
             LevelManager.Instance.controller.StateController = StateController.Pause;
             UIManager.Instance.QueuePush(GameManager.ScreenId_Setting, settingData, "UISetting", null);
+
+            UISetting ui = UIManager.Instance.GetScreen<UISetting>(GameManager.ScreenId_Setting);
+            if (!ui.gameObject.active) ui.gameObject.SetActive(true);
         }
 
         public void BtnPlay()
@@ -125,6 +150,10 @@ namespace Game.MainGame
             _imgMid.sprite = _sprOnMid;
             _imgLeft.sprite = _sprOffLeft;
             _imgRight.sprite = _sprOffRight;
+            _imgIconMid.sprite = _sprIconOnMid;
+            _imgIconLeft.sprite = _sprIconOffLeft;
+            _imgIconRight.sprite = _sprIconOffRight;
+
             _objHome.SetActive(true);
             _btnHome.interactable = false;
             _btnShop.interactable = true;
@@ -139,18 +168,26 @@ namespace Game.MainGame
             _imgMid.sprite = _sprOffMid;
             _imgLeft.sprite = _sprOnLeft;
             _imgRight.sprite = _sprOffRight;
+            _imgIconMid.sprite = _sprIconOffMid;
+            _imgIconLeft.sprite = _sprIconOnLeft;
+            _imgIconRight.sprite = _sprIconOffRight;
+
             _objHome.SetActive(false);
             _btnShop.interactable = false;
             _btnHome.interactable = true;
             _btnLeaderBoard.interactable = true;
         }
-    
+
 
         public void BtnLeaderBoard()
         {
             _imgMid.sprite = _sprOffMid;
             _imgLeft.sprite = _sprOffLeft;
             _imgRight.sprite = _sprOnRight;
+            _imgIconMid.sprite = _sprIconOffMid;
+            _imgIconLeft.sprite = _sprIconOffLeft;
+            _imgIconRight.sprite = _sprIconOnRight;
+
             _objHome.SetActive(false);
             _btnLeaderBoard.interactable = false;
             _btnShop.interactable = true;
@@ -184,14 +221,14 @@ namespace Game.MainGame
             _effTym.transform.localScale = new Vector3(0.9f, 0.9f, 1f);
             _effTym.transform.position = _tranStart.position;
             Vector3[] paths = new Vector3[]{_tranMid.position, _tranEnd.position};
-            _effTym.transform.DOPath(paths, 0.3f, PathType.CatmullRom) // Sử dụng CatmullRom để tạo đường cong
-              .SetEase(Ease.Linear) // Chuyển động đều
+            _effTym.transform.DOPath(paths, 0.3f, PathType.CatmullRom)
+              .SetEase(Ease.Linear)
               .OnComplete(() => {
                   _effTym.transform.DOScale(Vector3.zero, 0.2f).SetEase(Ease.InBack).OnComplete(() => {
                       _effTym.gameObject.SetActive(false);
                   });
-              }); // Giúp vật thể xoay theo hướng di chuyển
+              });
         }
-    
+
     }
 }

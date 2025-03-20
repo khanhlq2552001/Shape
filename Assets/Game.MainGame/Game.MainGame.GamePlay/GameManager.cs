@@ -17,6 +17,8 @@ namespace Game.MainGame
         public static readonly BlitzyUI.Screen.Id ScreenId_UIBuyLife = new BlitzyUI.Screen.Id("UIBuyTym");
         public static readonly BlitzyUI.Screen.Id ScreenId_UINewObject = new BlitzyUI.Screen.Id("UINewObject");
         public static readonly BlitzyUI.Screen.Id ScreenId_UIBuyBooster = new BlitzyUI.Screen.Id("UIBuyBooster");
+        public static readonly BlitzyUI.Screen.Id ScreenId_UIOutOfTime = new BlitzyUI.Screen.Id("UIOutTime");
+        public static readonly BlitzyUI.Screen.Id ScreenId_UIFadeScreen = new BlitzyUI.Screen.Id("UIFadeScene");
 
         [SerializeField] private float _remainingTime;
         [SerializeField] private float _remainingTimeStart;
@@ -43,7 +45,7 @@ namespace Game.MainGame
         public Camera cameraMain;
         public Camera cameraUI;
         public Camera cameraBG;
-
+        public DataObject dataObject;
 
         // Start is called before the first frame update
         private void Awake()
@@ -311,7 +313,7 @@ namespace Game.MainGame
             {
                 PlayerPrefs.SetInt("isFirst", 1);
                 UpdateLevel(1);
-                UpdateCoin(100);
+                UpdateCoin(1000);
                 UpdateTym(5);
                 UpdateBooster(1, 0);
                 UpdateBooster(1, 1);
@@ -320,6 +322,7 @@ namespace Game.MainGame
                 UpdateMusic(true);
                 UpdateVibration(true);
                 UpdateNoti(true);
+                pref.SetIDnewBlock(0);
             }
         }
     }

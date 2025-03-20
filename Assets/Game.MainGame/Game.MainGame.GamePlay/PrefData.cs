@@ -1,4 +1,3 @@
-using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 using UnityEngine;
 
 namespace Game.MainGame
@@ -33,6 +32,16 @@ namespace Game.MainGame
             }
 
             return 0;
+        }
+
+        public void SetIDnewBlock(int id)
+        {
+            PlayerPrefs.SetInt("idNewBlock", id);
+        }
+
+        public int GetIdNewBlock()
+        {
+            return PlayerPrefs.GetInt("idNewBlock");
         }
     }
 }
