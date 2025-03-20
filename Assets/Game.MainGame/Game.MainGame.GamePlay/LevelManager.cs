@@ -211,7 +211,7 @@ namespace Game.MainGame
                     controller.StateController = StateController.Pause;
                     UIGamePlay ui = UIManager.Instance.GetScreen<UIGamePlay>(GameManager.ScreenId_ExampleMenu);
                     ui.StopTime();
-                    Invoke("ShowWin", 1f);
+                    Invoke("ShowWin", 0.4f);
                 }
             }
         }

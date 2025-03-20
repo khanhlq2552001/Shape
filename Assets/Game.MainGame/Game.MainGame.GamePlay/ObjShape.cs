@@ -440,12 +440,13 @@ namespace Game.MainGame
 
         public void EffectWin(TypeWall type, Wall wall)
         {
+            rb.velocity = Vector3.zero;
             _col.isTrigger = true;
             CanMove = false;
             Vector2 offset = tranCentre.localPosition;
             Vector2 posTarget = (Vector2)LevelManager.Instance.GetListItemGrid()[idsGrid[0]].transform.position - offset;
 
-            transform.DOMove(posTarget, 0.2f).SetEase(Ease.Linear).OnComplete(() =>
+            transform.DOMove(posTarget, 0.3f).SetEase(Ease.Linear).OnComplete(() =>
             {
                 if(type == TypeWall.top || type == TypeWall.bot)
                 {

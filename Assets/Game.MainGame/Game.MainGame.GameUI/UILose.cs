@@ -50,7 +50,8 @@ namespace Game.MainGame
 
         public void UpdateCoint()
         {
-            _txtCoin.text = PlayerPrefs.GetInt("coin").ToString();
+            int coin = PlayerPrefs.GetInt("coin");
+            _txtCoin.text = GameManager.Instance.FormatMoney(coin);
         }
 
         public void UpdateLevel()

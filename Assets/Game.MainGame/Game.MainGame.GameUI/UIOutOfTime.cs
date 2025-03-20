@@ -49,7 +49,8 @@ namespace Game.MainGame
 
         private void UpdateTxtCoin()
         {
-            _txtCoin.text = GameManager.Instance.pref.GetCoin().ToString();
+            int coin = GameManager.Instance.pref.GetCoin();
+            _txtCoin.text = GameManager.Instance.FormatMoney(coin);
         }
 
         private void BtnBuyCoin()

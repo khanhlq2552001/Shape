@@ -34,26 +34,30 @@ namespace Game.MainGame
         public override void OnPush(Data data)
         {
             PushFinished();
-
-            string booster = data.Get<string>("booster");
-
             UpdateTextCoin();
 
-            if (booster == "freeze")
+            if(data!= null)
             {
-                SetUpBoosterBuy(InfoBooster.freezeTime);
-                _info = InfoBooster.freezeTime;
+                string booster = data.Get<string>("booster");
+
+
+                if (booster == "freeze")
+                {
+                    SetUpBoosterBuy(InfoBooster.freezeTime);
+                    _info = InfoBooster.freezeTime;
+                }
+                else if (booster == "hammer")
+                {
+                    SetUpBoosterBuy(InfoBooster.hammer);
+                    _info = InfoBooster.hammer;
+                }
+                else if (booster == "magic")
+                {
+                    SetUpBoosterBuy(InfoBooster.magic);
+                    _info = InfoBooster.magic;
+                }
             }
-            else if (booster == "hammer")
-            {
-                SetUpBoosterBuy(InfoBooster.hammer);
-                _info = InfoBooster.hammer;
-            }
-            else if (booster == "magic")
-            {
-                SetUpBoosterBuy(InfoBooster.magic);
-                _info = InfoBooster.magic;
-            }
+
         }
 
         public override void OnSetup()
@@ -96,7 +100,8 @@ namespace Game.MainGame
 
         private void UpdateTextCoin()
         {
-            _txtCoin.text = GameManager.Instance.pref.GetCoin().ToString();
+            int coin = GameManager.Instance.pref.GetCoin();
+            _txtCoin.text = GameManager.Instance.FormatMoney(coin);
         }
 
         private void BtnBuyCoin(InfoBooster info)
@@ -119,6 +124,7 @@ namespace Game.MainGame
                         ui.EffBuy(InfoBooster.freezeTime, 3);
 
                         BtnClose();
+                        return;
                     }
 
                     break;
@@ -135,6 +141,7 @@ namespace Game.MainGame
                         UIGamePlay ui = UIManager.Instance.GetScreen<UIGamePlay>(GameManager.ScreenId_ExampleMenu);
                         ui.EffBuy(InfoBooster.hammer, 3);
                         BtnClose();
+                        return;
                     }
 
                     break;
@@ -151,10 +158,19 @@ namespace Game.MainGame
                         UIGamePlay ui = UIManager.Instance.GetScreen<UIGamePlay>(GameManager.ScreenId_ExampleMenu);
                         ui.EffBuy(InfoBooster.magic, 3);
                         BtnClose();
+                        return;
                     }
 
                     break;
             }
+
+            BtnClose();
+            UIManager.Instance.QueuePush(GameManager.ScreenId_UIShop, null, "UIShop", null);
+            UIShop uiShop = UIManager.Instance.GetScreen<UIShop>(GameManager.ScreenId_UIShop);
+            uiShop.SetAction(() => {
+                UIManager.Instance.QueuePush(GameManager.ScreenId_UIBuyBooster, null, "UIBuyBooster", null);
+            });
+
         }
 
         private void BtnBuyAds(InfoBooster info)

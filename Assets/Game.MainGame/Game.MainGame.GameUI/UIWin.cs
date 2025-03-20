@@ -2,7 +2,6 @@ using System.Collections;
 using BlitzyUI;
 using DG.Tweening;
 using Lean.Pool;
-using log4net.Core;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -54,7 +53,8 @@ namespace Game.MainGame
 
         public void UpdateTextCoint()
         {
-            _txtCoin.text = PlayerPrefs.GetInt("coin").ToString();
+            int coin = PlayerPrefs.GetInt("coin");
+            _txtCoin.text = GameManager.Instance.FormatMoney(coin);
         }
 
         public override void OnSetup()
@@ -136,7 +136,7 @@ namespace Game.MainGame
                 yield return new WaitForSeconds(0.13f);
             }
 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(0.7f);
 
             if (level == 2)
             {

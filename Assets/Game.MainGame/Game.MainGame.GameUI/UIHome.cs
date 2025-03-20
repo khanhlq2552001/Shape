@@ -107,7 +107,8 @@ namespace Game.MainGame
 
         public void UpdateTextCoint()
         {
-            _txtCoin.text = PlayerPrefs.GetInt("coin").ToString();
+            int coin  = PlayerPrefs.GetInt("coin");
+            _txtCoin.text = GameManager.Instance.FormatMoney(coin);
         }
 
         public void UpdateTextLevel()
@@ -212,7 +213,10 @@ namespace Game.MainGame
 
         private void BtnBuyCoin()
         {
+            UIManager.Instance.QueuePush(GameManager.ScreenId_UIShop, null, "UIShop", null);
 
+            UIShop ui = UIManager.Instance.GetScreen<UIShop>(GameManager.ScreenId_UIShop);
+            ui.SetAction();
         }
 
         public void LoadEffectTym()

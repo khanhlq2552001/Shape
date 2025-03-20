@@ -632,8 +632,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8d5ff4cd81026484d9dcf7252c55d51e
-    m_Address: UINewObject
+  - m_GUID: a398417ebdacf4e48adba5946203b901
+    m_Address: UIShop
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -19,6 +19,7 @@ namespace Game.MainGame
         public static readonly BlitzyUI.Screen.Id ScreenId_UIBuyBooster = new BlitzyUI.Screen.Id("UIBuyBooster");
         public static readonly BlitzyUI.Screen.Id ScreenId_UIOutOfTime = new BlitzyUI.Screen.Id("UIOutTime");
         public static readonly BlitzyUI.Screen.Id ScreenId_UIFadeScreen = new BlitzyUI.Screen.Id("UIFadeScene");
+        public static readonly BlitzyUI.Screen.Id ScreenId_UIShop = new BlitzyUI.Screen.Id("UIShop");
 
         [SerializeField] private float _remainingTime;
         [SerializeField] private float _remainingTimeStart;
@@ -313,7 +314,7 @@ namespace Game.MainGame
             {
                 PlayerPrefs.SetInt("isFirst", 1);
                 UpdateLevel(1);
-                UpdateCoin(1000);
+                UpdateCoin(100);
                 UpdateTym(5);
                 UpdateBooster(1, 0);
                 UpdateBooster(1, 1);
@@ -324,6 +325,20 @@ namespace Game.MainGame
                 UpdateNoti(true);
                 pref.SetIDnewBlock(0);
             }
+        }
+
+        public string FormatMoney(float value)
+        {
+            if (value >= 1e12f) // Tỷ (trillion)
+                return (value / 1e12f).ToString("0.0") + "T";
+            if (value >= 1e9f) // Tỷ (billion)
+                return (value / 1e9f).ToString("0.0") + "B";
+            if (value >= 1e6f) // Triệu (million)
+                return (value / 1e6f).ToString("0.0") + "M";
+            if (value >= 1e3f) // Nghìn (thousand)
+                return (value / 1e3f).ToString("0.0") + "K";
+
+            return value.ToString("0"); // Giữ nguyên nếu nhỏ hơn 1000
         }
     }
 }

@@ -286,6 +286,7 @@ MonoBehaviour:
   _btnClose: {fileID: 1440891724811074896}
   _btnBuyCoin: {fileID: 571970948807941905}
   _btnBuyAds: {fileID: 835644519830410894}
+  _price: 0
 --- !u!1 &433269756895980807
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,8 +605,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.850006, y: 0}
-  m_SizeDelta: {x: -25.7, y: 0}
+  m_AnchoredPosition: {x: -9.5119, y: 0}
+  m_SizeDelta: {x: -19.0238, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8007014564277011986
 CanvasRenderer:
