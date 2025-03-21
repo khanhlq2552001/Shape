@@ -9,14 +9,16 @@ namespace Game.MainGame
         [SerializeField] private SpriteRenderer _spr;
         [SerializeField] private SpriteRenderer _sprShadow;
 
-        public void SetColor(string strHex)
+        public void SetColor()
         {
-            Color color;
-            ColorUtility.TryParseHtmlString("#" + strHex, out color);
-            _spr.color = color;
+            DataColor data = GameManager.Instance.dataColors;
 
-            Color darkerColor = new Color(color.r *0.4f, color.g * 0.35f, color.b * 0.35f, color.a);
-            _sprShadow.color = darkerColor;
+            Material mat = new Material(GameManager.Instance.materialWall);
+            mat.SetColor("_MultiplyColor", data.colorWall);
+
+            _spr.material = mat;
+
+            _sprShadow.color = data.colorWallShadow;
         }
     }
 }

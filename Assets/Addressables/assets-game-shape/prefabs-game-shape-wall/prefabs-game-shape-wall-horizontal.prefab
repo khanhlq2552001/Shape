@@ -531,9 +531,9 @@ MonoBehaviour:
   _arrowRightLeft:
   - {fileID: 0}
   - {fileID: 0}
-  listCalculateXY:
-  - x: 0
-    y: 0
+  _typeWall: 0
+  _sprWall: {fileID: 21300000, guid: d7e30b9550fe69c4293421746a622c1b, type: 3}
+  _sprWallEat: {fileID: 21300000, guid: cb138183525e7974c81855884477c50a, type: 3}
 --- !u!50 &8009045570203972050
 Rigidbody2D:
   serializedVersion: 4

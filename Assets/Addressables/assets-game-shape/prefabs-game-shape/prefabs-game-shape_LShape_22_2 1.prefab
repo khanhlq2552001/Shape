@@ -64,7 +64,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.1192}
+  m_AnchoredPosition: {x: 0, y: 0.07}
   m_SizeDelta: {x: 2, y: 2.0983}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &8354290124994740850
@@ -545,15 +545,15 @@ PolygonCollider2D:
     m_Paths:
     - - {x: -1.375, y: 0.5}
       - {x: -1.4335938, y: 0.46875}
-      - {x: -1.484375, y: 0.41015625}
-      - {x: -1.5, y: 0.37890625}
-      - {x: -1.5, y: -0.38671875}
-      - {x: -1.4726562, y: -0.44140625}
-      - {x: -1.3867188, y: -0.5}
-      - {x: 1.3828125, y: -0.5}
-      - {x: 1.5, y: -0.4296875}
-      - {x: 1.5, y: 0.421875}
-      - {x: 1.421875, y: 0.5}
+      - {x: -1.4464567, y: 0.4227957}
+      - {x: -1.4705079, y: 0.2735774}
+      - {x: -1.4536552, y: -0.32352144}
+      - {x: -1.4136721, y: -0.3824221}
+      - {x: -1.3150951, y: -0.44101578}
+      - {x: 1.3339883, y: -0.43286663}
+      - {x: 1.4389696, y: -0.34424502}
+      - {x: 1.430827, y: 0.38462803}
+      - {x: 1.3527021, y: 0.5}
   m_UseDelaunayMesh: 0
 --- !u!50 &8561688488675272104
 Rigidbody2D:
@@ -815,8 +815,8 @@ Transform:
   m_GameObject: {fileID: 4890374416780408178}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0024, y: 0.0791, z: 0}
-  m_LocalScale: {x: 1.0810773, y: 1.1785815, z: 1}
+  m_LocalPosition: {x: -0.0024, y: 0.0335, z: 0}
+  m_LocalScale: {x: 1.0810773, y: 1.1452394, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8295327257715924964}

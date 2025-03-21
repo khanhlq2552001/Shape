@@ -368,6 +368,8 @@ MonoBehaviour:
   - {fileID: 7142111254854503542}
   - {fileID: 1447745218938156388}
   _typeWall: 0
+  _sprWall: {fileID: 21300000, guid: f30bf3c424674ef45ad7f42f1d976fbe, type: 3}
+  _sprWallEat: {fileID: 21300000, guid: f54d1fcbb482ea44cb7511292b1ae3fa, type: 3}
 --- !u!50 &9059211395246781627
 Rigidbody2D:
   serializedVersion: 4

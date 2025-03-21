@@ -25,6 +25,7 @@ MonoBehaviour:
   - {fileID: 7855798796562966681, guid: c4e0cbcbb0b0f5841b0b670b071145ea, type: 3}
   - {fileID: 62268974528876343, guid: c27be4b6e61c97e49ad8875d86e551b6, type: 3}
   - {fileID: 1199797908761570738, guid: 296756fabd78694469eec1afb0859acc, type: 3}
+  - {fileID: 5342724848573789537, guid: 05a4f53795c69f44096550d4438a4da7, type: 3}
   shapesWall:
   - {fileID: 5034319180997102158, guid: a9107cae981208a41a13b54d462261d1, type: 3}
   - {fileID: 9127622651059974590, guid: 27cb222f932a15d4e8eed4fe5e70cdeb, type: 3}
@@ -32,6 +33,10 @@ MonoBehaviour:
   - {fileID: 3149775918129082955, guid: be59237b19c966f45991b9199848fa4e, type: 3}
   - {fileID: 2343352561446687059, guid: c04c647ca633eb848b57ff1eedad7680, type: 3}
   - {fileID: 5172597556729747599, guid: 3ef1c4ab8f9b0d041831d561a82be1a3, type: 3}
+  - {fileID: 8311148633487125453, guid: b860fbe17bfa17a4ea227d8ee7785f97, type: 3}
+  - {fileID: 857945305567175859, guid: 5fea1bd8ee5544a4ab7a7ef5b90a7574, type: 3}
+  - {fileID: 3694047371660708288, guid: 13d8f8327a71fbe4391b908bedf8ea18, type: 3}
+  - {fileID: 2981381917101910209, guid: 75ef68d464fa6d745a90047eb5f9b06b, type: 3}
   shapesWallCorner:
   - {fileID: 4600737181920288848, guid: 2fdb7e83467c222419e5cd3f8ffe35a4, type: 3}
   - {fileID: 4426569394532649253, guid: 56c1e0fc0a0520045b8c59e61da4bb3a, type: 3}

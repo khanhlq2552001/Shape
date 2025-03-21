@@ -18,6 +18,8 @@ namespace Game.MainGame
         [SerializeField] private GameObject[] _arrowTopDown = new GameObject[2];
         [SerializeField] private GameObject[] _arrowRightLeft = new GameObject[2];
         [SerializeField] private TypeWall _typeWall;
+        [SerializeField] private Sprite _sprWall;
+        [SerializeField] private Sprite _sprWallEat;
 
         private Color _colorLight;
         private Vector3 _posStartSpr = Vector3.zero;
@@ -48,18 +50,33 @@ namespace Game.MainGame
             set => _idGate = value;
         }
 
-        public void SetColor(string strHex)
+        public void SetColor(bool isWall, int idColor)
         {
-            Color color;
-            ColorUtility.TryParseHtmlString("#" + strHex, out color);
-            _spr.color = color;
-            _colorLight = color;
+            DataColor data = GameManager.Instance.dataColors;
 
-            Color darkerColor = new Color(color.r *0.4f, color.g * 0.35f, color.b * 0.35f, color.a);
-
-            for (int i = 0; i < _sprShadows.Count; i++)
+            if (isWall)
             {
-                _sprShadows[i].color = darkerColor;
+                _spr.sprite = _sprWall;
+                Material mat = new Material(GameManager.Instance.materialWall);
+                mat.SetColor("_MultiplyColor", data.colorWall);
+                _spr.material = mat;
+                for (int i = 0; i < _sprShadows.Count; i++)
+                {
+                    _sprShadows[i].color = data.colorWallShadow;
+                }
+            }
+            else
+            {
+                _spr.sprite = _sprWallEat;
+                Material mat = new Material(GameManager.Instance.materialShape);
+                mat.SetColor("_MultiplyColor", data.colorsShape[idColor].colorMul);
+                mat.SetColor("_OverlayColor", data.colorsShape[idColor].colorOver);
+                _spr.material = mat;
+
+                for (int i = 0; i < _sprShadows.Count; i++)
+                {
+                    _sprShadows[i].color = data.colorsShape[idColor].colorShadow;
+                }
             }
         }
 

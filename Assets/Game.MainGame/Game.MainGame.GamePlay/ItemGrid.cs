@@ -87,6 +87,8 @@ namespace Game.MainGame
 
         public void SetWall(TypeWall type, int idWall, bool isWall, int idGate)
         {
+            DataColor data = GameManager.Instance.dataColors;
+
             if(type == TypeWall.left)
             {
                 GameObject obj = LeanPool.Spawn(LevelManager.Instance.dataShape.shapesWall[idWall]);
@@ -101,7 +103,7 @@ namespace Game.MainGame
                 {
                     wall.IDGate = idGate;
 
-                    wall.SetColor(LevelManager.Instance.GetData().colorCodes[idGate]);
+                    wall.SetColor(false ,LevelManager.Instance.GetData().colorCodes[idGate]);
 
                     wall.SetArrow(type);
 
@@ -109,7 +111,7 @@ namespace Game.MainGame
                 }
                 else
                 {
-                    wall.SetColor("797979");
+                    wall.SetColor(true, 0);
                     wall.CalculatorCoordinates(ID, isWall, -1);
                 }
 
@@ -131,7 +133,7 @@ namespace Game.MainGame
                 {
                     wall.IDGate = idGate;
 
-                    wall.SetColor(LevelManager.Instance.GetData().colorCodes[idGate]);
+                    wall.SetColor(false, LevelManager.Instance.GetData().colorCodes[idGate]);
 
                     wall.SetArrow(type);
 
@@ -139,7 +141,7 @@ namespace Game.MainGame
                 }
                 else
                 {
-                    wall.SetColor("797979");
+                    wall.SetColor(true, 0);
 
                     wall.CalculatorCoordinates(ID, isWall, -1);
                 }
@@ -162,7 +164,7 @@ namespace Game.MainGame
                 {
                     wall.IDGate = idGate;
 
-                    wall.SetColor(LevelManager.Instance.GetData().colorCodes[idGate]);
+                    wall.SetColor(false, LevelManager.Instance.GetData().colorCodes[idGate]);
 
                     wall.SetArrow(type);
 
@@ -170,7 +172,7 @@ namespace Game.MainGame
                 }
                 else
                 {
-                    wall.SetColor("797979");
+                    wall.SetColor(true, 0);
 
                     wall.CalculatorCoordinates(ID, isWall, -1);
                 }
@@ -193,7 +195,7 @@ namespace Game.MainGame
                 {
                     wall.IDGate = idGate;
 
-                    wall.SetColor(LevelManager.Instance.GetData().colorCodes[idGate]);
+                    wall.SetColor(false, LevelManager.Instance.GetData().colorCodes[idGate]);
 
                     wall.SetArrow(type);
 
@@ -201,7 +203,7 @@ namespace Game.MainGame
                 }
                 else
                 {
-                    wall.SetColor("797979");
+                    wall.SetColor(true, 0);
 
                     wall.CalculatorCoordinates(ID, isWall, -1);
                 }
@@ -261,7 +263,7 @@ namespace Game.MainGame
 
                 obj.transform.position = transWallCorner[(int)type].position;
                 WallCorner wallCorner = obj.GetComponent<WallCorner>();
-                wallCorner.SetColor("797979");
+               // wallCorner.SetColor();
         }
     }
 

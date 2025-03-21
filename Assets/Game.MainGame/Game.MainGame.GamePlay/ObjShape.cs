@@ -41,7 +41,7 @@ namespace Game.MainGame
 
         private Vector3 _posStartShape2;
         private Vector3 _scaleStartShape2;
-        private string _hexColorShape2;
+        private int _idColorShape2;
 
         [Header("Shape")]
         private bool _canMove = true;
@@ -51,7 +51,7 @@ namespace Game.MainGame
         private TypeBlock _typeBlock;
         private TypeShape _typeShape;
         private int _countFreeze = 0;
-        private string _hexColorShape1;
+        private int _idcolorShape1;
         private PolygonCollider2D _col;
 
         public Transform tranCentre;
@@ -132,9 +132,9 @@ namespace Game.MainGame
             _border.SetActive(active);
         }
 
-        public string GetColor()
+        public int GetColor()
         {
-            return _hexColorShape1;
+            return _idcolorShape1;
         }
 
         public void UnLock()
@@ -173,7 +173,7 @@ namespace Game.MainGame
                 IDGate = IDGate2;
                 IDGate2 = -1;
                 _shape2.gameObject.SetActive(false);
-                SetColor(_hexColorShape2, true);
+                SetColor(_idColorShape2, true);
                 return true;
             }
 
@@ -201,8 +201,8 @@ namespace Game.MainGame
             {
                 _shape2.transform.localScale = Vector2.one;
                 _shape2.transform.localPosition = Vector2.zero;
-                SetColorShape2(_hexColorShape1, false);
-                SetColor(_hexColorShape2, true);
+                SetColorShape2(_idcolorShape1, false);
+                SetColor(_idColorShape2, true);
                 IDGate = IDGate2;
                 IDGate2 = -1;
                 _shape2Border.SetActive(true);
@@ -247,39 +247,43 @@ namespace Game.MainGame
             }
         }
 
-        public void SetColor(string strHex, bool saveColor)
+        public void SetColor(int idColor, bool saveColor)
         {
-            Color color;
-            ColorUtility.TryParseHtmlString("#"+ strHex, out color);
-            _spr.color = color;
+            DataColor data = GameManager.Instance.dataColors;
+
+            Material mat = new Material(GameManager.Instance.materialShape);
+            mat.SetColor("_MultiplyColor", data.colorsShape[idColor].colorMul);
+            mat.SetColor("_OverlayColor", data.colorsShape[idColor].colorOver);
+
+
+            _spr.material = mat;
 
             if (saveColor)
             {
-                _hexColorShape1 = strHex;
+                _idcolorShape1 = idColor;
             }
-
-            Color darkerColor = new Color(color.r *0.4f, color.g * 0.35f, color.b * 0.35f, color.a);
 
             for(int i=0; i< _sprShadows.Count; i++)
             {
-                _sprShadows[i].color = darkerColor;
+                _sprShadows[i].color = data.colorsShape[idColor].colorShadow;
             }
         }
 
-        public void SetColorShape2(string strHex, bool saveColor)
+        public void SetColorShape2(int idColor, bool saveColor)
         {
-            Color color;
-            ColorUtility.TryParseHtmlString("#" + strHex, out color);
-            _shape2Shadow.color = color;
+            DataColor data = GameManager.Instance.dataColors;
+            Material mat = new Material(GameManager.Instance.materialShape);
+            mat.SetColor("_MultiplyColor", data.colorsShape[idColor].colorMul);
+            mat.SetColor("_OverlayColor", data.colorsShape[idColor].colorOver);
+
+            _shape2Shadow.material = mat;
 
             if (saveColor)
             {
-                _hexColorShape2 = strHex;
+                _idColorShape2 = idColor;
             }
 
-            Color darkerColor = new Color(color.r *0.4f, color.g * 0.35f, color.b * 0.35f, color.a);
-
-            _shape2.color = darkerColor;
+            _shape2.color = data.colorsShape[idColor].colorShadow;
         }
 
         private void ResetShape2()
@@ -332,11 +336,11 @@ namespace Game.MainGame
             _lock.SetActive(isLock);
         }
 
-        public void SetIDGate2(string hexColor, int idGate2)
+        public void SetIDGate2(int idColor, int idGate2)
         {
             IDGate2 = idGate2;
             _shape2.gameObject.SetActive(true);
-            SetColorShape2(hexColor, true);
+            SetColorShape2(idColor, true);
         }
 
         public void SetFreeze(int count)
@@ -487,8 +491,8 @@ namespace Game.MainGame
             Vector2 posTarget = (Vector2)LevelManager.Instance.GetListItemGrid()[idsGrid[0]].transform.position - offset;
             _shape2.transform.localScale = Vector2.one;
             _shape2.transform.localPosition = Vector2.zero;
-            SetColorShape2(_hexColorShape1, false);
-            SetColor(_hexColorShape2, true);
+            SetColorShape2(_idcolorShape1, false);
+            SetColor(_idColorShape2, true);
             IDGate = IDGate2;
             IDGate2 = -1;
 

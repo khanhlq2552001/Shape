@@ -19,6 +19,8 @@ namespace Game.MainGame
         [SerializeField] private Transform _tranStart;
         [SerializeField] private Transform[] _transPath =  new Transform[4];
 
+        private bool _isPause = false;
+
         public override void OnFocus()
         {
 
@@ -38,6 +40,7 @@ namespace Game.MainGame
         {
             PushFinished();
             _txtLevel.text = "Level " + PlayerPrefs.GetInt("level").ToString();
+            _isPause = false;
             UpdateTextCoint();
         }
 
@@ -71,6 +74,9 @@ namespace Game.MainGame
 
         public void BtnClaimVideo()
         {
+            if (_isPause) return;
+            _isPause = true;
+
             int coin = PlayerPrefs.GetInt("coin");
             int level = PlayerPrefs.GetInt("level");
             level++;
@@ -84,6 +90,9 @@ namespace Game.MainGame
 
         public void BtnClaim()
         {
+            if (_isPause) return;
+            _isPause = true;
+
             int coin = PlayerPrefs.GetInt("coin");
             int level = PlayerPrefs.GetInt("level");
             level++;
@@ -129,14 +138,14 @@ namespace Game.MainGame
             for (int i = 0; i < 8; i++)
             {
                 int idx = i;
-                objs[i].transform.DOPath(paths, 0.6f, PathType.CatmullRom).SetEase(Ease.Linear).OnComplete(() => {
+                objs[i].transform.DOPath(paths, 0.5f, PathType.CatmullRom).SetEase(Ease.Linear).OnComplete(() => {
                     UpdateTextCoint();
                     LeanPool.Despawn(objs[idx]);
                 });
-                yield return new WaitForSeconds(0.13f);
+                yield return new WaitForSeconds(0.1f);
             }
 
-            yield return new WaitForSeconds(0.7f);
+            yield return new WaitForSeconds(0.6f);
 
             if (level == 2)
             {

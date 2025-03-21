@@ -502,11 +502,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e5854243221fa274a8d634fe576af47f
-    m_Address: UINewObject
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fccbf1afa73b2784fa5710a4d0832323
     m_Address: image_coin3
     m_ReadOnly: 0
@@ -634,6 +629,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a398417ebdacf4e48adba5946203b901
     m_Address: UIShop
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e511f2157311385409d199204e493ad7
+    m_Address: HVD Fonts  MikadoBold
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

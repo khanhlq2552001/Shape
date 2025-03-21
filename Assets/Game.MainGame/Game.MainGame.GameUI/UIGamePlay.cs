@@ -273,7 +273,7 @@ namespace Game.MainGame
 
             GameObject hammer =  LeanPool.Spawn(_hammerAnim, obj.transform.position, Quaternion.identity);
             Hammer h = hammer.GetComponent<Hammer>();
-            h.hex = obj.GetColor();
+           // h.hex = obj.GetColor();
             yield return new WaitForSeconds(1f);
             bool value = obj.CheckBoosterHammer();
 

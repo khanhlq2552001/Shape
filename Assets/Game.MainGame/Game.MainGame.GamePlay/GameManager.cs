@@ -47,6 +47,12 @@ namespace Game.MainGame
         public Camera cameraUI;
         public Camera cameraBG;
         public DataObject dataObject;
+        public DataColor dataColors;
+
+        [Header("Material")]
+        public Material materialWall;
+        public Material materialShape;
+
 
         // Start is called before the first frame update
         private void Awake()

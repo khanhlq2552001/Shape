@@ -108,7 +108,14 @@ namespace Game.MainGame
             int count = (_data.width * _data.height);
             int idCount= 0;
 
-            _cameraMain.orthographicSize = ((float)_data.width / 3f) * 5f;
+            if(_data.width == 3)
+            {
+                _cameraMain.orthographicSize = 8f;
+            }
+            else
+            {
+                _cameraMain.orthographicSize = ((float)_data.width / 3f) * 5f;
+            }
 
             // Tính toán vị trí bắt đầu để lưới được đặt ở giữa màn hình
             Vector2 startPosition = new Vector2(-totalWidth * 0.5f, totalHeight * 0.5f);
@@ -125,7 +132,7 @@ namespace Game.MainGame
                 item.ID = i;
                 item.ResetAttibute();
 
-                if (i == _data.ids[idCount])
+                if (idCount < _data.ids.Count &&  i == _data.ids[idCount])
                 {
                     idCount++;
                 }
@@ -198,7 +205,6 @@ namespace Game.MainGame
             }
 
             CountShape = _listItemShape.Count;
-            Debug.Log(CountShape);
         }
 
         public void ReduceCountShape()
@@ -354,7 +360,7 @@ namespace Game.MainGame
         public int height;
         public int time; // tinh bang giay
         public List<int> ids;
-        public List<string> colorCodes;
+        public List<int> colorCodes;
         public List<ShapeCreate> idCentreShapes;
         public List<DataWall> datasWall;
         public List<DataWallCorner> datasWallCorner;

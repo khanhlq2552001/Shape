@@ -33,7 +33,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.1192}
+  m_AnchoredPosition: {x: 0, y: 0.07}
   m_SizeDelta: {x: 2, y: 2.0983}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1929078898232366657
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 7
-  m_Sprite: {fileID: 21300000, guid: 2cc08a9d7a1a8e54e9823cb541af2f9e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 76800afc1aeac824895ba54c7101f320, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -857,18 +857,18 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.4375, y: 1.5}
+    - - {x: 0.36150467, y: 1.5030398}
       - {x: -0.40234375, y: 1.5}
-      - {x: -0.4921875, y: 1.4179688}
-      - {x: -0.5, y: 1.3945312}
-      - {x: -0.5, y: -1.3828125}
-      - {x: -0.46484375, y: -1.4335938}
-      - {x: -0.41015625, y: -1.484375}
-      - {x: -0.37890625, y: -1.5}
-      - {x: 0.38671875, y: -1.5}
-      - {x: 0.44140625, y: -1.4765625}
-      - {x: 0.5, y: -1.3828125}
-      - {x: 0.5, y: 1.3828125}
+      - {x: -0.4465903, y: 1.4210086}
+      - {x: -0.46960187, y: 1.3641331}
+      - {x: -0.45744264, y: -1.3037773}
+      - {x: -0.42532617, y: -1.3727974}
+      - {x: -0.39495718, y: -1.4296584}
+      - {x: -0.35154793, y: -1.4422436}
+      - {x: 0.3441614, y: -1.4331241}
+      - {x: 0.41100818, y: -1.403607}
+      - {x: 0.45049864, y: -1.3227414}
+      - {x: 0.4574426, y: 1.373693}
   m_UseDelaunayMesh: 0
 --- !u!50 &7937574690960542699
 Rigidbody2D:
@@ -1080,8 +1080,8 @@ Transform:
   m_GameObject: {fileID: 6955856843836413051}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.0629, z: 0}
-  m_LocalScale: {x: 1.0621328, y: 1.1333312, z: 1}
+  m_LocalPosition: {x: 0, y: 0.0333, z: 0}
+  m_LocalScale: {x: 1, y: 1.1188742, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4401854588465299368}
