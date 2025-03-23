@@ -263,7 +263,7 @@ namespace Game.MainGame
 
                 obj.transform.position = transWallCorner[(int)type].position;
                 WallCorner wallCorner = obj.GetComponent<WallCorner>();
-               // wallCorner.SetColor();
+                wallCorner.SetColor();
         }
     }
 

@@ -72,7 +72,7 @@ Material:
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
-    - _MultiplyBoost: 1.1
+    - _MultiplyBoost: 1
     - _OcclusionStrength: 1
     - _OverlayStrength: 1
     - _Parallax: 0.02
@@ -85,6 +85,6 @@ Material:
     - _BlendColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MultiplyColor: {r: 0.32941177, g: 0.43137255, b: 0.64705884, a: 1}
-    - _OverlayColor: {r: 0.23128438, g: 0, b: 0.754717, a: 1}
+    - _MultiplyColor: {r: 0.56078434, g: 0.16862746, b: 1, a: 1}
+    - _OverlayColor: {r: 0.26666668, g: 0.11764706, b: 0.6039216, a: 1}
   m_BuildTextureStacks: []

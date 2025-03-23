@@ -21,15 +21,9 @@ namespace Game.MainGame
         [SerializeField] private Button _btnBuyCoin;
         [SerializeField] private GameObject _objShop;
         [SerializeField] private GameObject _objHome;
-        [SerializeField] private Sprite _sprOnLeft;
-        [SerializeField] private Sprite _sprOffLeft;
-        [SerializeField] private Sprite _sprOnMid;
-        [SerializeField] private Sprite _sprOffMid;
-        [SerializeField] private Sprite _sprOnRight;
-        [SerializeField] private Sprite _sprOffRight;
-        [SerializeField] private Image _imgMid;
-        [SerializeField] private Image _imgLeft;
-        [SerializeField] private Image _imgRight;
+        [SerializeField] private GameObject _menuMid;
+        [SerializeField] private GameObject _menuLeft;
+        [SerializeField] private GameObject _menuRight;
         [SerializeField] private GameObject _effTym;
         [SerializeField] private Transform _tranStart;
         [SerializeField] private Transform _tranMid;
@@ -37,14 +31,24 @@ namespace Game.MainGame
 
         [Header("icon")]
         [SerializeField] private Sprite _sprIconOnLeft;
-        [SerializeField] private Sprite _sprIconOffLeft;
         [SerializeField] private Sprite _sprIconOnMid;
-        [SerializeField] private Sprite _sprIconOffMid;
         [SerializeField] private Sprite _sprIconOnRight;
-        [SerializeField] private Sprite _sprIconOffRight;
-        [SerializeField] private Image _imgIconMid;
-        [SerializeField] private Image _imgIconLeft;
-        [SerializeField] private Image _imgIconRight;
+        [SerializeField] private Image _imgIconChoose;
+        [SerializeField] private Text _txtChoose;
+        [SerializeField] private GameObject _objChoose;
+        [SerializeField] private Animator _animMenu;
+
+        [Header("Home")]
+        [SerializeField] private Sprite[] _sprBtnDifficulty = new Sprite[3];
+        [SerializeField] private Sprite[] _sprIconDifficulty = new Sprite[3];
+        [SerializeField] private Sprite[] _sprIconBgName = new Sprite[3];
+        [SerializeField] private Image[] _imgIconDifficuly = new Image[3];
+        [SerializeField] private Image[] _imgIconBgName = new Image[3];
+        [SerializeField] private Text[] _txtIconName = new Text[3];
+        [SerializeField] private Text[] _txtLevels = new Text[3];
+
+        private enum Menu {shop, home, rank };
+        private enum Difficulty { Normal, Hard, VeryHard}
 
         public override void OnFocus()
         {
@@ -67,12 +71,7 @@ namespace Game.MainGame
             UpdateTextLevel();
             UpdateTextTym();
             UpdateTime();
-            _imgMid.sprite = _sprOnMid;
-            _imgLeft.sprite = _sprOffLeft;
-            _imgRight.sprite = _sprOffRight;
-            _imgIconMid.sprite = _sprIconOnMid;
-            _imgIconLeft.sprite = _sprIconOffLeft;
-            _imgIconRight.sprite = _sprIconOffRight;
+
             _effTym.gameObject.SetActive(false);
             GameManager.Instance.AddActionTimeHeal(UpdateTime);
             UIFadeScreen ui = UIManager.Instance.GetScreen<UIFadeScreen>(GameManager.ScreenId_UIFadeScreen);
@@ -94,10 +93,42 @@ namespace Game.MainGame
             _btnLeaderBoard.onClick.AddListener(() => BtnLeaderBoard());
             _btnBuyTym.onClick.AddListener(() => BtnBuyTym());
             _btnBuyCoin.onClick.AddListener(() => BtnBuyCoin());
+            BtnHome();
 
             GameManager.Instance.AddActionCoin(UpdateTextCoint);
             GameManager.Instance.AddActionLevel(UpdateTextLevel);
             GameManager.Instance.AddActionTym(UpdateTextTym);
+        }
+
+        private void ItemChoose(Menu id)
+        {
+            switch (id)
+            {
+                case Menu.home:
+                    _objChoose.transform.SetParent(_menuMid.transform);
+                    _objChoose.transform.localPosition = Vector3.zero;
+                    _imgIconChoose.sprite = _sprIconOnMid;
+                    _imgIconChoose.SetNativeSize();
+                    _txtChoose.text = "Home";
+                    _animMenu.Play("17", 0, 0f);
+                    break;
+                case Menu.shop:
+                    _objChoose.transform.SetParent(_menuLeft.transform);
+                    _objChoose.transform.localPosition = Vector3.zero;
+                    _imgIconChoose.sprite = _sprIconOnLeft;
+                    _imgIconChoose.SetNativeSize();
+                    _txtChoose.text = "Shop";
+                    _animMenu.Play("17", 0, 0f);
+                    break;
+                case Menu.rank:
+                    _objChoose.transform.SetParent(_menuRight.transform);
+                    _objChoose.transform.localPosition = Vector3.zero;
+                    _imgIconChoose.sprite = _sprIconOnRight;
+                    _imgIconChoose.SetNativeSize();
+                    _txtChoose.text = "Rank";
+                    _animMenu.Play("17", 0, 0f);
+                    break;
+            }
         }
 
         public void UpdateTime()
@@ -113,7 +144,33 @@ namespace Game.MainGame
 
         public void UpdateTextLevel()
         {
-            _txtLevel.text = PlayerPrefs.GetInt("level").ToString();
+            int level =GameManager.Instance.pref.GetLevel();
+            DataLevel data = LevelManager.Instance._dataLevels;
+            for (int i=0; i< 3; i++)
+            {   
+                _txtLevels[i].text = (level + i).ToString();
+
+                if(i == 0)
+                {
+                    _btnPlay.GetComponent<Image>().sprite = _sprBtnDifficulty[(int)data.listDatas[level - 1].diff];
+                }
+
+                _imgIconDifficuly[i].sprite = _sprIconDifficulty[(int)data.listDatas[level - 1 + i].diff];
+                _imgIconDifficuly[i].SetNativeSize();
+
+                if (data.listDatas[level - 1 + i].diff == MainGame.Difficulty.normal)
+                {
+                    _imgIconBgName[i].gameObject.SetActive(false);
+                }
+                else
+                {
+                    _imgIconBgName[i].gameObject.SetActive(true);
+                    _imgIconBgName[i].sprite = _sprIconBgName[(int)data.listDatas[level - 1 + i].diff];
+
+                    if (data.listDatas[level - 1 + i].diff == MainGame.Difficulty.hard) _txtIconName[i].text = "Hard";
+                    else _txtIconName[i].text = "Very Hard";
+                }
+            }
         }
 
         public void UpdateTextTym()
@@ -148,12 +205,7 @@ namespace Game.MainGame
 
         public void BtnHome()
         {
-            _imgMid.sprite = _sprOnMid;
-            _imgLeft.sprite = _sprOffLeft;
-            _imgRight.sprite = _sprOffRight;
-            _imgIconMid.sprite = _sprIconOnMid;
-            _imgIconLeft.sprite = _sprIconOffLeft;
-            _imgIconRight.sprite = _sprIconOffRight;
+            ItemChoose(Menu.home);
 
             _objHome.SetActive(true);
             _btnHome.interactable = false;
@@ -166,12 +218,7 @@ namespace Game.MainGame
         public void BtnShop()
         {
             _objShop.SetActive(true);
-            _imgMid.sprite = _sprOffMid;
-            _imgLeft.sprite = _sprOnLeft;
-            _imgRight.sprite = _sprOffRight;
-            _imgIconMid.sprite = _sprIconOffMid;
-            _imgIconLeft.sprite = _sprIconOnLeft;
-            _imgIconRight.sprite = _sprIconOffRight;
+            ItemChoose(Menu.shop);
 
             _objHome.SetActive(false);
             _btnShop.interactable = false;
@@ -182,12 +229,7 @@ namespace Game.MainGame
 
         public void BtnLeaderBoard()
         {
-            _imgMid.sprite = _sprOffMid;
-            _imgLeft.sprite = _sprOffLeft;
-            _imgRight.sprite = _sprOnRight;
-            _imgIconMid.sprite = _sprIconOffMid;
-            _imgIconLeft.sprite = _sprIconOffLeft;
-            _imgIconRight.sprite = _sprIconOnRight;
+            ItemChoose(Menu.rank);
 
             _objHome.SetActive(false);
             _btnLeaderBoard.interactable = false;
@@ -233,6 +275,5 @@ namespace Game.MainGame
                   });
               });
         }
-
     }
 }

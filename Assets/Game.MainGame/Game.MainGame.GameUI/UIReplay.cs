@@ -9,6 +9,10 @@ namespace Game.MainGame
         [SerializeField] private Text _txtLevel;
         [SerializeField] private Button _btnReplay;
         [SerializeField] private Button _btnClose;
+        [SerializeField] private Button _btnHome;
+        [SerializeField] private Text _txtCoin;
+        [SerializeField] private Text _txtTym;
+        [SerializeField] private Text _txtTimeTym;
 
         public void BtnClose()
         {
@@ -58,6 +62,8 @@ namespace Game.MainGame
         public override void OnPop()
         {
             PopFinished();
+            GameManager.Instance.RemoveActionTym(UpdateTym);
+            GameManager.Instance.RemoveActionTimeHeal(UpdateTextTime);
         }
 
         public override void OnPush(Data data)
@@ -65,12 +71,44 @@ namespace Game.MainGame
             PushFinished();
             LevelManager.Instance.controller.StateController = StateController.Pause;
             UpdateTextLevel();
+            UpdateTxtCoin();
+            UpdateTym();
+
+            GameManager.Instance.AddActionTym(UpdateTym);
+            GameManager.Instance.AddActionTimeHeal(UpdateTextTime);
         }
 
         public override void OnSetup()
         {
             _btnClose.onClick.AddListener(() => BtnClose());
             _btnReplay.onClick.AddListener(() => BtnReplay());
+            _btnHome.onClick.AddListener(() => BtnHome());
+        }
+
+        private void BtnHome()
+        {
+            UIManager.Instance.QueuePush(GameManager.ScreenId_UIFadeScreen, null, "UIFadeScene", null);
+            UIFadeScreen ui = UIManager.Instance.GetScreen<UIFadeScreen>(GameManager.ScreenId_UIFadeScreen);
+            ui.SetAction(() => {
+                UIManager.Instance.CloseAllScreensExcept(GameManager.ScreenId_UIFadeScreen);
+                UIManager.Instance.QueuePush(GameManager.ScreenId_UIHome, null, "UIHome", null);
+            }, true);
+        }
+
+        private void UpdateTym()
+        {
+            _txtTym.text = GameManager.Instance.pref.GetTym().ToString();
+        }
+
+        private void UpdateTextTime()
+        {
+            _txtTimeTym.text = GameManager.Instance.timeHeal;
+        }
+
+        private void UpdateTxtCoin()
+        {
+            int coin = GameManager.Instance.pref.GetCoin();
+            _txtCoin.text = GameManager.Instance.FormatMoney(coin);
         }
     }
 }

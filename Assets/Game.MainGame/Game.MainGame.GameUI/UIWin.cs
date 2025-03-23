@@ -18,6 +18,8 @@ namespace Game.MainGame
         [SerializeField] private Transform _tranCha;
         [SerializeField] private Transform _tranStart;
         [SerializeField] private Transform[] _transPath =  new Transform[4];
+        [SerializeField] private Text _txtTym;
+        [SerializeField] private Text _txtTimeTym;
 
         private bool _isPause = false;
 
@@ -34,6 +36,8 @@ namespace Game.MainGame
         public override void OnPop()
         {
             PopFinished();
+            GameManager.Instance.RemoveActionTym(UpdateTym);
+            GameManager.Instance.RemoveActionTimeHeal(UpdateTextTime);
         }
 
         public override void OnPush(Data data)
@@ -42,16 +46,28 @@ namespace Game.MainGame
             _txtLevel.text = "Level " + PlayerPrefs.GetInt("level").ToString();
             _isPause = false;
             UpdateTextCoint();
+            int level = PlayerPrefs.GetInt("level");
+            level++;
+            GameManager.Instance.UpdateLevel(level);
+            GameManager.Instance.AddActionTym(UpdateTym);
+            GameManager.Instance.AddActionTimeHeal(UpdateTextTime);
+            UpdateTym();
         }
 
         public void BtnHome()
         {
-            UIManager.Instance.QueuePop();
             LevelManager.Instance.controller.StateController = StateController.Pause;
-            LevelManager.Instance.ClearCell();
-            UIGamePlay ui =  UIManager.Instance.GetScreen<UIGamePlay>(GameManager.ScreenId_ExampleMenu);
-            ui.CloseUI();
-            UIManager.Instance.QueuePush(GameManager.ScreenId_UIHome, null, "UIHome", null);
+            int coin = PlayerPrefs.GetInt("coin");
+            coin += 50;
+
+            GameManager.Instance.UpdateCoin(coin);
+
+            UIManager.Instance.QueuePush(GameManager.ScreenId_UIFadeScreen, null, "UIFadeScene", null);
+            UIFadeScreen ui = UIManager.Instance.GetScreen<UIFadeScreen>(GameManager.ScreenId_UIFadeScreen);
+            ui.SetAction(() => {
+                UIManager.Instance.CloseAllScreensExcept(GameManager.ScreenId_UIFadeScreen);
+                UIManager.Instance.QueuePush(GameManager.ScreenId_UIHome, null, "UIHome", null);
+            }, true);
         }
 
         public void UpdateTextCoint()
@@ -78,14 +94,22 @@ namespace Game.MainGame
             _isPause = true;
 
             int coin = PlayerPrefs.GetInt("coin");
-            int level = PlayerPrefs.GetInt("level");
-            level++;
             coin += 100;
-
+            int level = PlayerPrefs.GetInt("level");
             GameManager.Instance.UpdateCoin(coin);
-            GameManager.Instance.UpdateLevel(level);
+            
 
             StartCoroutine(EffCoinCoroutine(level));
+        }
+
+        private void UpdateTym()
+        {
+            _txtTym.text = GameManager.Instance.pref.GetTym().ToString();
+        }
+
+        private void UpdateTextTime()
+        {
+            _txtTimeTym.text = GameManager.Instance.timeHeal;
         }
 
         public void BtnClaim()
@@ -95,11 +119,9 @@ namespace Game.MainGame
 
             int coin = PlayerPrefs.GetInt("coin");
             int level = PlayerPrefs.GetInt("level");
-            level++;
             coin += 50;
 
             GameManager.Instance.UpdateCoin(coin);
-            GameManager.Instance.UpdateLevel(level);
 
             StartCoroutine(EffCoinCoroutine(level));
         }

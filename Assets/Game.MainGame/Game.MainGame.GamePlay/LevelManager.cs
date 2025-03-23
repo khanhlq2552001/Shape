@@ -15,7 +15,6 @@ namespace Game.MainGame
         [SerializeField] private Transform  _tranParent;
         [SerializeField] private Data _data;
         [SerializeField] private float _spacing = 1.1f;
-        [SerializeField] private DataLevel _dataLevels;
         [SerializeField] private Camera _cameraMain;
 
         private List<GameObject> _listItemGrid = new List<GameObject>();
@@ -28,6 +27,7 @@ namespace Game.MainGame
 
         public DataShape dataShape;
         public GameController controller;
+        public DataLevel _dataLevels;
 
         private void Awake()
         {
@@ -319,6 +319,7 @@ namespace Game.MainGame
 
                     if (value)
                     {
+                        Debug.Log("okok");
                         count++;
                         GameObject parMagic = LeanPool.Spawn(GameManager.Instance.parMagic, magicBoo.tranStart.position, Quaternion.identity);
                         parMagic.transform.localScale = new Vector3(scale * 0.6f, scale * 0.6f, scale * 0.6f);
@@ -328,10 +329,9 @@ namespace Game.MainGame
                             ParticleSystem par = LeanPool.Spawn(GameManager.Instance.particleHammer, _listItemShape[idx].tranCentre.position, Quaternion.identity);
                             par.transform.localScale = new Vector3(scale * 0.8f, scale* 0.8f, scale * 0.8f);
                             par.Play();
-                            Color color;
-                            ColorUtility.TryParseHtmlString("#" + _listItemShape[idx].GetColor(), out color);
-                            par.GetComponent<FxSmoke>().SetColor(color);
 
+                            int idColor = _listItemShape[idx].GetColor();
+                            par.GetComponent<FxSmoke>().SetColor(GameManager.Instance.dataColors.colorsShape[idColor].colorMul);
                             magicBoo.End();
                         });
                     }

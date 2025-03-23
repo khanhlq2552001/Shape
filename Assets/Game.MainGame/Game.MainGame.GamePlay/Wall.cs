@@ -71,6 +71,7 @@ namespace Game.MainGame
                 Material mat = new Material(GameManager.Instance.materialShape);
                 mat.SetColor("_MultiplyColor", data.colorsShape[idColor].colorMul);
                 mat.SetColor("_OverlayColor", data.colorsShape[idColor].colorOver);
+                _colorLight = data.colorsShape[idColor].colorMul;
                 _spr.material = mat;
 
                 for (int i = 0; i < _sprShadows.Count; i++)

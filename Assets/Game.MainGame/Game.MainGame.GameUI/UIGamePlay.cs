@@ -92,10 +92,7 @@ namespace Game.MainGame
             DisplayTime(0);
             LevelManager.Instance.controller.StateController = StateController.Pause;
 
-            if(PlayerPrefs.GetInt("tym") > 1)
-            {
-                UIManager.Instance.QueuePush(GameManager.ScreenId_UIOutOfTime, null, "UIOutTime", null);
-            }
+            UIManager.Instance.QueuePush(GameManager.ScreenId_UIOutOfTime, null, "UIOutTime", null);
         }
 
         private IEnumerator CountdownRoutineFreeze(int time)
@@ -271,10 +268,12 @@ namespace Game.MainGame
             GameManager.Instance.UpdateBooster(count, 1);
             UpdateBoosterHammer();
 
+            float scale = GameManager.Instance.cameraMain.orthographicSize / 5f;
             GameObject hammer =  LeanPool.Spawn(_hammerAnim, obj.transform.position, Quaternion.identity);
             Hammer h = hammer.GetComponent<Hammer>();
-           // h.hex = obj.GetColor();
-            yield return new WaitForSeconds(1f);
+            hammer.transform.localScale = new Vector3(scale, scale, 0);
+            h.hex = obj.GetColor();
+            yield return new WaitForSeconds(1.2f);
             bool value = obj.CheckBoosterHammer();
 
             if (value)

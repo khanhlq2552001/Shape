@@ -5,12 +5,11 @@ namespace Game.MainGame
 {
     public class Hammer : MonoBehaviour
     {
-        public string hex;
+        public int hex;
 
         public void VoNat()
         {
-            Color color;
-            ColorUtility.TryParseHtmlString("#" + hex, out color);
+            Color color = GameManager.Instance.dataColors.colorsShape[hex].colorMul;
 
             ParticleSystem _par = LeanPool.Spawn(GameManager.Instance.particleHammer, transform.position, Quaternion.identity);
             _par.Play();

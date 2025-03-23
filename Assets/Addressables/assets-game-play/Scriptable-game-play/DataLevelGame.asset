@@ -86,7 +86,7 @@ MonoBehaviour:
       idGrid: 20
     - idWallCorner: 2
       idGrid: 24
-  - diff: 0
+  - diff: 1
     width: 5
     height: 6
     time: 75
@@ -177,7 +177,7 @@ MonoBehaviour:
       idGrid: 25
     - idWallCorner: 2
       idGrid: 29
-  - diff: 0
+  - diff: 2
     width: 5
     height: 6
     time: 75

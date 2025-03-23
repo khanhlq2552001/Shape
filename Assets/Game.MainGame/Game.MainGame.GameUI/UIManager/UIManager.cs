@@ -562,6 +562,44 @@ namespace BlitzyUI
                 ExecuteNextQueueItem();
         }
 
+        public void CloseAllScreensExcept(BlitzyUI.Screen.Id idToKeep)
+        {
+            // Lặp qua tất cả các màn hình trong ngăn xếp từ dưới lên trên
+            for (int i = _stack.Count - 1; i >= 0; i--)
+            {
+                var screen = _stack[i];
+
+                // Nếu màn hình không phải là màn hình cần giữ lại, thì loại bỏ nó
+                if (screen.id != idToKeep)
+                {
+                    // Loại bỏ màn hình khỏi ngăn xếp
+                    _stack.RemoveAt(i);
+
+                    // Tắt màn hình
+                    if (screen.keepCached)
+                    {
+                        screen.gameObject.SetActive(false);
+                        _cache[screen.PrefabName] = screen; // Thêm vào cache nếu cần
+                    }
+                    else
+                    {
+                        Object.Destroy(screen.gameObject); // Hủy màn hình nếu không cần cache
+                    }
+
+                    Debug.Log($"Screen {screen.id} has been forcibly removed.");
+                }
+            }
+
+            // Kích hoạt focus cho màn hình còn lại (nếu có)
+            var topScreen = GetTopScreen();
+            if (topScreen != null)
+            {
+                topScreen.OnFocus();
+            }
+
+            Debug.Log($"All screens except {idToKeep} have been closed.");
+        }
+
         public void ForceRemoveScreen(BlitzyUI.Screen.Id id)
         {
             for (int i = 0; i < _stack.Count; i++)
@@ -573,6 +611,17 @@ namespace BlitzyUI
 
                     // Loại bỏ khỏi ngăn xếp
                     _stack.RemoveAt(i);
+
+                    // Gọi OnFocusLost nếu đây là màn hình trên cùng
+                    if (i == 0 && _stack.Count > 0)
+                    {
+                        var newTopScreen = _stack[0];
+                        newTopScreen.OnFocus(); // Kích hoạt focus cho màn hình mới trên cùng
+                    }
+
+                    // Gọi OnPop để xử lý logic đóng màn hình
+                    screenToRemove.OnFocusLost(); // Thông báo mất focus
+                    screenToRemove.OnPop();       // Gọi OnPop
 
                     // Tắt màn hình
                     if (screenToRemove.keepCached)

@@ -13,8 +13,11 @@ namespace Game.MainGame
         [SerializeField] private Button _btnBuyCoin;
         [SerializeField] private Button _btnBuyAds;
         [SerializeField] private Button _btnClose;
+        [SerializeField] private Button _btnHome;
         [SerializeField] private Image _imgItemx3;
         [SerializeField] private Image _imgItemx1;
+        [SerializeField] private Text _txtTym;
+        [SerializeField] private Text _txtTimeTym;
 
         private InfoBooster _info;
 
@@ -29,6 +32,8 @@ namespace Game.MainGame
         public override void OnPop()
         {
             PopFinished();
+            GameManager.Instance.RemoveActionTym(UpdateTym);
+            GameManager.Instance.RemoveActionTimeHeal(UpdateTextTime);
         }
 
         public override void OnPush(Data data)
@@ -58,6 +63,9 @@ namespace Game.MainGame
                 }
             }
 
+            UpdateTym();
+            GameManager.Instance.AddActionTym(UpdateTym);
+            GameManager.Instance.AddActionTimeHeal(UpdateTextTime);
         }
 
         public override void OnSetup()
@@ -66,6 +74,7 @@ namespace Game.MainGame
             _btnBuyAds.onClick.AddListener(() => BtnBuyAds(_info));
             _btnBuyCoin.onClick.AddListener(() => BtnBuyCoin(_info));
             _btnClose.onClick.AddListener(() => BtnClose());
+            _btnHome.onClick.AddListener(() => BtnHome());
         }
 
         public void SetUpBoosterBuy(InfoBooster info)
@@ -78,6 +87,7 @@ namespace Game.MainGame
                     _txtName.text = data.listDatas[0].name;
                     _txtDescript.text = data.listDatas[0].describe.Replace("\\n", "\n");
                     _imgItem.sprite = data.listDatas[0].sprBooster;
+                    _imgItem.SetNativeSize();
                     _imgItemx3.sprite = data.listDatas[0].sprBooster;
                     _imgItemx1.sprite = data.listDatas[0].sprBooster;
                     break;
@@ -85,6 +95,7 @@ namespace Game.MainGame
                     _txtName.text = data.listDatas[1].name;
                     _txtDescript.text = data.listDatas[1].describe.Replace("\\n", "\n");
                     _imgItem.sprite = data.listDatas[1].sprBooster;
+                    _imgItem.SetNativeSize();
                     _imgItemx3.sprite = data.listDatas[1].sprBooster;
                     _imgItemx1.sprite = data.listDatas[1].sprBooster;
                     break;
@@ -92,10 +103,36 @@ namespace Game.MainGame
                     _txtName.text = data.listDatas[2].name;
                     _txtDescript.text = data.listDatas[2].describe.Replace("\\n", "\n");
                     _imgItem.sprite = data.listDatas[2].sprBooster;
+                    _imgItem.SetNativeSize();
                     _imgItemx3.sprite = data.listDatas[2].sprBooster;
                     _imgItemx1.sprite = data.listDatas[2].sprBooster;
                     break;
             }
+            _imgItemx3.SetNativeSize();
+            _imgItemx3.transform.localScale = Vector3.one * 0.2f;
+            _imgItemx1.SetNativeSize();
+            _imgItemx1.transform.localScale = Vector3.one * 0.2f;
+        }
+
+        private void BtnHome()
+        {
+            UIManager.Instance.QueuePush(GameManager.ScreenId_UIFadeScreen, null, "UIFadeScene", null);
+            UIFadeScreen ui = UIManager.Instance.GetScreen<UIFadeScreen>(GameManager.ScreenId_UIFadeScreen);
+            ui.SetAction(() => {
+                UIManager.Instance.CloseAllScreensExcept(GameManager.ScreenId_UIFadeScreen);
+                UIManager.Instance.QueuePush(GameManager.ScreenId_UIHome, null, "UIHome", null);
+            }, true);
+
+        }
+
+        private void UpdateTym()
+        {
+            _txtTym.text = GameManager.Instance.pref.GetTym().ToString();
+        }
+
+        private void UpdateTextTime()
+        {
+            _txtTimeTym.text = GameManager.Instance.timeHeal;
         }
 
         private void UpdateTextCoin()
