@@ -1,0 +1,877 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d34c14289a71c1b408e798f338b90776, type: 3}
+  m_Name: N-Base-0-0-84
+  m_EditorClassIdentifier: 
+  baseMap: Game1_LevelMapBase_PlayMode
+  levelName: N-Base-0-0-84
+  gameTut: 
+  width: 11
+  height: 13
+  blocks:
+  - id: 0
+    objectName: Block 7
+    position: {x: 1.5, y: 3.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 4
+      - key: objectName
+        value: Block 7
+      - key: starID
+        value: 0
+    objects: []
+  - id: 1
+    objectName: Block 7
+    position: {x: 1.5, y: 9.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 4
+      - key: objectName
+        value: Block 7_3
+      - key: starID
+        value: 0
+    objects:
+    - id: 0
+      objectName: IceBlock
+      position: {x: 2, y: 10.05, z: 0}
+      rotation: {x: -0, y: 0, z: 0}
+      scale: {x: 1, y: 1, z: 1}
+      properties:
+        properties:
+        - key: iceDurable
+          value: 12
+      objects: []
+  - id: 2
+    objectName: Block 7
+    position: {x: 8.5, y: 3.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 6
+      - key: objectName
+        value: Block 7_1
+      - key: starID
+        value: 0
+    objects: []
+  - id: 3
+    objectName: Block 7
+    position: {x: 8.5, y: 9.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 7
+      - key: objectName
+        value: Block 7_2
+      - key: starID
+        value: 0
+    objects:
+    - id: 0
+      objectName: IceBlock
+      position: {x: 9, y: 10.05, z: 0}
+      rotation: {x: -0, y: 0, z: 0}
+      scale: {x: 1, y: 1, z: 1}
+      properties:
+        properties:
+        - key: iceDurable
+          value: 8
+      objects: []
+  - id: 4
+    objectName: Block 3-1
+    position: {x: 3.5, y: 4.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 2
+      - key: objectName
+        value: Block 3-1
+      - key: starID
+        value: 0
+    objects: []
+  - id: 5
+    objectName: Block 3-1
+    position: {x: 6.5, y: 1.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 2
+      - key: objectName
+        value: Block 3-1_2
+      - key: starID
+        value: 0
+    objects: []
+  - id: 6
+    objectName: Block 3-1
+    position: {x: 7.5, y: 8.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 7
+      - key: objectName
+        value: Block 3-1_1
+      - key: starID
+        value: 0
+    objects: []
+  - id: 7
+    objectName: Block 3-1-1
+    position: {x: 6.5, y: 4.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 4
+      - key: objectName
+        value: Block 3-1-1
+      - key: starID
+        value: 0
+    objects: []
+  - id: 8
+    objectName: Block 3-1-1
+    position: {x: 3.5, y: 1.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 7
+      - key: objectName
+        value: Block 3-1-1_2
+      - key: starID
+        value: 0
+    objects: []
+  - id: 9
+    objectName: Block 3-1-1
+    position: {x: 2.5, y: 8.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 1
+      - key: objectName
+        value: Block 3-1-1_1
+      - key: starID
+        value: 0
+    objects: []
+  - id: 10
+    objectName: Block 5-1
+    position: {x: 4.5, y: 10.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 0
+      - key: objectName
+        value: Block 5-1
+      - key: starID
+        value: 0
+    objects:
+    - id: 0
+      objectName: Key
+      position: {x: 5.5, y: 10.5, z: 0}
+      rotation: {x: -0, y: 0, z: 0}
+      scale: {x: 1, y: 1, z: 1}
+      properties:
+        properties: []
+      objects: []
+  - id: 11
+    objectName: Block 5-1
+    position: {x: 4.5, y: 11.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 7
+      - key: objectName
+        value: Block 5-1_1
+      - key: starID
+        value: 0
+    objects:
+    - id: 0
+      objectName: Key
+      position: {x: 5.5, y: 11.5, z: 0}
+      rotation: {x: -0, y: 0, z: 0}
+      scale: {x: 1, y: 1, z: 1}
+      properties:
+        properties: []
+      objects: []
+  - id: 12
+    objectName: Block 5-2
+    position: {x: 2.5, y: 5.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 8
+      - key: objectName
+        value: Block 5-2
+      - key: starID
+        value: 0
+    objects:
+    - id: 0
+      objectName: Key
+      position: {x: 2.5, y: 6.5, z: 0}
+      rotation: {x: -0, y: 0, z: 0}
+      scale: {x: 1, y: 1, z: 1}
+      properties:
+        properties: []
+      objects: []
+  - id: 13
+    objectName: Block 5-2
+    position: {x: 8.5, y: 5.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 1
+      - key: objectName
+        value: Block 5-2_1
+      - key: starID
+        value: 0
+    objects:
+    - id: 0
+      objectName: Key
+      position: {x: 8.5, y: 6.5, z: 0}
+      rotation: {x: -0, y: 0, z: 0}
+      scale: {x: 1, y: 1, z: 1}
+      properties:
+        properties: []
+      objects: []
+  - id: 14
+    objectName: Block 5-2
+    position: {x: 5.5, y: 1.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 3
+      - key: objectName
+        value: Block 5-2_2
+      - key: starID
+        value: 0
+    objects:
+    - id: 0
+      objectName: Lock 1
+      position: {x: 5.5, y: 2.5, z: 0}
+      rotation: {x: -0, y: 0, z: 0}
+      scale: {x: 1, y: 1, z: 1}
+      properties:
+        properties:
+        - key: totalRequire
+          value: 6
+      objects: []
+  - id: 15
+    objectName: Block 4-1
+    position: {x: 1.5, y: 2.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 6
+      - key: objectName
+        value: Block 4-1
+      - key: starID
+        value: 0
+    objects:
+    - id: 0
+      objectName: Key
+      position: {x: 2, y: 2.5, z: 0}
+      rotation: {x: -0, y: 0, z: 0}
+      scale: {x: 1, y: 1, z: 1}
+      properties:
+        properties: []
+      objects: []
+  - id: 16
+    objectName: Block 4-1
+    position: {x: 8.5, y: 2.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 0
+      - key: objectName
+        value: Block 4-1_1
+      - key: starID
+        value: 0
+    objects:
+    - id: 0
+      objectName: Key
+      position: {x: 9, y: 2.5, z: 0}
+      rotation: {x: -0, y: 0, z: 0}
+      scale: {x: 1, y: 1, z: 1}
+      properties:
+        properties: []
+      objects: []
+  objects:
+  - id: 0
+    objectName: Collector 3-3
+    position: {x: 9.5, y: 6.5, z: 0}
+    rotation: {x: 0, y: 0, z: 270}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: ColorID
+        value: 2
+      - key: StarID
+        value: 0
+    objects: []
+  - id: 1
+    objectName: Collector 3-4
+    position: {x: 1.5, y: 6.5, z: 0}
+    rotation: {x: -0, y: -0, z: 90}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: ColorID
+        value: 7
+      - key: StarID
+        value: 0
+    objects: []
+  - id: 2
+    objectName: Collector 2-3
+    position: {x: 10.5, y: 9, z: 0}
+    rotation: {x: 0, y: 0, z: 270}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: ColorID
+        value: 0
+      - key: StarID
+        value: 0
+    objects: []
+  - id: 3
+    objectName: Collector 2-4
+    position: {x: 0.5, y: 9, z: 0}
+    rotation: {x: -0, y: 0, z: 90}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: ColorID
+        value: 6
+      - key: StarID
+        value: 0
+    objects: []
+  - id: 4
+    objectName: Collector 2-2
+    position: {x: 5, y: 0.5, z: 0}
+    rotation: {x: -0, y: -0, z: 180}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: ColorID
+        value: 4
+      - key: StarID
+        value: 0
+    objects: []
+  - id: 5
+    objectName: Collector 1-2
+    position: {x: 6.5, y: 0.5, z: 0}
+    rotation: {x: -0, y: 0, z: 180}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: ColorID
+        value: 8
+      - key: StarID
+        value: 0
+    objects: []
+  - id: 6
+    objectName: Collector 1-1
+    position: {x: 4.5, y: 12.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: ColorID
+        value: 3
+      - key: StarID
+        value: 0
+    objects: []
+  - id: 7
+    objectName: Collector 2-1
+    position: {x: 6, y: 12.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: ColorID
+        value: 1
+      - key: StarID
+        value: 0
+    objects: []
+  table:
+    rows:
+    - column:
+      - x: 0
+        y: 0
+        tileType: 0
+      - x: 1
+        y: 0
+        tileType: 0
+      - x: 2
+        y: 0
+        tileType: 3
+      - x: 3
+        y: 0
+        tileType: 3
+      - x: 4
+        y: 0
+        tileType: 4
+      - x: 5
+        y: 0
+        tileType: 4
+      - x: 6
+        y: 0
+        tileType: 4
+      - x: 7
+        y: 0
+        tileType: 3
+      - x: 8
+        y: 0
+        tileType: 3
+      - x: 9
+        y: 0
+        tileType: 0
+      - x: 10
+        y: 0
+        tileType: 0
+    - column:
+      - x: 0
+        y: 1
+        tileType: 3
+      - x: 1
+        y: 1
+        tileType: 3
+      - x: 2
+        y: 1
+        tileType: 3
+      - x: 3
+        y: 1
+        tileType: 1
+      - x: 4
+        y: 1
+        tileType: 1
+      - x: 5
+        y: 1
+        tileType: 1
+      - x: 6
+        y: 1
+        tileType: 1
+      - x: 7
+        y: 1
+        tileType: 1
+      - x: 8
+        y: 1
+        tileType: 3
+      - x: 9
+        y: 1
+        tileType: 3
+      - x: 10
+        y: 1
+        tileType: 3
+    - column:
+      - x: 0
+        y: 2
+        tileType: 3
+      - x: 1
+        y: 2
+        tileType: 1
+      - x: 2
+        y: 2
+        tileType: 1
+      - x: 3
+        y: 2
+        tileType: 1
+      - x: 4
+        y: 2
+        tileType: 1
+      - x: 5
+        y: 2
+        tileType: 1
+      - x: 6
+        y: 2
+        tileType: 1
+      - x: 7
+        y: 2
+        tileType: 1
+      - x: 8
+        y: 2
+        tileType: 1
+      - x: 9
+        y: 2
+        tileType: 1
+      - x: 10
+        y: 2
+        tileType: 3
+    - column:
+      - x: 0
+        y: 3
+        tileType: 3
+      - x: 1
+        y: 3
+        tileType: 1
+      - x: 2
+        y: 3
+        tileType: 1
+      - x: 3
+        y: 3
+        tileType: 1
+      - x: 4
+        y: 3
+        tileType: 1
+      - x: 5
+        y: 3
+        tileType: 1
+      - x: 6
+        y: 3
+        tileType: 1
+      - x: 7
+        y: 3
+        tileType: 1
+      - x: 8
+        y: 3
+        tileType: 1
+      - x: 9
+        y: 3
+        tileType: 1
+      - x: 10
+        y: 3
+        tileType: 3
+    - column:
+      - x: 0
+        y: 4
+        tileType: 3
+      - x: 1
+        y: 4
+        tileType: 1
+      - x: 2
+        y: 4
+        tileType: 1
+      - x: 3
+        y: 4
+        tileType: 1
+      - x: 4
+        y: 4
+        tileType: 1
+      - x: 5
+        y: 4
+        tileType: 1
+      - x: 6
+        y: 4
+        tileType: 1
+      - x: 7
+        y: 4
+        tileType: 1
+      - x: 8
+        y: 4
+        tileType: 1
+      - x: 9
+        y: 4
+        tileType: 1
+      - x: 10
+        y: 4
+        tileType: 3
+    - column:
+      - x: 0
+        y: 5
+        tileType: 3
+      - x: 1
+        y: 5
+        tileType: 4
+      - x: 2
+        y: 5
+        tileType: 1
+      - x: 3
+        y: 5
+        tileType: 1
+      - x: 4
+        y: 5
+        tileType: 1
+      - x: 5
+        y: 5
+        tileType: 1
+      - x: 6
+        y: 5
+        tileType: 1
+      - x: 7
+        y: 5
+        tileType: 1
+      - x: 8
+        y: 5
+        tileType: 1
+      - x: 9
+        y: 5
+        tileType: 4
+      - x: 10
+        y: 5
+        tileType: 3
+    - column:
+      - x: 0
+        y: 6
+        tileType: 0
+      - x: 1
+        y: 6
+        tileType: 4
+      - x: 2
+        y: 6
+        tileType: 1
+      - x: 3
+        y: 6
+        tileType: 1
+      - x: 4
+        y: 6
+        tileType: 1
+      - x: 5
+        y: 6
+        tileType: 1
+      - x: 6
+        y: 6
+        tileType: 1
+      - x: 7
+        y: 6
+        tileType: 1
+      - x: 8
+        y: 6
+        tileType: 1
+      - x: 9
+        y: 6
+        tileType: 4
+      - x: 10
+        y: 6
+        tileType: 0
+    - column:
+      - x: 0
+        y: 7
+        tileType: 3
+      - x: 1
+        y: 7
+        tileType: 4
+      - x: 2
+        y: 7
+        tileType: 1
+      - x: 3
+        y: 7
+        tileType: 1
+      - x: 4
+        y: 7
+        tileType: 1
+      - x: 5
+        y: 7
+        tileType: 2
+      - x: 6
+        y: 7
+        tileType: 1
+      - x: 7
+        y: 7
+        tileType: 1
+      - x: 8
+        y: 7
+        tileType: 1
+      - x: 9
+        y: 7
+        tileType: 4
+      - x: 10
+        y: 7
+        tileType: 3
+    - column:
+      - x: 0
+        y: 8
+        tileType: 4
+      - x: 1
+        y: 8
+        tileType: 1
+      - x: 2
+        y: 8
+        tileType: 1
+      - x: 3
+        y: 8
+        tileType: 1
+      - x: 4
+        y: 8
+        tileType: 1
+      - x: 5
+        y: 8
+        tileType: 2
+      - x: 6
+        y: 8
+        tileType: 1
+      - x: 7
+        y: 8
+        tileType: 1
+      - x: 8
+        y: 8
+        tileType: 1
+      - x: 9
+        y: 8
+        tileType: 1
+      - x: 10
+        y: 8
+        tileType: 4
+    - column:
+      - x: 0
+        y: 9
+        tileType: 4
+      - x: 1
+        y: 9
+        tileType: 1
+      - x: 2
+        y: 9
+        tileType: 1
+      - x: 3
+        y: 9
+        tileType: 1
+      - x: 4
+        y: 9
+        tileType: 1
+      - x: 5
+        y: 9
+        tileType: 1
+      - x: 6
+        y: 9
+        tileType: 1
+      - x: 7
+        y: 9
+        tileType: 1
+      - x: 8
+        y: 9
+        tileType: 1
+      - x: 9
+        y: 9
+        tileType: 1
+      - x: 10
+        y: 9
+        tileType: 4
+    - column:
+      - x: 0
+        y: 10
+        tileType: 3
+      - x: 1
+        y: 10
+        tileType: 1
+      - x: 2
+        y: 10
+        tileType: 1
+      - x: 3
+        y: 10
+        tileType: 1
+      - x: 4
+        y: 10
+        tileType: 1
+      - x: 5
+        y: 10
+        tileType: 1
+      - x: 6
+        y: 10
+        tileType: 1
+      - x: 7
+        y: 10
+        tileType: 1
+      - x: 8
+        y: 10
+        tileType: 1
+      - x: 9
+        y: 10
+        tileType: 1
+      - x: 10
+        y: 10
+        tileType: 3
+    - column:
+      - x: 0
+        y: 11
+        tileType: 3
+      - x: 1
+        y: 11
+        tileType: 3
+      - x: 2
+        y: 11
+        tileType: 3
+      - x: 3
+        y: 11
+        tileType: 1
+      - x: 4
+        y: 11
+        tileType: 1
+      - x: 5
+        y: 11
+        tileType: 1
+      - x: 6
+        y: 11
+        tileType: 1
+      - x: 7
+        y: 11
+        tileType: 1
+      - x: 8
+        y: 11
+        tileType: 3
+      - x: 9
+        y: 11
+        tileType: 3
+      - x: 10
+        y: 11
+        tileType: 3
+    - column:
+      - x: 0
+        y: 12
+        tileType: 0
+      - x: 1
+        y: 12
+        tileType: 0
+      - x: 2
+        y: 12
+        tileType: 3
+      - x: 3
+        y: 12
+        tileType: 3
+      - x: 4
+        y: 12
+        tileType: 4
+      - x: 5
+        y: 12
+        tileType: 4
+      - x: 6
+        y: 12
+        tileType: 4
+      - x: 7
+        y: 12
+        tileType: 3
+      - x: 8
+        y: 12
+        tileType: 3
+      - x: 9
+        y: 12
+        tileType: 0
+      - x: 10
+        y: 12
+        tileType: 0

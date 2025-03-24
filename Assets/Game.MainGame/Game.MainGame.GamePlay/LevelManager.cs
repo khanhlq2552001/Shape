@@ -319,7 +319,6 @@ namespace Game.MainGame
 
                     if (value)
                     {
-                        Debug.Log("okok");
                         count++;
                         GameObject parMagic = LeanPool.Spawn(GameManager.Instance.parMagic, magicBoo.tranStart.position, Quaternion.identity);
                         parMagic.transform.localScale = new Vector3(scale * 0.6f, scale * 0.6f, scale * 0.6f);
@@ -327,7 +326,8 @@ namespace Game.MainGame
                         parMagic.transform.DOMove(_listItemShape[idx].tranCentre.position, 0.5f).SetEase(Ease.Linear).OnComplete(()=> {
                             _listItemShape[idx].DestroyIfMagic();
                             ParticleSystem par = LeanPool.Spawn(GameManager.Instance.particleHammer, _listItemShape[idx].tranCentre.position, Quaternion.identity);
-                            par.transform.localScale = new Vector3(scale * 0.8f, scale* 0.8f, scale * 0.8f);
+                            par.transform.position = new Vector3(par.transform.position.x, par.transform.position.y, -2f);
+                            par.transform.localScale = new Vector3(scale * 1.2f, scale *1.2f, scale* 1.2f);
                             par.Play();
 
                             int idColor = _listItemShape[idx].GetColor();

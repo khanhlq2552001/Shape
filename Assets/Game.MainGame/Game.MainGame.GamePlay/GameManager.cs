@@ -20,6 +20,7 @@ namespace Game.MainGame
         public static readonly BlitzyUI.Screen.Id ScreenId_UIOutOfTime = new BlitzyUI.Screen.Id("UIOutTime");
         public static readonly BlitzyUI.Screen.Id ScreenId_UIFadeScreen = new BlitzyUI.Screen.Id("UIFadeScene");
         public static readonly BlitzyUI.Screen.Id ScreenId_UIShop = new BlitzyUI.Screen.Id("UIShop");
+        public static readonly BlitzyUI.Screen.Id ScreenId_UIWelcom = new BlitzyUI.Screen.Id("UWelcomPlayer");
 
         [SerializeField] private float _remainingTime;
         [SerializeField] private float _remainingTimeStart;
@@ -70,6 +71,8 @@ namespace Game.MainGame
             UIManager.Instance.QueuePush(ScreenId_UIHome, null, "UIHome", null);
 
             Application.targetFrameRate = 60;
+
+            CheckInfiniteTime();
         }
 
         private void Update()
@@ -81,21 +84,36 @@ namespace Game.MainGame
 
         public void UpdateTimeTym()
         {
-            if(PlayerPrefs.GetInt("tym") < 5 && _isCountTime)
+            if(PlayerPrefs.GetInt("tym") < 5 && _isCountTime && !pref.GetInfiniteTime())
             {
                 _isCountTime = false;
                 _remainingTime = _remainingTimeStart;
             }
 
+            if (pref.GetInfiniteTime() && _isCountTime)
+            {
+                _remainingTime = pref.GetTimeRemainingInfinite();
+                _isCountTime = false;
+                Debug.Log(_remainingTime);
+            }
+
+
             if (!_isCountTime)
             {
                 _remainingTime -= Time.deltaTime;  // Giảm thời gian theo thời gian thực
-                if (_remainingTime <= 0)
+                if (_remainingTime <= 0 && !pref.GetInfiniteTime())
                 {
                     _remainingTime = 0;
                     _isCountTime = true;
                     int tym = PlayerPrefs.GetInt("tym") + 1;
                     UpdateTym(tym);
+                }
+                else if(_remainingTime <= 0 && pref.GetInfiniteTime())
+                {
+                    pref.SetInfiniteTime(false);
+                    _remainingTime = 0;
+                    _isCountTime = true;
+                    UpdateTym(5);
                 }
             }
             FormatTime(_remainingTime);
@@ -103,11 +121,21 @@ namespace Game.MainGame
             _onUpdateTimeHeal?.Invoke();
         }
 
+        public void SetIsCountTime(bool value)
+        {
+            _isCountTime = value;
+        }
+
         private void FormatTime(float timeInSeconds)
         {
-            if (PlayerPrefs.GetInt("tym") == 5) {
+            if (PlayerPrefs.GetInt("tym") == 5 && !pref.GetInfiniteTime()) {
                 timeHeal = "Full";
                 return;
+            }
+
+            if (pref.GetInfiniteTime())
+            {
+                pref.SetTimeRemainingInfinite(timeInSeconds);
             }
 
             int minutes = Mathf.FloorToInt(timeInSeconds / 60);
@@ -271,6 +299,9 @@ namespace Game.MainGame
 
         public void UpdateTym(int tym)
         {
+            if (pref.GetInfiniteTime())
+                return;
+
             if(tym <= 5)
             {
                 PlayerPrefs.SetInt("tym", tym);
@@ -330,6 +361,14 @@ namespace Game.MainGame
                 UpdateVibration(true);
                 UpdateNoti(true);
                 pref.SetIDnewBlock(0);
+            }
+        }
+
+        private void CheckInfiniteTime()
+        {
+            if (!pref.GetInfiniteTime())
+            {
+                UIManager.Instance.QueuePush(GameManager.ScreenId_UIWelcom, null, "UWelcomPlayer", null);
             }
         }
 

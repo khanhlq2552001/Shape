@@ -97,6 +97,12 @@ namespace Game.MainGame
 
         private void UpdateTym()
         {
+            if (GameManager.Instance.pref.GetInfiniteTime())
+            {
+                _txtTym.text = "∞";
+                return;
+            }
+
             _txtTym.text = GameManager.Instance.pref.GetTym().ToString();
         }
 

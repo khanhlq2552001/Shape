@@ -97,13 +97,19 @@ namespace Game.MainGame
             coin += 100;
             int level = PlayerPrefs.GetInt("level");
             GameManager.Instance.UpdateCoin(coin);
-            
+
 
             StartCoroutine(EffCoinCoroutine(level));
         }
 
         private void UpdateTym()
         {
+            if (GameManager.Instance.pref.GetInfiniteTime())
+            {
+                _txtTym.text = "∞";
+                return;
+            }
+
             _txtTym.text = GameManager.Instance.pref.GetTym().ToString();
         }
 

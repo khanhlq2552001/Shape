@@ -43,5 +43,39 @@ namespace Game.MainGame
         {
             return PlayerPrefs.GetInt("idNewBlock");
         }
+
+        public void SetInfiniteTime(bool isStatus)
+        {
+            if (isStatus)
+            {
+                PlayerPrefs.SetInt("InfiniteTime", 1);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("InfiniteTime", 0);
+            }
+        }
+
+        public bool GetInfiniteTime()
+        {
+            if(PlayerPrefs.GetInt("InfiniteTime") == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void SetTimeRemainingInfinite(float time)
+        {
+            PlayerPrefs.SetFloat("TimeRemainingInfinite", time);
+        }
+
+        public float GetTimeRemainingInfinite()
+        {
+            return PlayerPrefs.GetFloat("TimeRemainingInfinite");
+        }
     }
 }

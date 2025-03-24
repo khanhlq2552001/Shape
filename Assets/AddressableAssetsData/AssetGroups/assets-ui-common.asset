@@ -1067,8 +1067,63 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e5854243221fa274a8d634fe576af47f
+  - m_GUID: 8d5ff4cd81026484d9dcf7252c55d51e
     m_Address: UINewObject
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 80c22c58708a28a44892bdf2883ddff0
+    m_Address: assets-ui-common-popup-4_popup welcome
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 31ccd8dd92db7a94cb0d80eb901aa187
+    m_Address: assets-ui-common-popup-4_popup welcome_glow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7676d59d4fe892a42a612daa846fa5df
+    m_Address: assets-ui-common-popup-4_popup welcome_glow 2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0b3f762b259454e4b8815d54150c5478
+    m_Address: assets-ui-common-popup-4_popup welcome_icon_heart
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d266bca6872703146aed649d793404a9
+    m_Address: assets-ui-common-popup-4_popup welcome title glow 2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 364a358636034f24cb92030edf391332
+    m_Address: assets-ui-common-popup-4_popup welcome item panel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c3591fde342bd054d9b318978bedb799
+    m_Address: assets-ui-common-popup-4_popup welcome title glow 1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c2b8a732904de084daeb3b3317e9427f
+    m_Address: assets-ui-common-popup-4_popup welcome_glow 3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e5626a085301aa49aba29443d6f6919
+    m_Address: assets-ui-common-popup-Welcome  Player!!
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0f3b15da5a9c5204db33c78d4c363017
+    m_Address: assets-ui-common-popup-4_popup welcome title
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2977e1154ddf5b247bba902db20a2bb8
+    m_Address: UWelcomPlayer
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

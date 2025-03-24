@@ -889,7 +889,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 5f337b8e54a6f67498e2fcd5fb523317, type: 3}
+    m_Font: {fileID: 12800000, guid: e511f2157311385409d199204e493ad7, type: 3}
     m_FontSize: 14
     m_FontStyle: 1
     m_BestFit: 1
@@ -11573,7 +11573,6 @@ MonoBehaviour:
   from: {x: 1, y: 1, z: 1}
   to: {x: 0.95, y: 0.95, z: 0.95}
   to1: {x: 1.05, y: 1.05, z: 1.05}
-  duration: 0.08
 --- !u!1 &5907549699275491474
 GameObject:
   m_ObjectHideFlags: 0

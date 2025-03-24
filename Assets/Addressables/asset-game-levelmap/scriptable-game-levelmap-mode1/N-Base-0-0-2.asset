@@ -1,0 +1,250 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d34c14289a71c1b408e798f338b90776, type: 3}
+  m_Name: N-Base-0-0-2
+  m_EditorClassIdentifier: 
+  baseMap: Game1_LevelMapBase_PlayMode
+  levelName: N-Base-0-0-2
+  width: 7
+  height: 8
+  blocks:
+  - id: 0
+    objectName: Block 6-1
+    position: {x: 1.5, y: 2.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 2
+      - key: objectName
+        value: Block 6-1
+      - key: starID
+        value: 0
+    objects: []
+  - id: 1
+    objectName: Block 6-1
+    position: {x: 3.5, y: 4.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 6
+      - key: objectName
+        value: Block 6-1_1
+      - key: starID
+        value: 0
+    objects: []
+  objects:
+  - id: 0
+    objectName: Collector 2-3
+    position: {x: 6.5, y: 2, z: 0}
+    rotation: {x: -0, y: 0, z: 270}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: ColorID
+        value: 2
+      - key: StarID
+        value: 0
+    objects: []
+  - id: 1
+    objectName: Collector 2-4
+    position: {x: 0.5, y: 6, z: 0}
+    rotation: {x: -0, y: -0, z: 90}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: ColorID
+        value: 6
+      - key: StarID
+        value: 0
+    objects: []
+  table:
+    rows:
+    - column:
+      - x: 0
+        y: 0
+        tileType: 3
+      - x: 1
+        y: 0
+        tileType: 3
+      - x: 2
+        y: 0
+        tileType: 3
+      - x: 3
+        y: 0
+        tileType: 3
+      - x: 4
+        y: 0
+        tileType: 3
+      - x: 5
+        y: 0
+        tileType: 3
+      - x: 6
+        y: 0
+        tileType: 3
+    - column:
+      - x: 0
+        y: 1
+        tileType: 3
+      - x: 1
+        y: 1
+        tileType: 1
+      - x: 2
+        y: 1
+        tileType: 1
+      - x: 3
+        y: 1
+        tileType: 1
+      - x: 4
+        y: 1
+        tileType: 1
+      - x: 5
+        y: 1
+        tileType: 1
+      - x: 6
+        y: 1
+        tileType: 4
+    - column:
+      - x: 0
+        y: 2
+        tileType: 3
+      - x: 1
+        y: 2
+        tileType: 1
+      - x: 2
+        y: 2
+        tileType: 1
+      - x: 3
+        y: 2
+        tileType: 1
+      - x: 4
+        y: 2
+        tileType: 1
+      - x: 5
+        y: 2
+        tileType: 1
+      - x: 6
+        y: 2
+        tileType: 4
+    - column:
+      - x: 0
+        y: 3
+        tileType: 3
+      - x: 1
+        y: 3
+        tileType: 1
+      - x: 2
+        y: 3
+        tileType: 1
+      - x: 3
+        y: 3
+        tileType: 1
+      - x: 4
+        y: 3
+        tileType: 1
+      - x: 5
+        y: 3
+        tileType: 1
+      - x: 6
+        y: 3
+        tileType: 3
+    - column:
+      - x: 0
+        y: 4
+        tileType: 3
+      - x: 1
+        y: 4
+        tileType: 1
+      - x: 2
+        y: 4
+        tileType: 1
+      - x: 3
+        y: 4
+        tileType: 1
+      - x: 4
+        y: 4
+        tileType: 1
+      - x: 5
+        y: 4
+        tileType: 1
+      - x: 6
+        y: 4
+        tileType: 3
+    - column:
+      - x: 0
+        y: 5
+        tileType: 4
+      - x: 1
+        y: 5
+        tileType: 1
+      - x: 2
+        y: 5
+        tileType: 1
+      - x: 3
+        y: 5
+        tileType: 1
+      - x: 4
+        y: 5
+        tileType: 1
+      - x: 5
+        y: 5
+        tileType: 1
+      - x: 6
+        y: 5
+        tileType: 3
+    - column:
+      - x: 0
+        y: 6
+        tileType: 4
+      - x: 1
+        y: 6
+        tileType: 1
+      - x: 2
+        y: 6
+        tileType: 1
+      - x: 3
+        y: 6
+        tileType: 1
+      - x: 4
+        y: 6
+        tileType: 1
+      - x: 5
+        y: 6
+        tileType: 1
+      - x: 6
+        y: 6
+        tileType: 3
+    - column:
+      - x: 0
+        y: 7
+        tileType: 3
+      - x: 1
+        y: 7
+        tileType: 3
+      - x: 2
+        y: 7
+        tileType: 3
+      - x: 3
+        y: 7
+        tileType: 3
+      - x: 4
+        y: 7
+        tileType: 3
+      - x: 5
+        y: 7
+        tileType: 3
+      - x: 6
+        y: 7
+        tileType: 3

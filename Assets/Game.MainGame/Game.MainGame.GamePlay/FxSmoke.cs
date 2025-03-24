@@ -27,7 +27,7 @@ namespace Game.MainGame
         public void SetColor(Color color)
         {
             var main = _par.main;
-            main.startColor = new ParticleSystem.MinMaxGradient(color, _color2);
+            main.startColor = color;
         }
 
     }

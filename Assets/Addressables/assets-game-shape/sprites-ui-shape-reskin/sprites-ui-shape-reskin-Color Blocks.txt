@@ -1,0 +1,21 @@
+Color 1: Multiply: ffdc36 - Overlay: dd9804
+
+Color 2: Multiply: ff8c1b - Overlay: dc830f
+
+Color 3: Multiply: ff3c3c - Overlay: a20ca7
+
+Color 4: Multiply: ff5cbc - Overlay: b113bf
+
+Color 5: Multiply: 8f2bff - Overlay: 441e9a
+
+Color 6: Multiply: 08db28 - Overlay: 09791a
+
+Color 7: Multiply: bdfc12 - Overlay: 5e9b06
+
+Color 8: Multiply: 13dfde - Overlay: 0885a0
+
+Color 9: Multiply: 19bbff - Overlay: 0d66a5
+
+Color 10: Multiply: 2984ff - Overlay: 104db2
+
+Wall: Multiply: 546ea5

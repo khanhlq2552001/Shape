@@ -147,7 +147,7 @@ namespace Game.MainGame
             int level =GameManager.Instance.pref.GetLevel();
             DataLevel data = LevelManager.Instance._dataLevels;
             for (int i=0; i< 3; i++)
-            {   
+            {
                 _txtLevels[i].text = (level + i).ToString();
 
                 if(i == 0)
@@ -175,6 +175,13 @@ namespace Game.MainGame
 
         public void UpdateTextTym()
         {
+            if (GameManager.Instance.pref.GetInfiniteTime())
+            {
+                Debug.Log("okok");
+                _txtHeal.text = "∞";
+                return;
+            }
+
             _txtHeal.text = PlayerPrefs.GetInt("tym").ToString();
         }
 

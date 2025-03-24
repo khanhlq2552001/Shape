@@ -26,12 +26,14 @@ namespace Game.MainGame
         public override void OnPop()
         {
             PopFinished();
+            LevelManager.Instance.controller.StateController = StateController.NoDrag;
         }
 
         public override void OnPush(Data data)
         {
             PushFinished();
             _scroll.verticalNormalizedPosition = 1;
+            LevelManager.Instance.controller.StateController = StateController.Pause;
         }
 
         public override void OnSetup()

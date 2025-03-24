@@ -34,6 +34,7 @@ namespace Game.MainGame
             PopFinished();
             GameManager.Instance.RemoveActionTym(UpdateTym);
             GameManager.Instance.RemoveActionTimeHeal(UpdateTextTime);
+            LevelManager.Instance.controller.StateController = StateController.NoDrag;
         }
 
         public override void OnPush(Data data)
@@ -66,6 +67,7 @@ namespace Game.MainGame
             UpdateTym();
             GameManager.Instance.AddActionTym(UpdateTym);
             GameManager.Instance.AddActionTimeHeal(UpdateTextTime);
+            LevelManager.Instance.controller.StateController = StateController.Pause;
         }
 
         public override void OnSetup()
@@ -127,6 +129,12 @@ namespace Game.MainGame
 
         private void UpdateTym()
         {
+            if (GameManager.Instance.pref.GetInfiniteTime())
+            {
+                _txtTym.text = "∞";
+                return;
+            }
+
             _txtTym.text = GameManager.Instance.pref.GetTym().ToString();
         }
 

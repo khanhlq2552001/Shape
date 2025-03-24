@@ -1,0 +1,488 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d34c14289a71c1b408e798f338b90776, type: 3}
+  m_Name: N-Base-0-0-22
+  m_EditorClassIdentifier: 
+  baseMap: Game1_LevelMapBase_PlayMode
+  levelName: N-Base-0-0-22
+  width: 7
+  height: 9
+  blocks:
+  - id: 0
+    objectName: Block 2-4
+    position: {x: 1.5, y: 2.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 6
+      - key: objectName
+        value: Block 2-4
+      - key: starID
+        value: 0
+    objects:
+    - id: 0
+      objectName: Block 2-4
+      position: {x: 1.5, y: 2.5, z: 0}
+      rotation: {x: -0, y: 0, z: 0}
+      scale: {x: 0.75, y: 0.75, z: 0.75}
+      properties:
+        properties:
+        - key: colorID
+          value: 9
+        - key: objectName
+          value: Block 2-4_1
+        - key: starID
+          value: 0
+      objects: []
+  - id: 1
+    objectName: Block 4-1
+    position: {x: 2.5, y: 1.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 4
+      - key: objectName
+        value: Block 4-1
+      - key: starID
+        value: 0
+    objects: []
+  - id: 2
+    objectName: Block 4-2
+    position: {x: 3.5, y: 2.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 3
+      - key: objectName
+        value: Block 4-2
+      - key: starID
+        value: 0
+    objects:
+    - id: 0
+      objectName: ConstraintMarker
+      position: {x: 3.5, y: 3, z: 0}
+      rotation: {x: -0, y: 0, z: 0}
+      scale: {x: 1, y: 1, z: 1}
+      properties:
+        properties:
+        - key: constraint
+          value: Vertical
+        - key: sizeX
+          value: 1200
+        - key: sizeY
+          value: 1000
+      objects: []
+  - id: 3
+    objectName: Block 4-2
+    position: {x: 5.5, y: 1.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 10
+      - key: objectName
+        value: Block 4-2_1
+      - key: starID
+        value: 0
+    objects: []
+  - id: 4
+    objectName: Block 3-3
+    position: {x: 3.5000002, y: 2.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 4
+      - key: objectName
+        value: Block 3-3
+      - key: starID
+        value: 0
+    objects: []
+  - id: 5
+    objectName: Block 8-4
+    position: {x: 1.5, y: 4.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 5
+      - key: objectName
+        value: Block 8-4
+      - key: starID
+        value: 0
+    objects:
+    - id: 0
+      objectName: Block 8-4
+      position: {x: 1.5, y: 4.75, z: 0}
+      rotation: {x: -0, y: 0, z: 0}
+      scale: {x: 0.75, y: 0.75, z: 0.75}
+      properties:
+        properties:
+        - key: colorID
+          value: 4
+        - key: objectName
+          value: Block 8-4_1
+        - key: starID
+          value: 0
+      objects: []
+  - id: 6
+    objectName: Block 2-3
+    position: {x: 2.5, y: 6.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 9
+      - key: objectName
+        value: Block 2-3
+      - key: starID
+        value: 0
+    objects: []
+  - id: 7
+    objectName: Block 4-2
+    position: {x: 3.5, y: 5.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 10
+      - key: objectName
+        value: Block 4-2_2
+      - key: starID
+        value: 0
+    objects:
+    - id: 0
+      objectName: ConstraintMarker
+      position: {x: 3.5, y: 6, z: 0}
+      rotation: {x: -0, y: 0, z: 0}
+      scale: {x: 1, y: 1, z: 1}
+      properties:
+        properties:
+        - key: constraint
+          value: Vertical
+        - key: sizeX
+          value: 1200
+        - key: sizeY
+          value: 1000
+      objects: []
+  - id: 8
+    objectName: Block 8-3
+    position: {x: 4.5, y: 5.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: colorID
+        value: 4
+      - key: objectName
+        value: Block 8-3
+      - key: starID
+        value: 0
+    objects:
+    - id: 0
+      objectName: Block 8-3
+      position: {x: 4.75, y: 5.75, z: 0}
+      rotation: {x: -0, y: 0, z: 0}
+      scale: {x: 0.75, y: 0.75, z: 0.75}
+      properties:
+        properties:
+        - key: colorID
+          value: 6
+        - key: objectName
+          value: Block 8-3_1
+        - key: starID
+          value: 0
+      objects: []
+  objects:
+  - id: 0
+    objectName: Collector 1-2
+    position: {x: 3.5, y: 0.5, z: 0}
+    rotation: {x: -0, y: 0, z: 180}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: ColorID
+        value: 3
+      - key: StarID
+        value: 0
+    objects: []
+  - id: 1
+    objectName: Collector 2-1
+    position: {x: 2, y: 8.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: ColorID
+        value: 4
+      - key: StarID
+        value: 0
+    objects: []
+  - id: 2
+    objectName: Collector 2-1
+    position: {x: 5, y: 8.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: ColorID
+        value: 6
+      - key: StarID
+        value: 0
+    objects: []
+  - id: 3
+    objectName: Collector 2-2
+    position: {x: 2, y: 0.5, z: 0}
+    rotation: {x: -0, y: 0, z: 180}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: ColorID
+        value: 9
+      - key: StarID
+        value: 0
+    objects: []
+  - id: 4
+    objectName: Collector 2-2
+    position: {x: 5, y: 0.5, z: 0}
+    rotation: {x: -0, y: 0, z: 180}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: ColorID
+        value: 5
+      - key: StarID
+        value: 0
+    objects: []
+  - id: 5
+    objectName: Collector 1-1
+    position: {x: 3.5, y: 8.5, z: 0}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 1, y: 1, z: 1}
+    properties:
+      properties:
+      - key: ColorID
+        value: 10
+      - key: StarID
+        value: 0
+    objects: []
+  table:
+    rows:
+    - column:
+      - x: 0
+        y: 0
+        tileType: 3
+      - x: 1
+        y: 0
+        tileType: 4
+      - x: 2
+        y: 0
+        tileType: 4
+      - x: 3
+        y: 0
+        tileType: 4
+      - x: 4
+        y: 0
+        tileType: 4
+      - x: 5
+        y: 0
+        tileType: 4
+      - x: 6
+        y: 0
+        tileType: 3
+    - column:
+      - x: 0
+        y: 1
+        tileType: 3
+      - x: 1
+        y: 1
+        tileType: 1
+      - x: 2
+        y: 1
+        tileType: 1
+      - x: 3
+        y: 1
+        tileType: 1
+      - x: 4
+        y: 1
+        tileType: 1
+      - x: 5
+        y: 1
+        tileType: 1
+      - x: 6
+        y: 1
+        tileType: 3
+    - column:
+      - x: 0
+        y: 2
+        tileType: 3
+      - x: 1
+        y: 2
+        tileType: 1
+      - x: 2
+        y: 2
+        tileType: 1
+      - x: 3
+        y: 2
+        tileType: 1
+      - x: 4
+        y: 2
+        tileType: 1
+      - x: 5
+        y: 2
+        tileType: 1
+      - x: 6
+        y: 2
+        tileType: 3
+    - column:
+      - x: 0
+        y: 3
+        tileType: 3
+      - x: 1
+        y: 3
+        tileType: 1
+      - x: 2
+        y: 3
+        tileType: 1
+      - x: 3
+        y: 3
+        tileType: 1
+      - x: 4
+        y: 3
+        tileType: 1
+      - x: 5
+        y: 3
+        tileType: 1
+      - x: 6
+        y: 3
+        tileType: 3
+    - column:
+      - x: 0
+        y: 4
+        tileType: 3
+      - x: 1
+        y: 4
+        tileType: 1
+      - x: 2
+        y: 4
+        tileType: 1
+      - x: 3
+        y: 4
+        tileType: 1
+      - x: 4
+        y: 4
+        tileType: 1
+      - x: 5
+        y: 4
+        tileType: 1
+      - x: 6
+        y: 4
+        tileType: 3
+    - column:
+      - x: 0
+        y: 5
+        tileType: 3
+      - x: 1
+        y: 5
+        tileType: 1
+      - x: 2
+        y: 5
+        tileType: 1
+      - x: 3
+        y: 5
+        tileType: 1
+      - x: 4
+        y: 5
+        tileType: 1
+      - x: 5
+        y: 5
+        tileType: 1
+      - x: 6
+        y: 5
+        tileType: 3
+    - column:
+      - x: 0
+        y: 6
+        tileType: 3
+      - x: 1
+        y: 6
+        tileType: 1
+      - x: 2
+        y: 6
+        tileType: 1
+      - x: 3
+        y: 6
+        tileType: 1
+      - x: 4
+        y: 6
+        tileType: 1
+      - x: 5
+        y: 6
+        tileType: 1
+      - x: 6
+        y: 6
+        tileType: 3
+    - column:
+      - x: 0
+        y: 7
+        tileType: 3
+      - x: 1
+        y: 7
+        tileType: 1
+      - x: 2
+        y: 7
+        tileType: 1
+      - x: 3
+        y: 7
+        tileType: 1
+      - x: 4
+        y: 7
+        tileType: 1
+      - x: 5
+        y: 7
+        tileType: 1
+      - x: 6
+        y: 7
+        tileType: 3
+    - column:
+      - x: 0
+        y: 8
+        tileType: 3
+      - x: 1
+        y: 8
+        tileType: 4
+      - x: 2
+        y: 8
+        tileType: 4
+      - x: 3
+        y: 8
+        tileType: 4
+      - x: 4
+        y: 8
+        tileType: 4
+      - x: 5
+        y: 8
+        tileType: 4
+      - x: 6
+        y: 8
+        tileType: 3

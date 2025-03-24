@@ -271,7 +271,8 @@ namespace Game.MainGame
             float scale = GameManager.Instance.cameraMain.orthographicSize / 5f;
             GameObject hammer =  LeanPool.Spawn(_hammerAnim, obj.transform.position, Quaternion.identity);
             Hammer h = hammer.GetComponent<Hammer>();
-            hammer.transform.localScale = new Vector3(scale, scale, 0);
+            hammer.transform.position = new Vector3(hammer.transform.position.x, hammer.transform.position.y, -2f);
+            hammer.transform.localScale = new Vector3(scale, scale, scale);
             h.hex = obj.GetColor();
             yield return new WaitForSeconds(1.2f);
             bool value = obj.CheckBoosterHammer();
